@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TITLE</title>
+    <link href="css/remark.css" media="all" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <script src="js/remark-latest.min.js" type="text/javascript"></script>
+    <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript"></script> -->
+    <script>
+      var slideshow = remark.create({
+          sourceUrl: 'body.md',
+          highlightStyle: 'monokai',
+          navigation: {
+              scroll: false  // disable nagivation using scroll
+          } 
+      });
+    </script>
+    <script src="js/remark-zoom.js" type="text/javascript"></script>
+
+  </body>
+</html>
