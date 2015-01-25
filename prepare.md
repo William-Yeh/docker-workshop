@@ -6,6 +6,7 @@ Docker 建置實戰講堂・行前準備
   - 安裝軟體
   - 註冊 GitHub 帳號
   - 註冊 Docker Hub 帳號
+  - 列印參考資料
   - 預載範例程式碼
 
 
@@ -40,6 +41,7 @@ Docker 建置實戰講堂・行前準備
 課堂上，也會帶領大家操作一些常用的 Vagrant 指令。
 
 
+
 ## 註冊 GitHub 帳號
 
 本課程會帶你實機操作，將欲「Docker 化」的程式碼置於 [GitHub](https://github.com/) 上，以供後續 Docker Hub 串接運用。
@@ -52,6 +54,18 @@ Docker 建置實戰講堂・行前準備
 本課程會帶你實機操作，如何利用 Docker 官方的 [Docker Hub](https://registry.hub.docker.com/) 服務，串接置於 GitHub 的程式碼，自動建置 Docker image。
 
 如果你還沒有 Docker Hub 帳號，請到[這裡](https://hub.docker.com/account/signup/)註冊。
+
+
+
+## 列印參考資料
+
+有幾份資料，在課堂上會反覆用到。因著作權所限，我們無法主動提供紙本。如果您習慣在紙本上註記，請於參加課程之前自行列印，攜至課堂上。
+
+  - [Docker 命令查詢](http://philipzheng.gitbooks.io/docker_practice/content/appendix_command/README.html)
+
+  - [一張圖總結 Docker 的命令](http://philipzheng.gitbooks.io/docker_practice/content/_images/cmd_logic.png) ← 彩色
+
+  - [Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)
 
 
 ## 預載範例程式碼
