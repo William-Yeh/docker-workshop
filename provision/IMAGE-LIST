@@ -1,0 +1,44 @@
+#--------------------------------------#
+# basic base image
+#
+
+debian:wheezy
+debian:jessie
+ubuntu:precise
+ubuntu:trusty
+ubuntu:14.04
+ubuntu:latest
+centos:5.11
+busybox:latest
+
+# Docker Hub: https://registry.hub.docker.com/_/node/
+node:0.3.16-slim
+node:0.3.16-onbuild
+
+
+#--------------------------------------#
+# app
+#
+
+redis:2.8.19
+nginx:1.6.2
+nginx:1.7.8
+nginx:1.7.9
+mysql:5.6.22
+wordpress:4.1.0
+
+# Docker Hub: https://registry.hub.docker.com/_/mongo/
+# Dockerfile: https://github.com/docker-library/mongo/blob/1d641659a75cf2f8ce1b517c7fc2a0ebfd033eed/2.6/Dockerfile
+#mongo:2.6.7
+
+svendowideit/ambassador
+jwilder/nginx-proxy
+
+williamyeh/redis:2.8.19
+williamyeh/wrk
+williamyeh/spray-httpserver
+williamyeh/fluentd
+digitalwonderland/elasticsearch
+
+ipython/notebook
+#dockerfile/ghost

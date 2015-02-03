@@ -11,12 +11,17 @@ After given 2 Docker speeches at the end of 2014 (see [A Gentle Introduction to 
 
 ## Course Introduction
 
-See 【[Docker 建置實戰講堂・課程簡介](intro.md)】.
+Read the document ☛ [Docker 建置實戰講堂・課程簡介](intro.md).
 
 ## Preparation
 
-See 【[Docker 建置實戰講堂・行前準備](prepare.md)】.
+Read the document ☛ [行前準備：申請帳號、安裝軟體](prepare.md).
 
 ## Configuration
 
-TO BE ANNOUNCED.
+Read the document ☛ [行前準備：預載範例程式碼](config.md).
+
+## License
+
+Apache License V2.0.  See [LICENSE](LICENSE) file for details.
+

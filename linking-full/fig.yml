@@ -1,0 +1,9 @@
+---
+spray:
+    image: williamyeh/spray-httpserver
+
+wrk:
+    image: williamyeh/wrk
+    command: http://httpserver:8080/
+    links:
+        - spray:httpserver
