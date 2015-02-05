@@ -5,7 +5,12 @@ Docker 建置實戰講堂
 與名師 Step by Step
 實機操作學習 Docker 建置與應用
 
-報名網頁：[第一梯次](http://containersummit.ithome.com.tw/workshop/1/)、[第二梯次](http://containersummit.ithome.com.tw/workshop/2/)
+報名系統：
+
+  - [第三梯次](http://containersummit.ithome.com.tw/workshop/3/) : 2015-04-11
+  - [第二梯次](http://containersummit.ithome.com.tw/workshop/2/) : 2015-02-07
+  - [第一梯次](http://containersummit.ithome.com.tw/workshop/1/) : 2015-01-07
+
 
 ## 課程目標
 

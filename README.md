@@ -15,11 +15,13 @@ Read the document ☛ [Docker 建置實戰講堂・課程簡介](intro.md).
 
 ## Preparation
 
-Read the document ☛ [行前準備：申請帳號、安裝軟體](prepare.md).
+Read the documents:
 
-## Configuration
+  - [行前準備：申請帳號、安裝軟體](prepare.md) ☚ 愈早進行愈好！
 
-Read the document ☛ [行前準備：預載範例程式碼](config.md).
+  - [行前準備：預載範例程式碼](config.md) ☚ 建議等開課前一週再進行。
+
+
 
 ## License
 
