@@ -10,7 +10,7 @@
  *         the zoom factor may not function correctly.
  *         RELOAD the page, if necessary.
  *
- * 
+ *
  * @author William Yeh <william.pjyeh@gmail.com>
  * @date   2015-01-15
  *
@@ -92,7 +92,7 @@ window.addEventListener("keydown", function(event) {
     switch (event.keyCode) {
        case 187:  // '+': 187 in Chrome & Safari, 61 in FF
        case 61:  // '+': 187 in Chrome, 61 in FF
-          zoom_in(); 
+          zoom_in();
           break;
 
        case 189:  // '-': 189 in Chrome & Safari, 173 in FF

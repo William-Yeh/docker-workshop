@@ -1,20 +1,36 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+
+@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,400italic,700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:400,600,700,400italic,600italic,700italic);
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+@import url(http://fonts.googleapis.com/css?family=PT+Mono&subset=latin,latin-ext);
 
 body {
-    font-family: 'Droid Serif';
+    font-family: 'Droid Serif', "Noto Sans CJK TC", "儷黑 Pro", "Microsoft YaHei", "Microsoft JhengHei";
 }
 
 h1, h2, h3 {
+    font-family: 'Josefin Slab';
+    font-weight: 600;
+    /*
     font-family: 'Yanone Kaffeesatz';
     font-weight: 400;
+    */
     margin-bottom: 0;
 }
+.inverse h1, .inverse h2 {
+    font-family: 'Averia Serif Libre' /* 'Yanone Kaffeesatz' */;
+}
+.left-column h1, .left-column h2, .left-column h3 {
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: 400;
+}
 
-.remark-slide-content h1 { font-size: 3em;   }
-.remark-slide-content h2 { font-size: 2em;   }
-.remark-slide-content h3 { font-size: 1.6em; }
+.remark-slide-content    { font-size: 24px;  }
+.remark-slide-content h1 { font-size: 2em;   }
+.remark-slide-content h2 { font-size: 1.5em;   }
+.remark-slide-content h3 { font-size: 1.2em; }
 .footnote {
     position: absolute;
     bottom: 3em;
@@ -34,9 +50,29 @@ code {
     -web-border-radius: 5px;
     background: #e7e8e2;
     border-radius: 5px;
+    font-size: 0.85em;
 }
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+.remark-code, .remark-inline-code {
+    font-family: 'PT Mono' /* 'Ubuntu Mono' 'Oxygen Mono' */ ;
+}
+.remark-code-line                 { font-size: 1em;  }
 .remark-code-line-highlighted     { background-color: #373832;  }
+
+.percent150 img { max-width: 150%; }
+.percent140 img { max-width: 140%; }
+.percent130 img { max-width: 130%; }
+.percent120 img { max-width: 120%; }
+.percent110 img { max-width: 110%; }
+.percent100 img { max-width: 100%; }
+.percent95  img { max-width:  95%; }
+.percent90  img { max-width:  90%; }
+.percent80  img { max-width:  80%; }
+.percent70  img { max-width:  70%; }
+.percent60  img { max-width:  60%; }
+.percent50  img { max-width:  50%; }
+.percent40  img { max-width:  40%; }
+.percent30  img { max-width:  30%; }
 
 
 .pull-left {
@@ -70,7 +106,7 @@ code {
 
 .inverse h1, .inverse h2 {
     color: #f3f3f3;
-    line-height: 0.8em;
+    /*line-height: 0.8em;*/
 }
 
 
@@ -134,4 +170,8 @@ code {
     float: right;
     padding-top: 1em;
     font-size: 1.5em;  /* !!! */
+}
+
+.remark-slide-number {
+    font-size: 20px ! important ;
 }
