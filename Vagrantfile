@@ -68,6 +68,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.box = "chef/centos-5.11"
         node.vm.network "private_network", ip: "10.0.0.30"
 
+        # [NOTE] unmark this while benchmarking VM startup time
+        #node.vm.box_check_update = false
+
         node.vm.provider "virtualbox" do |vb|
             vb.customize ["modifyvm", :id, "--memory", "256"]
         end
