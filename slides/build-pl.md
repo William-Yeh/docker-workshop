@@ -343,7 +343,7 @@ or lookup the public-facing port
 # Re-run with port mapping...
 
 ```bash
-$ docker run -d   -p 10800:3000   `IMAGE_ID_OR_NAME`
+$ docker run -d   -p 10080:3000   `IMAGE_ID_OR_NAME`
 ```
 
 --
@@ -354,7 +354,7 @@ $ docker run -d   -p 10800:3000   `IMAGE_ID_OR_NAME`
 
 ```bash
 $ docker port  `CONTAINER_ID_OR_NAME`
-3000/tcp -> 0.0.0.0:10800
+3000/tcp -> 0.0.0.0:10080
 ```
 
 --
@@ -362,7 +362,7 @@ $ docker port  `CONTAINER_ID_OR_NAME`
 試著連線看看...
 
 ```bash
-$ curl http://127.0.0.1:10800
+$ curl http://127.0.0.1:10080
 ```
 
 ---
