@@ -1,22 +1,40 @@
-Build a naive Nginx image for Ubuntu 14.04 LTS (Trusty)
+Build a derived Nginx image for Ubuntu 14.04 LTS (Trusty)
 ===
 
 
 ## Purpose
 
-Demostrate how to build a naive Nginx image from Dockerfile.
+ - Demostrate how to build derived Nginx image(s) from Dockerfile(s).
 
-This lab uses a pre-downloaded DEB file to minimize time to completion. Alternatives have drawbacks for this lab:
-
-  - Building from tarball source will require `build-essential`.
-  - Installing by `apt-get` will require downloading packages on-the-fly.
-
-It is just a naive demo, especially in early workshop stages. For a better Dockerfile to learn from, see [official repo](https://registry.hub.docker.com/_/nginx/).
+ - Demostrate different behaviors while running Nginx with/without the "daemon off" flag.
 
 
-## Package
+## Build a (correct!) daemon-off Nginx image
 
-PPA: [`ppa:nginx/stable`](https://launchpad.net/~nginx/+archive/ubuntu/stable)
+- Docker 1.5.0 or higher:
 
-DEB file: [nginx-full_1.6.2-5+trusty0_amd64.deb](https://launchpad.net/~rwky/+archive/ubuntu/redis/+files/redis-server_2.8.19-rwky1~trusty_amd64.deb)
+  ```
+  $ docker build  -f Dockerfile-daemon-off  .
+  ```
 
+- Docker 1.4.1 or lower:
+
+  ```
+  $ cp  Dockerfile-daemon-off  Dockerfile
+  $ docker build  .
+  ```
+
+## Build an (incorrect!) daemonize Nginx image
+
+- Docker 1.5.0 or higher:
+
+  ```
+  $ docker build  -f Dockerfile-daemonize  .
+  ```
+
+- Docker 1.4.1 or lower:
+
+  ```
+  $ cp  Dockerfile-daemonize  Dockerfile
+  $ docker build  .
+  ```
