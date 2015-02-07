@@ -8,8 +8,8 @@ Docker 建置實戰講堂
 報名系統：
 
   - [第三梯次](http://containersummit.ithome.com.tw/workshop/3/) : 2015-04-11
-  - [第二梯次](http://containersummit.ithome.com.tw/workshop/2/) : 2015-02-07
-  - [第一梯次](http://containersummit.ithome.com.tw/workshop/1/) : 2015-01-07
+  - [第二梯次](http://containersummit.ithome.com.tw/workshop/2/) : 2015-03-07
+  - [第一梯次](http://containersummit.ithome.com.tw/workshop/1/) : 2015-02-07
 
 
 ## 課程目標
