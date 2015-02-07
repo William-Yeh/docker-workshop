@@ -242,7 +242,7 @@ There's no port mapping:
 
   ```bash
   $ docker run -it  \
-        --link redis:redis_srv
+        --link redis:redis_srv \
         ubuntu:14.04   bash
   ```
 

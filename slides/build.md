@@ -99,7 +99,7 @@ $ ls -al tmp
 Install!
 
 ```bash
-$ dpkg -i redis-server_2.8.19.deb
+$ sudo dpkg -i redis-server_2.8.19.deb
 ```
 
 ---
