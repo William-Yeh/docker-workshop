@@ -12,9 +12,8 @@ centos:5.11
 busybox:latest
 
 # Docker Hub: https://registry.hub.docker.com/_/node/
-node:0.3.16-slim
-node:0.3.16-onbuild
-
+node:0.10.36-slim
+node:0.10.16-onbuild
 
 #--------------------------------------#
 # app
