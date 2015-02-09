@@ -22,6 +22,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             node.vm.network "forwarded_port", guest: i, host: i
         end
 
+        node.vm.synced_folder ".", "/home/vagrant/docker-workshop"
+
         node.vm.provision "shell", path: "provision/setup-docker-tools.sh"
         node.vm.provision "shell", path: "provision/setup-env.sh"
 
@@ -42,6 +44,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             hosts.add_host '10.0.0.200', ['registry.com', 'registry']
         end
 
+        node.vm.synced_folder ".", "/home/vagrant/docker-workshop"
+
         node.vm.provision "shell", path: "provision/setup-docker-tools.sh"
         node.vm.provision "shell", path: "provision/setup-env.sh"
 
@@ -58,6 +62,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             hosts.add_host '10.0.0.200', ['registry.com', 'registry']
         end
 
+        node.vm.synced_folder ".", "/home/vagrant/docker-workshop"
+
         node.vm.provision "shell", path: "provision/setup-docker-tools.sh"
         node.vm.provision "shell", path: "provision/setup-env.sh"
 
@@ -67,6 +73,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "centos" do |node|
         node.vm.box = "chef/centos-5.11"
         node.vm.network "private_network", ip: "10.0.0.30"
+
+        node.vm.synced_folder ".", "/home/vagrant/docker-workshop"
 
         # [NOTE] unmark this while benchmarking VM startup time
         #node.vm.box_check_update = false
@@ -87,6 +95,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision "hosts" do |hosts|
             hosts.add_host '10.0.0.200', ['registry.com', 'registry']
         end
+
+        node.vm.synced_folder ".", "/home/vagrant/docker-workshop"
 
         node.vm.provision "shell", path: "provision/setup-docker-tools.sh"
         node.vm.provision "shell", path: "provision/setup-env.sh"
