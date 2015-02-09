@@ -21,9 +21,9 @@
 
 為了順利進行本系列文章的操作，請先依照以下步驟安裝 Vagrant 及 VirtualBox：
 
-1. 去 Vagrant 官網的下載頁 (http://www.vagrantup.com/downloads.html)，下載適合的安裝檔，執行之。
+1. 去 Vagrant 官網的[下載頁](http://www.vagrantup.com/downloads.html)，下載適合的安裝檔，執行之。
 
-2. 去 VirtualBox 官網的下載頁 (https://www.virtualbox.org/wiki/Downloads)，下載兩個安裝檔：
+2. 去 VirtualBox 官網的[下載頁](https://www.virtualbox.org/wiki/Downloads)，下載兩個安裝檔：
 
    - VirtualBox platform packages
    - VirtualBox Extension Pack
