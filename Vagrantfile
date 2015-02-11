@@ -1,4 +1,3 @@
-VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.7.2"
 
 
@@ -6,12 +5,12 @@ Vagrant.require_version ">= 1.7.2"
 FORWARDED_PORT_RANGE = 10080..10100
 
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(2) do |config|
 
     config.vm.define "main", primary: true do |node|
 
         node.vm.box = "williamyeh/ubuntu-trusty64-docker"
-        node.vm.box_version = ">= 1.4.1.3"
+        node.vm.box_version = ">= 1.5.0"
 
         node.vm.network "private_network", ip: "10.0.0.10"
         node.vm.provision "hosts" do |hosts|
@@ -37,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "alice" do |node|
 
         node.vm.box = "williamyeh/ubuntu-trusty64-docker"
-        node.vm.box_version = ">= 1.4.1.3"
+        node.vm.box_version = ">= 1.5.0"
 
         node.vm.network "private_network", ip: "10.0.0.11"
         node.vm.provision "hosts" do |hosts|
@@ -55,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "bob" do |node|
 
         node.vm.box = "williamyeh/ubuntu-trusty64-docker"
-        node.vm.box_version = ">= 1.4.1.3"
+        node.vm.box_version = ">= 1.5.0"
 
         node.vm.network "private_network", ip: "10.0.0.12"
         node.vm.provision "hosts" do |hosts|
@@ -89,7 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "registry" do |node|
 
         node.vm.box = "williamyeh/insecure-registry"
-        node.vm.box_version = ">= 1.4.1.3"
+        node.vm.box_version = ">= 1.5.0"
 
         node.vm.network "private_network", ip: "10.0.0.200"
         node.vm.provision "hosts" do |hosts|
@@ -101,7 +100,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision "shell", path: "provision/setup-docker-tools.sh"
         node.vm.provision "shell", path: "provision/setup-env.sh"
         node.vm.provision "shell",
-            inline: "PRIVATE_DOCKER_REGISTRY=registry.com  docker-mirror  /vagrant/provision/IMAGE-LIST"
+            inline: "PRIVATE_DOCKER_REGISTRY=registry.com  docker-mirror  /home/vagrant/docker-workshop/provision/IMAGE-LIST"
 
     end
 
