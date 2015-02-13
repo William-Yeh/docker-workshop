@@ -69,7 +69,15 @@
 
 本課程會帶你實機操作，將欲「Docker 化」的程式碼置於 [GitHub](https://github.com/) 上，以供後續 Docker Hub 串接運用。
 
-如果你還沒有 GitHub 帳號，請到[這裡](https://github.com/)註冊，並設定好 SSH key。
+如果你還沒有 GitHub 帳號，請到[這裡](https://github.com/)註冊，並在本機端設定好 SSH key。
+
+GitHub 註冊及設定完畢後，請再進行以下步驟，以訂閱 Docker Workshop 範例程式的異動通知：
+
+A. 開啟 https://github.com/William-Yeh/docker-workshop
+
+B. 按右上角的 ![Watch Button](icon-github-watch.png) 按鈕。
+
+之後，範例程式的任何異動，會自動送到你的 GitHub 登入畫面及 email。這個管道也會通知你，最近梯次的範例程式碼，何時正式定案。
 
 
 ## 3. 註冊 Docker Hub 帳號
