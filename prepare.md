@@ -9,14 +9,13 @@
 2. 註冊 GitHub 帳號
 3. 註冊 Docker Hub 帳號
 4. 列印參考資料
-5. 預載範例程式碼
 
 
 ## 1. 安裝軟體
 
 本課程的「實機操作」部分，需要學員自備筆記型電腦。而這些筆電的作業系統，可能是 Windows，也可能是 Mac OS X，或各種 Linux distributions。
 
-為了讓課程有個一致的實作環境，減少干擾施教者與學習者的環境變因，我們統一使用 [Vagrant](http://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/) 虛擬機器組合，作為課堂實作的統一環境。詳細的解說，請見本文附錄：【關於 Vagrant】。這裡先只講軟體安裝步驟。
+為了讓課程有個一致的實作環境，減少干擾施教者與學習者的環境變因，我們統一使用 [Vagrant](http://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/) 虛擬機器組合，作為課堂實作的統一環境。對這種軟體組合的技術細節感興趣的，請見本文附錄：【關於 Vagrant】。這裡先只講軟體安裝步驟。
 
 
 ### 1.1：安裝步驟
@@ -97,13 +96,6 @@ B. 按右上角的 ![Watch Button](icon-github-watch.png) 按鈕。
   - [一張圖總結 Docker 的命令](http://philipzheng.gitbooks.io/docker_practice/content/_images/cmd_logic.png) ← 彩色
 
   - [Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)
-
-
-## 5. 預載範例程式碼
-
-請閱讀文件 ☛  [行前準備：預載範例程式碼](config.md)。
-
-為了節省課程現場下載程式及相關資源的時間及頻寬，請學員先在網路暢通的地方，根據指示備妥必要的軟體及設定。
 
 
 
