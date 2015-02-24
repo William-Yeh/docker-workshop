@@ -1,0 +1,13 @@
+#!/bin/bash
+
+NODEJS_IMAGE=$1
+NODEJS_EXAMPLE=${2:-example.js}
+NAME=$(basename $BASH_SOURCE)
+
+if [ $# -lt 1 ]; then
+    echo "Demo for Dockerized Node.js."
+    echo "Usage:  $NAME  <nodejs image>  [nodejs source code]"
+    exit 1
+fi
+
+cat $NODEJS_EXAMPLE | docker run -i $NODEJS_IMAGE

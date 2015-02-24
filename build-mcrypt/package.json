@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-mcrypt-example",
+  "version": "0.0.1",
+  "description": "nodejs mcrypt example",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mcrypt": "*"
+  }
+}

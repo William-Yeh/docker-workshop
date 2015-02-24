@@ -11,9 +11,13 @@ ubuntu:latest
 centos:5.11
 busybox:latest
 
+# Docker Hub: https://registry.hub.docker.com/_/php/
+php:5.6.6-cli
+#php:5.6.6-fpm
+
 # Docker Hub: https://registry.hub.docker.com/_/node/
 node:0.10.36-slim
-node:0.10.16-onbuild
+node:0.10.36-onbuild
 
 #--------------------------------------#
 # app
@@ -39,5 +43,5 @@ williamyeh/spray-httpserver
 williamyeh/fluentd
 digitalwonderland/elasticsearch
 
-ipython/notebook
+#ipython/notebook
 #dockerfile/ghost

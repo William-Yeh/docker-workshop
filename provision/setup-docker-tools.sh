@@ -14,3 +14,11 @@ for i in "${APP[@]}"; do
     curl -o $NAME  "$BASE_URL$NAME"
     chmod a+x $NAME
 done
+
+
+readonly OTHER_TOOLS=( "http://stedolan.github.io/jq/download/linux64/jq" )
+for i in "${OTHER_TOOLS[@]}"; do
+    curl -L -O $i
+done
+chmod a+x *
+

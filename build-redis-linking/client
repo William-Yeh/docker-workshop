@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# A simple wrapper for Dockerized redis-cli.
+#
+# Expecting link alias to be 'redis'.
+#
+
+
+exec   redis-cli -h redis -p 6379  "$@"
+#exec  redis-cli -h $REDIS_PORT_6379_TCP_ADDR -p $REDIS_PORT_6379_TCP_PORT  "$@"

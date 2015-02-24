@@ -18,7 +18,7 @@
 
 2. 開啟 https://github.com/William-Yeh/docker-workshop
 
-3. 按右上角的 ![Fork Button](icon-github-fork.png) 按鈕。
+3. 按右上角的 ![Fork Button](img/icon-github-fork.png) 按鈕。
 
 4. 幾秒鐘之內，你應該會被自動導引到自己帳號底下的 docker-workshop 專案。
 

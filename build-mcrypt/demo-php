@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PHP_IMAGE=$1
+PHP_EXAMPLE=${2:-example.php}
+NAME=$(basename $BASH_SOURCE)
+
+if [ $# -lt 1 ]; then
+    echo "Demo for Dockerized PHP."
+    echo "Usage:  $NAME  <php image>  [php source code]"
+    exit 1
+fi
+
+cat $PHP_EXAMPLE | docker run -i $PHP_IMAGE

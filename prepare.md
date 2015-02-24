@@ -31,14 +31,14 @@
 
    並依序執行之。
 
-   ![下載必要的 VirtualBox 安裝檔案](download-virtualbox.png)
+   ![下載必要的 VirtualBox 安裝檔案](img/download-virtualbox.png)
 
 
 ### 1.2：Windows 作業系統注意事項
 
 在 Windows 上安裝 VirtualBox 時，如果遇到以下錯誤：
 
-   ![找不到指定的檔案](vbox-win64-error.png)
+   ![找不到指定的檔案](img/vbox-win64-error.png)
 
 請先切換到放置下載檔案的目錄，找出剛剛下載回來的安裝檔名（以我的例子：`VirtualBox-4.3.14-95030-Win.exe`），再依序執行以下命令：
 
@@ -74,7 +74,7 @@ GitHub 註冊及設定完畢後，請再進行以下步驟，以訂閱 Docker Wo
 
 A. 開啟 https://github.com/William-Yeh/docker-workshop
 
-B. 按右上角的 ![Watch Button](icon-github-watch.png) 按鈕。
+B. 按右上角的 ![Watch Button](img/icon-github-watch.png) 按鈕。
 
 之後，範例程式的任何異動，會自動送到你的 GitHub 登入畫面及 email。這個管道也會通知你，最近梯次的範例程式碼，何時正式定案。
 

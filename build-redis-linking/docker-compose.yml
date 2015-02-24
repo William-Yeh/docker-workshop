@@ -1,0 +1,8 @@
+benchmark:
+  build: .
+  command: benchmark
+  links:
+    - redis
+
+redis:
+  image: redis:2.8.19
