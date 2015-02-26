@@ -24,7 +24,7 @@ node:0.10.36-onbuild
 #
 
 redis:2.8.19
-nginx:1.6.2
+#nginx:1.6.2
 nginx:1.7.8
 nginx:1.7.9
 mysql:5.6.22
