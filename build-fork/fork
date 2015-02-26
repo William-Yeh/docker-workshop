@@ -1,0 +1,97 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use English;   # for $PID
+use File::Basename;
+
+
+my $fh;
+my $PARENT_TAG = "[Parent] ";
+my $CHILD_TAG  = "    [Child] ";
+
+# sleep period in seconds
+my ($parent_sleep, $child_sleep, $output_file) = @ARGV;
+
+sub main;
+sub child;
+sub my_tee;
+sub process_cmdline;
+sub usage;
+
+main();
+
+sub main {
+    process_cmdline();
+
+    my_tee $fh => ($PARENT_TAG, "PID = ", $PID, "\n");
+
+    my $pid = fork();
+    if ($pid == 0) {  # We are the child
+        child();
+    }
+    elsif (defined($pid)) {  # We are the parent of child
+        my_tee $fh => ($PARENT_TAG, "forked a child with PID = $pid\n");
+        if ($parent_sleep > 0) {
+            my_tee $fh => ($PARENT_TAG, "sleeping...\n");
+            sleep($parent_sleep);
+            my_tee $fh => ($PARENT_TAG, "awaken!\n");
+        }
+        my_tee $fh => ($PARENT_TAG, "exit...\n");
+        exit 0;
+    }
+    else {  # The fork failed
+        my_tee $fh => ($PARENT_TAG, "fork failed.\n");
+        exit 2;
+    }
+}
+
+
+sub child {
+    my_tee $fh => ($CHILD_TAG, "PID = ", $PID, "\n");
+
+    if ($child_sleep > 0) {
+        my_tee $fh => ($CHILD_TAG, "sleeping...\n");
+        sleep($child_sleep);
+        my_tee $fh => ($CHILD_TAG, "awaken!\n");
+    }
+
+    my_tee $fh => ($CHILD_TAG, "exit...\n");
+    exit 0;
+}
+
+
+# simple "tee" function for Perl:
+# print the output on the screen and to a file
+# @see http://www.perlmonks.org/?node_id=962541
+sub my_tee {
+    my $handle = shift;
+    print $handle @_;
+    print @_;
+}
+
+
+sub process_cmdline {
+    usage()  if (scalar @ARGV < 2);
+
+    if (not defined $output_file) {
+        $output_file = 'output.txt';
+    }
+
+    open $fh, '>>', $output_file
+        or die "$!";
+
+    my $now = localtime();
+    my_tee $fh => ("\n----> ", $now, " <----\n");
+}
+
+
+sub usage {
+    my $prog_name = basename($0);
+
+    print <<USAGE;
+Usage: $prog_name  <parent's sleep seconds>   <child's sleep seconds>  [output file]
+
+USAGE
+
+    exit 1;
+}

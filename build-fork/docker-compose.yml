@@ -1,0 +1,16 @@
+# normal case:
+#   child exit first, parent exit last
+normal:
+  build: .
+  command: fork 5 0
+  volumes:
+    - .:/data
+
+# abnormal case:
+#   parent exit first, child exit last (zombie)
+abnormal:
+  build: .
+  command: fork 0 5
+  volumes:
+    - .:/data
+
