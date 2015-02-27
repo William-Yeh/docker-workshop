@@ -30,8 +30,9 @@ Read the documents:
   - 更新至 Docker 1.5.0。
   - 增加更多程式語言例子。
   - 增加 Docker Compose 例子。
-  - 增加更適合的實例，解釋 dependency 與 isolation。
+  - 增加更適合的實例，解釋 dependency 與 isolation 性質。
   - 增加更適合的實例，逐步剖析 container linking 觀念。
+  - 增加更適合的實例，逐步剖析 Dockerized app 要素。
 
 
 **v1.0** / 第一梯次 (2015-02-07)
