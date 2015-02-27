@@ -7,7 +7,7 @@ normal:
     - .:/data
 
 # abnormal case:
-#   parent exit first, child exit last (zombie)
+#   parent exit first, child exit last (orphan)
 abnormal:
   build: .
   command: fork 0 5

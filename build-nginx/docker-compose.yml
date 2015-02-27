@@ -1,7 +1,7 @@
 nginx:
   image: nginx:1.7.9
   ports:
-    - 10081:80
+    - "10081:80"
   volumes:
     - .:/usr/share/nginx/html:ro
 
