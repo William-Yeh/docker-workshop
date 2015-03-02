@@ -83,14 +83,14 @@ class: center, middle
 1. 回復至初始狀態，登入
 
    ```bash
-   $ vagrant snapshot back  main
-   $ vagrant ssh            main
+   % vagrant snapshot back  main
+   % vagrant ssh            main
    ```
 --
 2. 安裝 Redis (native process)
 
    ```bash
-   $ sudo dpkg -i /vagrant/build-redis/redis-server_2.8.19.deb
+   $ sudo dpkg -i $HOME/docker-workshop/build-redis/redis-server_2.8.19.deb
    $ sudo service  redis-server  stop
    ```
 --

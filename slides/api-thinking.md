@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 .percent120[.center[![bg](img/dogfooding.png)]]
 
-# 從 API 角度思考／<br/>環境變數與 Linking
+# 從 API 角度思考／<br/>Container Linking
 
 ???
 
@@ -32,180 +32,346 @@ layout: false
 
 .pull-right[
 ## Lab directory
-- `build-redis`
+- `build-redis-linking`
 ]
 
 ---
 
-class: center, middle
+## Traditional scenario
 
-# 回顧 - Lab #6 的例子
-## 【性能評比／與 Native Process 比較】
+.pull-right[
+Native redis-server
+
+```bash
+$ sudo \
+    service redis-server start
+```
+]
+
+--
+
+.pull-left[
+Native redis-cli
+
+```bash
+$ IP=127.0.0.1
+$ PORT=6379
+
+$ redis-cli -h $IP -p $PORT
+
+$ # ... or, simply:
+$ redis-cli
+```
+]
+
+
+.percent100[.right[![bg](img/redis-traditional.svg)]]
 
 ---
 
-# Task 2B: Docker version
+## What if... in the Docker world?
 
-啟動 Redis server：
+.percent100[.center[![bg](img/redis-combinations.svg)]]
 
-```bash
-$ docker run -d  --name redis  \
-    -v $(pwd):/data            \
-    williamyeh/redis:2.8.19  start
-```
---
+---
 
-跑 benchmark：
+## Scenario #1: without port mapping
+
+.pull-right[
+Dockerized redis-server
 
 ```bash
-$ docker run --rm       \
-    --link redis:redis  \
-    williamyeh/redis:2.8.19  benchmark
+$ docker run -d    \
+    --name redis1  \
+    redis:2.8.19
 ```
+]
+
 --
 
-### ... What are these `start` and `benchmark`?
+.pull-left[
+Native redis-cli
+
+```bash
+how?
+```
+]
+
+.percent100[.right[![bg](img/redis-scenario1.svg)]]
+
+
+---
+
+```
+{
+    "Bridge": "docker0",        ◀ virtual Ethernet bridge 'docker0'
+    "Gateway": "172.17.42.1",   ◀ gateway of this bridge
+    "IPAddress": "172.17.0.2",  ◀ container's IP within the bridge
+    "Ports": {                  ◀ exposed ports?
+      "6379/tcp": null
+    }
+}
+```
+
+.percent100[.right[![bg](img/redis-scenario1.svg)]]
+
+---
+
+# Two approaches
+
+1. `.NetworkSettings.IPAddress`
+
+2. `--net=host`
+
+.percent100[.right[![bg](img/redis-scenario1.svg)]]
+
+
+.footnote[.red[*] See Lab 8: [編譯示範／從源碼建 image](build-pl.html)
+]
+
+---
+
+## Scenario #2: with port mapping
+
+.pull-right[
+Dockerized redis-server
+
+```bash
+$ docker run -d    \
+    -p 26379:6379  \
+    --name redis2  \
+    redis:2.8.19
+```
+]
+
+--
+
+.pull-left[
+Native redis-cli
+
+```bash
+How?
+```
+]
+
+.percent100[.right[![bg](img/redis-scenario2.svg)]]
+
+
+---
+
+```
+{
+    "Bridge": "docker0",        ◀ 仍然在 bridge 'docker0' 裡面
+    "Gateway": "172.17.42.1",
+    "IPAddress": "172.17.0.3",  ◀ 仍然有獨立的 IP address
+    "Ports": {
+        "6379/tcp": [              ◀ container 內部的 6379 port...
+          {
+            "HostIp": "0.0.0.0",   ◀ ... 被 mapping 到外面的 0.0.0.0...
+            "HostPort": "26379"    ◀ ... any interface 的 26379 port
+          }
+        ]
+    }
+}
+```
+
+.percent100[.right[![bg](img/redis-scenario2.svg)]]
+
+
+---
+
+## Scenario #3: with port mapping
+
+.pull-right[
+Dockerized redis-server
+
+```bash
+$ docker run -d    \
+    --name redis2  \
+    -p 26379:6379  \
+    redis:2.8.19
+```
+]
+
+--
+
+.pull-left[
+Dockerized redis-cli
+
+```bash
+How?
+```
+]
+
+.percent100[.right[![bg](img/redis-scenario3.svg)]]
+
+
+---
+
+```
+{
+    "Bridge": "docker0",        ◀ 仍然在 bridge 'docker0' 裡面
+    "Gateway": "172.17.42.1",
+    "IPAddress": "172.17.0.3",  ◀ 仍然有獨立的 IP address
+    "Ports": {
+        "6379/tcp": [              ◀ container 內部的 6379 port...
+          {
+            "HostIp": "0.0.0.0",   ◀ ... 被 mapping 到外面的 0.0.0.0...
+            "HostPort": "26379"    ◀ ... any interface 的 26379 port
+          }
+        ]
+    }
+}
+```
+
+.percent100[.right[![bg](img/redis-scenario3.svg)]]
+
+
+---
+
+```
+{
+    "Bridge": "docker0",        ◀ 仍然在 bridge 'docker0' 裡面
+    "Gateway": "172.17.42.1",
+    "IPAddress": "172.17.0.3",  ◀ 仍然有獨立的 IP address
+    "Ports": {
+        "6379/tcp": [              ◀ container 內部的 6379 port...
+          {
+*           "HostIp": "0.0.0.0",   ◀ ... 被 mapping 到外面的 0.0.0.0...
+*           "HostPort": "26379"    ◀ ... any interface 的 26379 port
+          }
+        ]
+    }
+}
+```
+
+
+☛ Dockerized redis-cli:
+
+```bash
+$ IP=127.0.0.1
+$ PORT=26379
+
+$ # fail!!!
+$ docker run -it redis:2.8.19  \
+    redis-cli -h $IP -p $PORT
+```
+```
+失敗：
+Could not connect to Redis at 127.0.0.1:26379: Connection refused
+```
+
+
+---
+
+```
+{
+    "Bridge": "docker0",        ◀ 仍然在 bridge 'docker0' 裡面
+    "Gateway": "172.17.42.1",
+*   "IPAddress": "172.17.0.3",  ◀ 仍然有獨立的 IP address
+    "Ports": {
+*       "6379/tcp": [              ◀ container 內部的 6379 port...
+          {
+            "HostIp": "0.0.0.0",   ◀ ... 被 mapping 到外面的 0.0.0.0...
+            "HostPort": "26379"    ◀ ... any interface 的 26379 port
+          }
+        ]
+    }
+}
+```
+
+☛ Dockerized redis-cli:
+
+```bash
+$ IP=$(docker inspect  \
+       --format "{{.NetworkSettings.IPAddress}}"  redis2)
+$ PORT=6379
+
+$ # fail!!!
+$ docker run -it redis:2.8.19  \
+    redis-cli -h $IP -p $PORT
+```
+
+--
 
 <br/>
-☛ Let's take a look at source code: https://github.com/William-Yeh/docker-redis
+... manually lookup; not perfect yet...
+
 
 ---
 
-# Dockerfile as a spec...
+## Scenario #4: without port mapping
 
-`Dockerfile`, near the end:
+.pull-right[
+Dockerized redis-server
 
-```dockerfile
-#...
-
-# configure Redis
-VOLUME  [ "/data", "/etc/redis" ]
-
-# Redis port.
-EXPOSE  6379
-
-# for convenience
-ENV   PATH       /opt:$PATH
-COPY  usage.sh   /opt/
-COPY  start      /opt/
-COPY  client     /opt/
-COPY  benchmark  /opt/
-
-# Define default command.
-CMD  ["usage.sh"]
+```bash
+$ docker run -d    \
+    --name redis1  \
+    redis:2.8.19
 ```
-
----
-
-# CMD: Default command
-
-```dockerfile
-CMD  [ "usage.sh" ]
-```
-
-## ☛ will call this "usage.sh"
-
-  - `docker run ... williamyeh/redis:2.8.19`
---
-
-  - `docker run ... williamyeh/redis:2.8.19  usage.sh`
---
-
-  - `docker run ... williamyeh/redis:2.8.19  /opt/usage.sh`
+]
 
 --
 
-## ☛ will call other scripts
-
-  - `docker run ... williamyeh/redis:2.8.19  start`
-  - `docker run ... williamyeh/redis:2.8.19  benchmark`
-  - `docker run ... williamyeh/redis:2.8.19  client`
-
----
-
-# Wrapper Script #1
-
-`usage.sh`:
+.pull-left[
+Dockerized redis-cli
 
 ```bash
-#!/bin/bash
-
-cat << EOF
-williamyeh/redis - Docker image for Redis.
-
-Env
-===
-- Exported volumes:
-    * [OUT] /data - for Redis persistent data.
-    * [IN]  /etc/redis - for customized "redis.conf".
-
-Usage
-=====
-## Starting a Redis server with my simple wrapper
-
-  Cmd:  start  [config-file]
-  Args:
-    - config-file: default = redis.conf
-
-  Examples:
-...
+how?
 ```
+]
+
+.percent100[.right[![bg](img/redis-scenario4.svg)]]
+
 
 ---
 
-# Wrapper Script #2
+```
+{
+    "Bridge": "docker0",        ◀ virtual Ethernet bridge 'docker0'
+    "Gateway": "172.17.42.1",   ◀ gateway of this bridge
+    "IPAddress": "172.17.0.2",  ◀ container's IP within the bridge
+    "Ports": {                  ◀ exposed ports?
+      "6379/tcp": null
+    }
+}
+```
 
-`start`:
+.percent100[.right[![bg](img/redis-scenario4.svg)]]
+
+
+---
+
+
+# 先從簡單的 busybox 下手...
+
+.center[`--link  ` &nbsp;&nbsp; *target-name* `:` *alias*  ]
+
+.pull-right[
+Dockerized redis-server
 
 ```bash
-#!/bin/bash
-#
-# Simple wrapper for "redis-server" executable.
-#
-# Usage:  start  [config-filename]
-#
-# Arguments:
-#   - config-filename: default="redis.conf"
-#
-
-CONF=${1:-redis.conf}
-
-exec  redis-server  /etc/redis/$CONF
+$ docker run -d    \
+    --name redis1  \
+    redis:2.8.19
 ```
+]
 
-`Dockerfile`:
+--
 
-```dockerfile
-# configure Redis
-VOLUME  [ "/data", "/etc/redis" ]
-```
-
----
-
-# Wrapper Script #3
-
-`client`:
+.pull-left[
+Dockerized *busybox*
 
 ```bash
-
+$ docker run -it         \
+*   --link redis1:redis  \
+    busybox
 ```
+]
 
+.percent100[.right[![bg](img/redis-linking.svg)]]
 
----
-
-# Wrapper Script #4
-
-`benchmark`:
-
-```bash
-
-```
-
----
-
-class: center, middle
-
-# What the h*ll are these environment variables?
 
 ---
 
@@ -213,94 +379,506 @@ template: inverse
 
 # Container Linking
 
----
+### env
+### /etc/hosts
 
-## How to access the container that has not port mapping?
-
-For example,
-
-   ```bash
-   $ docker run -d  --name redis  \
-       -v $(pwd):/data            \
-       williamyeh/redis:2.8.19  start
-   ```
-
-There's no port mapping:
-
-   ```bash
-   $ docker port     redis
-
-   # or, more details:
-   $ docker inspect  redis
-   ```
 
 ---
 
 ## Use link to access it...
 
-- Invoke a bash container to **link** to it...
+.right[`--link  ` &nbsp;&nbsp; *target-name* `:` *alias*  ]
+
+- Invoke a busybox container to **link** to it...
 
   ```bash
   $ docker run -it  \
-        --link redis:redis_srv \
-        ubuntu:14.04   bash
+  *     --link redis1:redis \
+        busybox
   ```
 
-  Now, we're inside the bash container, with a tty.
+  Now, we're inside the busybox container, with a tty.
 
 --
-- List environment variables in this bash container:
+
+.pull-left[
+- List environment variables in this busybox container:
 
   ```bash
   env
   ```
+]
 
---
-  or, filter "`REDIS_SRV`" (in uppercase) patterns:
+.pull-right[
+- List `/etc/hosts` contents:
 
   ```bash
-  env | grep REDIS_SRV
+  cat /etc/hosts
+  ```
+]
+
+
+---
+
+# Env in this busybox container
+
+Let's filter "`REDIS`" (in uppercase) patterns:
+
+  ```bash
+  env | grep REDIS
+  ```
+--
+- networking info of the target container:
+
+  ```
+  REDIS_PORT=tcp://172.17.0.2:6379
+  REDIS_PORT_6379_TCP_ADDR=172.17.0.2
+  REDIS_PORT_6379_TCP_PORT=6379
+  REDIS_PORT_6379_TCP_PROTO=tcp
+  REDIS_PORT_6379_TCP=tcp://172.17.0.2:6379
+  ```
+
+--
+- env of the target container:
+
+  ```
+  REDIS_ENV_REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-2.8.19.tar.gz
+  REDIS_ENV_REDIS_VERSION=2.8.19
+  REDIS_ENV_REDIS_DOWNLOAD_SHA1=3e362f4770ac2fdbdce58a5aa951c1967e0facc8
+  ```
+
+--
+- info of myself:
+
+  ```
+  REDIS_NAME=/prickly_perlman/redis
+  ```
+
+
+---
+
+# `/etc/hosts` contents
+
+  ```bash
+  cat /etc/hosts
+  ```
+--
+- networking info of the target container:
+
+  ```
+  172.17.0.2  redis
+  ```
+--
+- myself (IPv4):
+
+  ```
+  172.17.0.4  6f9b745cf1ae
+  127.0.0.1 localhost
+  ```
+
+--
+- myself (IPv6):
+
+  ```
+  ::1 localhost ip6-localhost ip6-loopback
+  fe00::0 ip6-localnet
+  ff00::0 ip6-mcastprefix
+  ff02::1 ip6-allnodes
+  ff02::2 ip6-allrouters
   ```
 
 ---
 
-## Try these environment variables generated by linking...
+## Link alias
 
-For example, `REDIS_SRV_PORT_6379_TCP_ADDR`:
+.right[`--link  ` &nbsp;&nbsp; *target-name* `:` .red[*alias*]  ]
 
-```bash
-$ docker run -it  --link redis:redis_srv  ubuntu:14.04  \
-    bash -c  'echo $REDIS_SRV_PORT_6379_TCP_ADDR'
-```
+- Invoke a busybox container to **link** to it...
+
+  ```bash
+  $ docker run -it  \
+  *     --link redis1:redis \
+        busybox
+  ```
+
+  Inside the busybox container, we'll see:
 
 --
 
-`REDIS_SRV_PORT_6379_TCP_PORT`:
+.pull-left[
+- Env (in uppercase):
 
-```bash
-$ docker run -it  --link redis:redis_srv  ubuntu:14.04  \
-    bash -c  'echo $REDIS_SRV_PORT_6379_TCP_PORT'
-```
+  ```
+  REDIS_PORT
+  REDIS_PORT_6379_TCP
+  REDIS_PORT_6379_TCP_*
+  REDIS_ENV_*
+  ```
+]
+
+.pull-right[
+- `/etc/hosts`:
+
+  ```
+  xx.xx.xx.xx  redis
+  ```
+]
+
+---
+
+## What if we change the link's alias?
+
+.right[`--link  ` &nbsp;&nbsp; *target-name* `:` .red[*alias*]  ]
+
+- Invoke a busybox container to **link** to it...
+
+  ```bash
+  $ docker run -it  \
+  *     --link redis1:redisserver \
+        busybox
+  ```
+
+  Inside the busybox container, we'll see:
+
+--
+
+.pull-left[
+- Env (in uppercase):
+
+  ```
+  REDISSERVER_PORT
+  REDISSERVER_PORT_6379_TCP
+  REDISSERVER_PORT_6379_TCP_*
+  REDISSERVER_ENV_*
+  ```
+]
+
+.pull-right[
+- `/etc/hosts`:
+
+  ```
+  xx.xx.xx.xx  redisserver
+  ```
+]
+
+---
+
+## What if we change the link's target name?
+
+.right[`--link  ` &nbsp;&nbsp; .red[*target-name*] `:` *alias*  ]
+
+- Invoke a busybox container to **link** to another server container `redis2`...
+
+  ```bash
+  $ docker run -d --name redis2 redis:2.8.19
+  $ docker run -it  \
+  *     --link redis2:redis \
+        busybox
+  ```
+
+  Inside the busybox container, we'll see:
+
+--
+
+.pull-left[
+- Env (in uppercase):
+
+  ```
+  REDIS_PORT
+  REDIS_PORT_6379_TCP
+  REDIS_PORT_6379_TCP_*
+  REDIS_ENV_*
+  ```
+]
+
+.pull-right[
+- `/etc/hosts`:
+
+  ```
+  xx.xx.xx.xx  redis
+  ```
+]
 
 ---
 
 # Benefits of container linking
 
-- Without specify ports explicitly
+### Env and `/etc/hosts`
+  - No need to lookup IP address manually
+  - No need to specify port mapping manually
+
+### Alias
+  - Location transparency
+  - Portable naming
+
+---
+
+class: center, middle
+
+# OK, how can we connect to it?
+
+---
+
+# Scenario #4: linking, without port mapping
+
+.pull-right[
+Dockerized redis-server
+
+```bash
+$ docker run -d    \
+*   --name redis1  \
+    redis:2.8.19
+```
+]
 
 --
 
-- Portable addressing
+.pull-left[
+Dockerized redis-cli
+
+```bash
+$ docker run -it        \
+*   --link redis1:redis \
+    redis:2.8.19        \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+]
+
+--
+<br clear="all">
+
+.pull-right[
+Dockerized redis-server #2
+
+```bash
+$ docker run -d    \
+*   --name redis2  \
+    redis:2.8.19
+```
+]
 
 --
 
-- Portable naming
+.pull-left[
+Dockerized redis-cli
+
+```bash
+$ docker run -it        \
+*   --link redis2:redis \
+    redis:2.8.19        \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+]
+
+---
+
+# 變與不變之間...
+
+.pull-left[
+Dockerized redis-cli
+
+```bash
+$ docker run -it          \
+*   --link redis1:redis   \
+    redis:2.8.19          \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+
+```bash
+$ docker run -it          \
+*   --link redis2:redis   \
+    redis:2.8.19          \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+]
+
+--
+
+.pull-right[
+Dockerized redis-cli
+
+```bash
+$ docker run -it          \
+*   --link redis3:redis   \
+    redis:2.8.19          \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+
+```bash
+$ docker run -it          \
+*   --link redis4:redis   \
+    redis:2.8.19          \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+]
+
+---
+
+class: center, middle
+
+## 只要 link 的 alias 部分維持不變，<br/>`redis-cli` 的參數就可以維持不變。
+
+.percent100[.center[![bg](img/redis-linking.svg)]]
+
+
+---
+
+template: inverse
+
+# DRY (Don't Repeat Yourself)
+
+## 如果某件事常常做，<br/>就值得單獨抽離出來。
+
+---
+
+# Wrapper script for redis-cli
+
+.pull-left[
+- Dockerized redis-cli
+
+```bash
+$ docker run -it          \
+*   --link redisXXX:redis \
+    redis:2.8.19          \
+    \
+    redis-cli  \
+      -h redis -p 6379
+```
+
+- Goal: wrapper
+
+```bash
+$ docker run -it          \
+*   --link redisXXX:redis \
+    redis:2.8.19          \
+    \
+    client
+```
+]
+
+
+--
+
+.pull-right[
+☛ Wrapper for redis-cli
+
+```bash
+#!/bin/bash
+
+exec redis-cli  \
+      -h redis -p 6379
+```
+]
+
+
+---
+
+# Wrapper script for redis-benchmark
+
+.pull-left[
+- Dockerized redis-benchmark
+
+```bash
+$ docker run -it          \
+*   --link redisXXX:redis \
+    redis:2.8.19          \
+    \
+    redis-benchmark  \
+      -h redis -p 6379
+```
+
+- Goal: wrapper
+
+```bash
+$ docker run -it          \
+*   --link redisXXX:redis \
+    redis:2.8.19          \
+    \
+    benchmark
+```
+]
+
+
+--
+
+.pull-right[
+☛ Wrapper for redis-benchmark
+
+```bash
+#!/bin/bash
+
+exec redis-benchmark  \
+      -h redis -p 6379
+```
+]
+
+
+---
+
+# Test them!
+
+- Test in foreground:
+
+  ```bash
+  $ docker-compose up
+  ```
+
+--
+  ... review the logs:
+
+  ```bash
+  $ docker logs `CONTAINER_NAME_OR_ID`
+  ```
+
+--
+
+- Test in background:
+
+  ```bash
+  $ docker-compose up -d
+  ```
+
+--
+  ... tail the logs:
+
+  ```bash
+  $ docker logs -f `CONTAINER_NAME_OR_ID`
+  ```
+
+
+---
+
+# Benchmark our and official redis image?
+
+```bash
+$ docker-compose  -f docker-compose-mixed.yml  up
+```
+
+... and see the logs?
 
 ---
 
 template: inverse
 
 # Recap: API Thinking
+
+---
+
+## Various clients in the Docker world...
+
+.percent100[.center[![bg](img/redis-combinations.svg)]]
 
 ---
 

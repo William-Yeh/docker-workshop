@@ -17,7 +17,7 @@ Img src: http://blog.coyoteproductions.co.uk/cartoons/software-simian-code-monke
 layout: false
 class: center, middle
 
-`$ cd docker-workshop`
+`% cd docker-workshop`
 
 ---
 
@@ -56,7 +56,7 @@ layout: false
 
 ---
 
-# List...
+# List images/containers
 
 >| Static Structure | ↔ | Dynamic Behavior |
 |:----------------:|---|:----------------:|
@@ -166,9 +166,9 @@ docker pull ubuntu
 
 ---
 
-# Some things about Docker Image
+# Image ID
 
-## ID (as hash)
+## ID (as 12-character hash)
 
 Analogy: alias, symbolic link
 
@@ -177,9 +177,21 @@ $ docker images
 ```
 --
 
-## File system layering
+## ID (as 64-character hash) .red[*]
 
-Analogy: single inheritance
+```bash
+$ docker images --no-trunc=true
+```
+
+.footnote[.red[*]  "All images are identified by a 64 hexadecimal digit string (internally a 256bit value)." Source: https://docs.docker.com/terms/image/
+]
+
+---
+
+# Layers
+
+## Tree of base images
+Analogy - single inheritance
 
 ```bash
 $ docker images --tree
@@ -187,9 +199,21 @@ $ docker images --tree
 
 .footnote[.red[*] See official doc about [Layers](https://docs.docker.com/terms/layer/). ]
 
+--
+
+- ### Q: What is the `511136ea3c5a` image?
+
+  ```bash
+  $ docker images -a
+  ```
+--
+
+- ### A: [`scratch`](https://registry.hub.docker.com/_/scratch/) image; see official document "[Create a Base Image](https://docs.docker.com/articles/baseimages/)" for more info.
+
+
 ---
 
-# ... from [Docker Hub](https://registry.hub.docker.com/)
+# Pull images from [Docker Hub](https://registry.hub.docker.com/)
 
 ## User-Created images
 
@@ -235,7 +259,7 @@ class: center, middle
 ]
 ---
 
-# ... from *another* registry
+# Pull images from *another* registry
 
 .pull-left[
 
@@ -269,12 +293,19 @@ class: center, middle
 
 Which case?
 
+- `scratch`
+
+--
 
 - `busybox`
 
 --
 
 - `ubuntu:14.04`
+
+--
+
+- `ubuntu:trusty`
 
 --
 
@@ -330,13 +361,13 @@ end
 - Pull images:
 
   ```bash
-  docker pull 10.0.0.200/ACCOUNT/IMAGE
+  docker pull  10.0.0.200/ACCOUNT/IMAGE
   ```
 
   or,
 
   ```bash
-  docker pull registry.com/ACCOUNT/IMAGE
+  docker pull  registry.com/ACCOUNT/IMAGE
   ```
 
 --
@@ -354,53 +385,6 @@ DOCKER  pull  ACCOUNT/IMAGE
 # Pre-loaded images
 
 See `provision/IMAGE-LIST`.
-
----
-
-# Example: `ipython/notebook`
-
-
-```bash
-$ DOCKER pull ipython/notebook
-
-$ docker run -d    \
-    -p 10080:8888  \
-    -e "PASSWORD=123" -e "USE_HTTP=1"  \
-    ipython/notebook
-```
-
-Browser:
-
-- View: http://localhost:10080/
-
-References:
-
-- [ipython/notebook](https://registry.hub.docker.com/u/ipython/notebook/) at Docker Hub
-
-- [IPython Notebook](http://ipython.org/notebook.html)
-
----
-
-# Example: `dockerfile/ghost`
-
-```bash
-$ DOCKER pull dockerfile/ghost
-
-$ docker run -d    \
-    -p 10080:2368  \
-    dockerfile/ghost
-```
-
-Browser:
-
-- View blog: http://localhost:10080/
-- Sign up: http://localhost:10080/ghost/signup/
-
-References:
-
-- [dockerfile/ghost](https://registry.hub.docker.com/u/dockerfile/ghost/) at Docker Hub
-
-- [Deploying Ghost With Docker](http://www.allaboutghost.com/deploying-ghost-with-docker/)
 
 ---
 

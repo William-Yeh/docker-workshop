@@ -4,13 +4,13 @@ class: center, middle, inverse
 
 ---
 
-.percent80[.center[![bg](img/CodeMonkey-3.jpg)]]
+.percent90[.center[![bg](img/cook-vector.jpg)]]
 
 # 牛刀小試／第一個 Docker Image
 
 ???
 
-Img src: http://zikayn.com/blog/wp-content/uploads/2011/12/monkey-5.jpg
+Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 
 ---
 
@@ -40,9 +40,60 @@ layout: false
 
 ---
 
+template: inverse
+
+# Layers
+
+## Which base image to build from?
+
+---
+
+# Analogy: base class (super class)
+
+.percent50[.center[![bg](img/java-io-hierarchy.gif)]]
+
+???
+
+Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
+
+---
+
+# Docker base image
+
+--
+
+- Minimalism: based on `scratch` or `busybox`
+
+  - [Create the smallest possible Docker container](http://blog.xebia.com/2014/07/04/create-the-smallest-possible-docker-container/)
+  - [Squashing Docker Images](http://jasonwilder.com/blog/2014/08/19/squashing-docker-images/)
+  - [Creating minimal Docker images from dynamically linked ELF binaries](http://blog.oddbit.com/2015/02/05/creating-minimal-docker-images/)
+  - [Creating super small docker images](http://yasermartinez.com/blog/posts/creating-super-small-docker-images.html)
+
+--
+
+- Modest: barebone Linux distributions
+  - Reuse your existing experiences: make, ant, apt-get, yum...
+
+--
+
+- Convenience: programming languages installed
+  - Reuse your existing experiences: gem, maven, npm, pip...
+
+---
+
+class: middle
+
+# .center[Let's start by this approach...]
+
+<br/>
+- Modest: barebone Linux distributions
+  - Reuse your existing experiences: make, ant, apt-get, yum...
+
+---
+
 class: center, middle
 
-# 在嘗試 build Docker image 之前，先確定自己會 build！
+# 在嘗試 build Docker image 之前，先確定自己會 build 傳統軟體！
 
 --
 
@@ -66,6 +117,25 @@ class: center, middle
 ---
 
 .percent70[.center[![bg](img/app-building-oldway.svg)]]
+
+---
+
+# Add something to root file system (rootfs)
+
+<br/>
+
+.pull-left[
+  .percent90[.center[![bg](img/app-building-oldway.svg)]]
+]
+
+.pull-right[
+  .percent90[.center[![bg](img/cook-vector.jpg)]]
+]
+
+
+???
+
+Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 
 
 ---
@@ -108,14 +178,25 @@ class: center, middle
 
 # 那麼，Docker 是怎麼 build 的？
 
+--
+
+.percent90[.center[![bg](img/cook-vector.jpg)]]
+
+Add something to ...?
+
 ---
+
+# Add something to ~~rootfs~~ <br/> base image!
 
 .percent110[.center[![bg](img/app-building-compare.svg)]]
 
 ---
 
-.percent110[.center[![bg](img/app-building-dockerway.svg)]]
+class: center, middle
 
+Add something to *layered* base image!
+
+.percent70[.center[![bg](img/app-building-dockerway.svg)]]
 
 ---
 
@@ -169,7 +250,7 @@ $ docker images --tree
 
 # 逐行拆解 Dockerfile 指令
 
-## #2: Add something to target image
+## #2: Add something to ~~rootfs~~ target image
 
 ```dockerfile
 COPY  redis-server_2.8.19.deb  redis-server.deb
@@ -186,7 +267,7 @@ Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 
 # 逐行拆解 Dockerfile 指令
 
-## #3: Run commands within target image
+## #3: Run commands within ~~rootfs~~ target image
 
 ```dockerfile
 # install from deb
@@ -222,7 +303,7 @@ $ docker build .
 
 ---
 
-# Look what we've built...
+# Look at what we've built...
 
 
 ```bash
@@ -270,7 +351,7 @@ $ docker ps -a
 
 # 收割時刻：Run it!
 
-Background mode (_**d**aemon_ mode):
+Background (_**d**aemon_ or _**d**etached_) mode:
 
 ```bash
 $ docker run -d  `THE_UGLY_IMAGE_ID`

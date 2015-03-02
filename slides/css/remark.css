@@ -56,8 +56,11 @@ code {
 .remark-code, .remark-inline-code {
     font-family: 'PT Mono' /* 'Ubuntu Mono' 'Oxygen Mono' */ ;
 }
-.remark-code-line                 { font-size: 1em;  }
-.remark-code-line-highlighted     { background-color: #373832;  }
+.remark-code-line                    { font-size: 1em;           }
+.remark-code-line-highlighted        { background-color: yellow; }
+.hljs .remark-code-line-highlighted  { background-color: gray;   }
+    /*background-color: #373832; */
+
 
 .percent150 img { max-width: 150%; }
 .percent140 img { max-width: 140%; }

@@ -39,20 +39,20 @@ layout: false
 
 .pull-right[
 ## Lab directory
-- any
+- workshop root
 ]
 
 ---
 
 template: inverse
 
-# "Containerization" <br/> vs <br/> "Virtualization"
+# "Virtualization" <br/> vs <br/> "Containerization"
 
 ---
 
 # Similar?
 
-.pull-left[
+.pull-right[
 ## Docker
 - Dependency
 - Isolation
@@ -60,35 +60,51 @@ template: inverse
 
 --
 
-.pull-right[
-## Virtual Machine
+.pull-left[
+## Virtual machine
 - Dependency
 - Isolation
 ]
 
 ---
 
-# 分析！
-
 .pull-left[
-## In Theory
+## Virtual machine
 ]
 
 .pull-right[
-## In Practice
+## Docker
 ]
+<br clear="all">
 
----
+```
+ `+------------------------+`         |  `+------------------------+`
+ `|  App                   |`         |  `|  App                   |`
+ `+------------------------+`         |  `+------------------------+`
 
-## In Theory
+     `+----------------------+`       |      `+----------------------+`
+     `|  PL library/package/ |`       |      `|  PL library/package/ |`
+     `|  module/extension    |`       |      `|  module/extension    |`
+     `+----------------------+`       |      `+----------------------+`
 
----
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+ `| PL      |`   `| special-purpose |`  |  `| PL      |`   `| special-purpose |`
+ `| runtime |`   `| runtime lib     |`  |  `| runtime |`   `| runtime lib     |`
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
 
-class: center, middle
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  libc & generic runtime lib   |`  |  `|  libc & generic runtime lib   |`
+ `+-------------------------------+`  |  `+-------------------------------+`
 
-# “In theory, theory and practice are the same.  In practice, they are not.”
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  root file system             |`  |  `|  root file system             |`
+ `+-------------------------------+`  |  `+-------------------------------+`
 
-― Albert Einstein
+ `+-------------------------------+`  |  +-------------------------------+
+ `|  Linux kernel                 |`  |  |  Linux kernel ≥ 3.10          |
+ `+-------------------------------+`  |  +-------------------------------+
+```
+
 
 ---
 
@@ -109,20 +125,59 @@ template: inverse
 
 ---
 
+.pull-left[
+## Virtual machine
+]
+
+.pull-right[
+## Docker
+]
+<br clear="all">
+
+```
+ `+------------------------+`         |  `+------------------------+`
+ `|  App                   |`         |  `|  App                   |`
+ `+------------------------+`         |  `+------------------------+`
+
+     `+----------------------+`       |      `+----------------------+`
+     `|  PL library/package/ |`       |      `|  PL library/package/ |`
+     `|  module/extension    |`       |      `|  module/extension    |`
+     `+----------------------+`       |      `+----------------------+`
+
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+ `| PL      |`   `| special-purpose |`  |  `| PL      |`   `| special-purpose |`
+ `| runtime |`   `| runtime lib     |`  |  `| runtime |`   `| runtime lib     |`
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  libc & generic runtime lib   |`  |  `|  libc & generic runtime lib   |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  root file system             |`  |  `|  root file system             |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  +-------------------------------+
+ `|  Linux kernel                 |`  |  |  Linux kernel ≥ 3.10          |
+ `+-------------------------------+`  |  +-------------------------------+
+```
+
+---
+
 # 前置作業
 
 - Rollback to clean state
 
   ```bash
-  $ vagrant snapshot back  main
-  $ vagrant snapshot back  centos
+  % vagrant snapshot back  main
+  % vagrant snapshot back  centos
   ```
 --
 
 - Shutdown all VMs
 
   ```bash
-  $ vagrant halt
+  % vagrant halt
   ```
 
 --
@@ -146,7 +201,7 @@ template: inverse
 測量以下時間：
 
 ```bash
-$ vagrant up centos
+% vagrant up  centos
 ```
 
 ---
@@ -156,11 +211,11 @@ $ vagrant up centos
 先備妥環境：
 
 ```bash
-$ vagrant up   registry
-$ vagrant up   main
-$ vagrant ssh  main
+% vagrant up   registry
+% vagrant up   main
+% vagrant ssh  main
 
-# 視網路狀況而定...
+$ # 視網路狀況而定...
 $ DOCKER pull  centos:5.11
 $ docker images
 ```
@@ -180,6 +235,44 @@ template: inverse
 
 # Task #2: Kernel
 
+---
+
+.pull-left[
+## Virtual machine
+]
+
+.pull-right[
+## Docker
+]
+<br clear="all">
+
+```
+ `+------------------------+`         |  `+------------------------+`
+ `|  App                   |`         |  `|  App                   |`
+ `+------------------------+`         |  `+------------------------+`
+
+     `+----------------------+`       |      `+----------------------+`
+     `|  PL library/package/ |`       |      `|  PL library/package/ |`
+     `|  module/extension    |`       |      `|  module/extension    |`
+     `+----------------------+`       |      `+----------------------+`
+
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+ `| PL      |`   `| special-purpose |`  |  `| PL      |`   `| special-purpose |`
+ `| runtime |`   `| runtime lib     |`  |  `| runtime |`   `| runtime lib     |`
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  libc & generic runtime lib   |`  |  `|  libc & generic runtime lib   |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  root file system             |`  |  `|  root file system             |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  +-------------------------------+
+ `|  Linux kernel                 |`  |  |  Linux kernel ≥ 3.10          |
+ `+-------------------------------+`  |  +-------------------------------+
+```
 
 ---
 
@@ -189,7 +282,8 @@ template: inverse
 ## CentOS 5.11
 
 ```bash
-$ vagrant ssh  centos
+% vagrant ssh  centos
+
 $ uname -a
 ```
 ]
@@ -200,7 +294,8 @@ $ uname -a
 ## Ubuntu 14.04
 
 ```bash
-$ vagrant ssh  main
+% vagrant ssh  main
+
 $ uname -a
 ```
 ]
@@ -209,7 +304,7 @@ $ uname -a
 
 # Task 2B: Container's view of kernel
 
-.center[ `$ vagrant ssh  main` ]
+.center[ `% vagrant ssh  main` ]
 
 
 --
@@ -248,25 +343,25 @@ template: inverse
 
 Bare metal machine is needed...
 
-.pull-left[
+.pull-right[
 ## ➤ Task for Docker
 
 Software stack:
 
-- Dockerized app
-- Docker Engine
+- *Dockerized app*
+- *Docker Engine*
 - Linux
 - Bare metal machine
 ]
 
 
-.pull-right[
+.pull-left[
 ## ➤ Task for VM
 
 Software stack:
 
-- App
-- Virtual Machine
+- *App*
+- *Virtual Machine*
 - Linux
 - Bare metal machine
 
@@ -277,7 +372,7 @@ Software stack:
 template: inverse
 
 # Recap
-## Containerization vs Virtualization
+## Virtualization vs Containerization
 
 ---
 

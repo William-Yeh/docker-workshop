@@ -17,7 +17,43 @@ Img src: http://andrewgarrison.com/wp-content/uploads/2012/10/CodeMonkey-68762_9
 layout: false
 class: center, middle
 
-`$ cd docker-workshop`
+`% cd docker-workshop`
+
+---
+
+# Directory mapping
+
+
+.pull-left[
+## Host machine
+
+```bash
+% ls -al
+```
+]
+
+
+.pull-right[
+## Guest machine
+
+```bash
+$ ls -al $HOME/docker-workshop
+```
+]
+
+--
+
+<br/><br/>
+Mapping rule:
+
+```yaml
+Vagrant.configure(2) do |config|
+
+  #                         host  guest
+  config.vm.synced_folder   "." , "/home/vagrant/docker-workshop"
+
+end
+```
 
 ---
 
@@ -156,7 +192,7 @@ class: center, middle
 Show current status of all VMs:
 
 ```bash
-$ vagrant status
+% vagrant status
 ```
 
 --
@@ -164,15 +200,15 @@ $ vagrant status
 Power on the `main` VM:
 
 ```bash
-$ vagrant up main
+% vagrant up  main
 ```
 
 --
 
-SSH into the VM:
+SSH into the `main` VM:
 
 ```bash
-$ vagrant ssh main
+% vagrant ssh  main
 ```
 
 .footnote[Ditto for built-in (`halt`, `destroy`, `provision`, etc) and plugin (e.g., `snapshot`) commands.
@@ -180,9 +216,7 @@ $ vagrant ssh main
 
 ---
 
-#  Looking around
-
-Inside the VM:
+#  Looking around inside the VM...
 
 - Machine arch, kernel version, etc.
 

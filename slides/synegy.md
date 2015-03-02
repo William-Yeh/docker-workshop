@@ -21,15 +21,12 @@ layout: false
 .pull-left[
 ## VMs
 
-1. `centos`:
+1. `main`:
+   - RAM: 2048
    - `up`
    - `ssh`
 
-2. `main`:
-   - `up`
-   - `ssh`
-
-3. `registry`:
+2. `registry`:
    - `up`
 ]
 
@@ -147,9 +144,11 @@ Re-run previous `wrk` task to see the `fluentd` output!
 
 Start the `Elasticsearch` server:
 
+ - map internal port 9200 to external 10092
+
 ```bash
 $ docker run -d  --name elasticsearch  \
-     -p 9200:9200  \
+     -p 10092:9200  \
      digitalwonderland/elasticsearch
 ```
 
@@ -159,7 +158,7 @@ $ docker run -d  --name elasticsearch  \
 
 Use browser to open the Kibana page:
 
-  - http://localhost:9200/_plugin/kibana3/
+  - http://localhost:10092/_plugin/kibana3/
 
 
 ---

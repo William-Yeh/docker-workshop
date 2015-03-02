@@ -3,14 +3,13 @@ layout: true
 class: center, middle, inverse
 
 ---
-
-.percent80[.center[![bg](img/CodeMonkey-3.jpg)]]
+.percent90[.center[![bg](img/cook-vector.jpg)]]
 
 # 舉一反三／第二個 Docker Image
 
 ???
 
-Img src: http://zikayn.com/blog/wp-content/uploads/2011/12/monkey-5.jpg
+Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 
 ---
 
@@ -289,109 +288,6 @@ For examples,
 Dig into a running Redis container.
 
 See if RPM files are installed into the container successfully.
-
----
-
-template: inverse
-
-# Dependency Hell
-
----
-
-class: center, middle
-
-.percent60[.center[![bg](img/slamdunk-ball.jpg)]]
-
-
----
-
-class: center, middle
-
-.percent90[.center[![bg](img/dependency-hell.svg)]]
-
-
----
-
-# Dependency hell... Where?
-
-```bash
-# list
-$ rpm -qpl jemalloc-3.6.0-2.el5.x86_64.rpm
-
-
-# extract contents, if you're curious...
-$ rpm2cpio ../jemalloc-3.6.0-2.el5.x86_64.rpm  |  cpio -div
-./usr/bin/jemalloc.sh
-./usr/lib64/libjemalloc.so.1       ◀◀◀◀◀◀◀◀ 就是這個！
-./usr/share/doc/jemalloc-3.6.0
-./usr/share/doc/jemalloc-3.6.0/COPYING
-./usr/share/doc/jemalloc-3.6.0/README
-./usr/share/doc/jemalloc-3.6.0/VERSION
-./usr/share/doc/jemalloc-3.6.0/jemalloc.html
-609 blocks
-```
-
-
-
----
-
-class: center, middle
-
-.percent90[.center[![bg](img/slamdunk-battlefield.jpg)]]
-
----
-
-template: inverse
-
-# The Docker Way
-
-### 『籃板之下就是戰場！』
-### 『無論如何都一定要死守自己的陣地！』
-
-
----
-
-class: center, middle
-
-
-.percent120[.center[![bg](img/docker-isolation.svg)]]
-
-
----
-
-# Isolation
-
-
-## ☛ at image level
-
-```bash
-$ ls -al /var/lib/docker/graph
-```
-
---
-
-## ☛ at container level
-
-```bash
-# on-disk structure
-$ ls -al /var/lib/docker/containers
-
-# runtime view
-$ docker exec -it  CONTAINER_NAME  bash
-```
-
---
-
-## ☛ at runtime, "**.red[cgroup]**" and "**.red[namespace]**" mechanisms of Linux kernel are also used.
-
----
-
-template: inverse
-
-# Recap: Docker 兩項特點
-
-## Dependency
-## Isolation
 
 ---
 

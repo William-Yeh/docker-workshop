@@ -11,7 +11,16 @@ class: center, middle, inverse
 layout: false
 class: center, middle
 
-`$ cd docker-workshop/vagrant-tutorial`
+`% cd docker-workshop/vagrant-tutorial`
+
+---
+
+class: center, middle
+
+VM - Almost isolated environment inside the Host Machine
+
+.percent90[![topology](img/lab-topology-1.svg)
+]
 
 ---
 
@@ -31,7 +40,8 @@ Vagrant *box* used here:
 
   - [`ubuntu/trusty64`](https://vagrantcloud.com/ubuntu/boxes/trusty64): Ubuntu 14.04 LTS (Trusty Tahr) 64-bit
 
-Explore [Atlas](https://atlas.hashicorp.com/boxes/search) site for more boxes.
+
+.footnote[Explore [Atlas](https://atlas.hashicorp.com/boxes/search) site for more boxes.]
 
 ---
 
@@ -46,7 +56,7 @@ class: center, middle
 Show current status of all VMs:
 
 ```bash
-$ vagrant status
+% vagrant status
 ```
 
 ---
@@ -56,7 +66,7 @@ $ vagrant status
 Power on the default VM:
 
 ```bash
-$ vagrant up
+% vagrant up
 ```
 
 --
@@ -64,7 +74,7 @@ $ vagrant up
 Show current status of all VMs, again:
 
 ```bash
-$ vagrant status
+% vagrant status
 ```
 
 --
@@ -72,7 +82,7 @@ $ vagrant status
 SSH into the VM:
 
 ```bash
-$ vagrant ssh
+% vagrant ssh
 ```
 
 ---
@@ -84,7 +94,7 @@ $ vagrant ssh
 ## Host machine
 
 ```bash
-$ ls -al
+% ls -al
 ```
 ]
 
@@ -93,13 +103,13 @@ $ ls -al
 ## Guest machine
 
 ```bash
-$ ls -al /vagrant
+$ ls -al  /vagrant
 ```
 ]
 
 --
 
-If not specified, Vagrant's default mapping .red[*] is:
+Default mapping rule .red[*]:
 
 ```yaml
 Vagrant.configure(2) do |config|
@@ -136,13 +146,13 @@ $ exit
 Current status of all VMs:
 
 ```bash
-$ vagrant status
+% vagrant status
 ```
 
 Can login again:
 
 ```bash
-$ vagrant ssh
+% vagrant ssh
 ```
 ]
 
@@ -153,10 +163,10 @@ $ vagrant ssh
 Shutdown the VM:
 
 ```bash
-$ vagrant halt
+% vagrant halt
 
-$ # current VM status?
-$ vagrant status
+% # current VM status?
+% vagrant status
 ```
 
 --
@@ -164,10 +174,10 @@ $ vagrant status
 We can power on the default VM, later:
 
 ```bash
-$ vagrant up
+% vagrant up
 
-$ # current VM status?
-$ vagrant status
+% # current VM status?
+% vagrant status
 ```
 
 
@@ -178,10 +188,10 @@ $ vagrant status
 Destroy the VM instance:
 
 ```bash
-$ vagrant destroy
+% vagrant destroy
 
-$ # current VM status?
-$ vagrant status
+% # current VM status?
+% vagrant status
 ```
 
 --
@@ -189,10 +199,10 @@ $ vagrant status
 Since the VM instance has been destroyed altogether, the following power on procedure will take times, as if it has never been `vagrant up` before...
 
 ```bash
-$ vagrant up
+% vagrant up
 
-$ # current VM status?
-$ vagrant status
+% # current VM status?
+% vagrant status
 ```
 
 
@@ -208,7 +218,7 @@ template: inverse
 
 class: center, middle
 
-`$ vagrant plugin install  ` [`vagrant-vbox-snapshot`](https://github.com/dergachev/vagrant-vbox-snapshot)
+`% vagrant plugin install  ` [`vagrant-vbox-snapshot`](https://github.com/dergachev/vagrant-vbox-snapshot)
 
 
 ---
@@ -216,7 +226,7 @@ class: center, middle
 ## Display all "snapshot" related commands:
 
 ```bash
-$ vagrant snapshot
+% vagrant snapshot
 Usage: vagrant snapshot <command> [<args>]
 
 Available subcommands:
@@ -234,7 +244,7 @@ For help on any individual command run `vagrant snapshot <command> -h`
 # List all saved snapshot(s)
 
 ```bash
-$ vagrant snapshot list
+% vagrant snapshot list
 ```
 
 ---
@@ -245,7 +255,7 @@ $ vagrant snapshot list
 - Name your snapshot, e.g., `02/19-08:00`
 
   ```bash
-  $ vagrant snapshot take  02/19-08:00
+  % vagrant snapshot take  02/19-08:00
   ```
 
 --
@@ -253,8 +263,8 @@ $ vagrant snapshot list
 - Check if the snapshot has been saved...
 
   ```bash
-  $ # snapshot saved?
-  $ vagrant snapshot list
+  % # snapshot saved?
+  % vagrant snapshot list
   ```
 
 --
@@ -262,7 +272,7 @@ $ vagrant snapshot list
 - Full usage:
 
   ```bash
-  $ vagrant snapshot take -h
+  % vagrant snapshot take -h
   Take snapshot
 
   Usage: vagrant snapshot take [vm-name] <SNAPSHOT_NAME>
@@ -277,13 +287,13 @@ $ vagrant snapshot list
 - List all snapshot(s)...
 
   ```bash
-  $ vagrant snapshot list
+  % vagrant snapshot list
   ```
 
 - Restore from the latest snapshot:
 
   ```bash
-  $ vagrant snapshot back
+  % vagrant snapshot back
   ```
 
 --
@@ -291,7 +301,7 @@ $ vagrant snapshot list
 - Full usage:
 
   ```bash
-  $ vagrant snapshot back -h
+  % vagrant snapshot back -h
   Back to current snapshot
 
   Usage: vagrant snapshot back [vm-name]
@@ -305,13 +315,13 @@ $ vagrant snapshot list
 - List all snapshot(s)...
 
   ```bash
-  $ vagrant snapshot list
+  % vagrant snapshot list
   ```
 
 - Restore from a specific snapshot:
 
   ```bash
-  $ vagrant snapshot go  02/19-08:00
+  % vagrant snapshot go  02/19-08:00
   ```
 
 --
@@ -319,7 +329,7 @@ $ vagrant snapshot list
 - Full usage
 
   ```bash
-  $ vagrant snapshot go -h
+  % vagrant snapshot go -h
   Go to specified snapshot
 
   Usage: vagrant snapshot go [vm-name] <SNAPSHOT_NAME>
@@ -334,7 +344,7 @@ $ vagrant snapshot list
 - Full usage
 
   ```bash
-  $ vagrant snapshot delete -h
+  % vagrant snapshot delete -h
   Delete snapshot (warning: this is a `very slow` operation)
 
   Usage: vagrant snapshot delete [vm-name] <SNAPSHOT_NAME>

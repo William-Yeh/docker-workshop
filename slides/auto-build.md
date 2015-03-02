@@ -77,15 +77,11 @@ template: inverse
 
 class: center, middle
 
-# 在嘗試用 CI build Docker image 之前，先確定會正常 build！
+# 用 CI 去 build Docker image 前，<br/>先確定會正常 build Docker！
 
 --
 
-## Vagrant 是你的好朋友...
-
---
-
-### ☛ 先在 Vagrant 實驗 Docker
+### ☛ 先在 本機端 實驗 Docker
 
 --
 
@@ -112,16 +108,16 @@ $ docker build .
 ## 在你的 Host machine 上：
 
 ```bash
-$ git status
+% git status
 
 # 如有必要，提交異動內容進去...
-$ git commit
+% git commit
 
 # 遠端資訊
-$ git remote -v
+% git remote -v
 
 # 送至遠端
-$ git push
+% git push
 ```
 
 .footnote[.red[*] 請確定你懂得以上指令的用意。 ]
