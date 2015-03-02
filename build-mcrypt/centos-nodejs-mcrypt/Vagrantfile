@@ -1,0 +1,11 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "chef/centos-6.6"
+
+  config.vm.provision "shell", inline: <<-SHELL
+      rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+      yum -y install libmcrypt-devel nodejs npm
+      npm install mcrypt
+      # vagrant ssh ; cd /vagrant
+      # node example.js
+  SHELL
+end

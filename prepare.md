@@ -36,21 +36,33 @@
 
 ### 1.2：Windows 作業系統注意事項
 
-在 Windows 上安裝 VirtualBox 時，如果遇到以下錯誤：
+在 Windows 上，下載 VirtualBox 兩個安裝檔時，最好先置於「完全由英文字或阿拉伯數字所組成的路徑」上，再執行安裝程序，比較不會出現奇奇怪怪的問題。
 
-   ![找不到指定的檔案](img/vbox-win64-error.png)
+- 安裝 VirtualBox 時，如果遇到以下錯誤：
 
-請先切換到放置下載檔案的目錄，找出剛剛下載回來的安裝檔名（以我的例子：`VirtualBox-4.3.14-95030-Win.exe`），再依序執行以下命令：
+  ![找不到指定的檔案](img/vbox-win64-error.png)
 
-   ```bat
-   $ VirtualBox-4.3.14-95030-Win  -extract
-   $ cd VirtualBox
-   $ dir
-   ```
+  請先切換到放置下載檔案的目錄，找出剛剛下載回來的安裝檔名（以我的例子：`VirtualBox-4.3.22-98236-Win.exe`），再依序執行以下命令：
 
-你應該會看到一個 `msi` 類型的安裝檔，請執行它。
+  ```bat
+  VirtualBox-4.3.22-98236-Win  -extract
+  cd VirtualBox
+  dir
+  ```
 
-最後，為了運作順暢，你還需要一個「**純命令列**的 ssh 程式」。如果你堅持要用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/)、[PieTTY](http://ntu.csie.org/~piaip/pietty/) 或[可攜版](http://jedi.org/PieTTYPortable/)，可能會在某些進階步驟踩到地雷，建議你安裝一個「**純命令列**的 ssh 程式」吧。以下是一些輕量級的 `ssh.exe` 選項：
+  你應該會看到一個 `msi` 類型的安裝檔，請執行它。
+
+- 安裝 VirtualBox Extension Pack 時，如果遇到 “The installer failed with exit code: 1” 錯誤，請先切換到放置下載檔案的目錄，找出剛剛下載回來的安裝檔名（以我的例子：`Oracle_VM_VirtualBox_Extension_Pack-4.3.22-98236.vbox-extpack`），再依序執行以下命令：
+
+  ```bat
+  VBoxManage extpack uninstall "Oracle VM VirtualBox Extension Pack"
+  VBoxManage extpack cleanup
+  VBoxManage extpack install --replace  Oracle_VM_VirtualBox_Extension_Pack-4.3.22-98236.vbox-extpack
+  ```
+
+
+
+最後，為了 Vagrant 運作順暢，你還需要一個「**純命令列**的 ssh 程式」。如果你堅持要用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/)、[PieTTY](http://ntu.csie.org/~piaip/pietty/) 或[可攜版](http://jedi.org/PieTTYPortable/)，可能會在某些進階步驟踩到地雷，建議你安裝一個「**純命令列**的 ssh 程式」吧。以下是一些輕量級的 `ssh.exe` 選項：
 
   - [OpenSSH for Windows](http://sourceforge.net/projects/opensshwindows/)
   - [Git for the Windows platform](http://git-scm.com/download/win) 裡面含有一枚 `ssh.exe`
