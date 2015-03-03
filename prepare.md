@@ -5,7 +5,8 @@
 
 1. 安裝軟體<br/>
    1.1：安裝步驟<br/>
-   1.2：Windows 作業系統注意事項
+   1.2：Windows 作業系統注意事項<br/>
+   1.3：磁碟空間
 2. 註冊 GitHub 帳號
 3. 註冊 Docker Hub 帳號
 4. 列印參考資料
@@ -72,6 +73,12 @@
 或者，乾脆安裝整套 [MinGW](http://www.mingw.org/) 或 [Cygwin](https://www.cygwin.com/) 算了⋯⋯
 
 
+### 1.3：磁碟空間
+
+請確定 VirtualBox 之【預設機器資料夾】所在的磁碟上，仍有足夠空間，以容納各虛擬機內容及預載之 Docker 映像檔。
+
+建議至少要預留 15 GB：
+![預留 VirtualBox 虛擬機所需空間](img/vbox-diskspace.png)
 
 
 
