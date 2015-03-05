@@ -731,6 +731,25 @@ template: inverse
 
 # 其他語言？
 
+## Java: maven
+
+例子：[`maven`](https://registry.hub.docker.com/_/maven/) 的 [Dockerfile](https://github.com/carlossg/docker-maven/blob/b022df671b603a9100ed9e75803ae32f753826a4/jdk-8/onbuild/Dockerfile):
+
+```dockerfile
+FROM  maven:3-jdk-8
+
+RUN      mkdir -p /usr/src/app
+WORKDIR  /usr/src/app
+
+ONBUILD  ADD  .  /usr/src/app
+
+ONBUILD  RUN  mvn install
+```
+
+---
+
+# 其他語言？
+
 ## Java: gradle
 
 例子：[`williamyeh/cseg`](https://registry.hub.docker.com/u/williamyeh/cseg/) 的 [Dockerfile](https://github.com/William-Yeh/cseg/blob/master/docker/Dockerfile):
