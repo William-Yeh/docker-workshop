@@ -63,14 +63,11 @@
 
 
 
-最後，為了 Vagrant 運作順暢，你還需要一個「**純命令列**的 ssh 程式」。如果你堅持要用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/)、[PieTTY](http://ntu.csie.org/~piaip/pietty/) 或[可攜版](http://jedi.org/PieTTYPortable/)，可能會在某些進階步驟踩到地雷，建議你安裝一個「**純命令列**的 ssh 程式」吧。以下是一些輕量級的 `ssh.exe` 選項：
+最後，為了 Vagrant 運作順暢，你還需要一個「**純命令列**的 ssh 程式」。如果你堅持要用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/)、[PieTTY](http://ntu.csie.org/~piaip/pietty/) 或[可攜版](http://jedi.org/PieTTYPortable/)，可能會在某些進階步驟踩到地雷。本課程建議您安裝以下這個軟體：
 
-  - [OpenSSH for Windows](http://sourceforge.net/projects/opensshwindows/)
-  - [Git for the Windows platform](http://git-scm.com/download/win) 裡面含有一枚 `ssh.exe`
+ - [Git for the Windows platform](http://git-scm.com/download/win)，裡面含有一枚 `ssh.exe`。
 
-安裝後，記得要去【控制台】把 `ssh.exe` 路徑加到 `PATH` 環境變數。
-
-或者，乾脆安裝整套 [MinGW](http://www.mingw.org/) 或 [Cygwin](https://www.cygwin.com/) 算了⋯⋯
+安裝後，記得要去【控制台】把 `ssh.exe` 所在路徑加到 `PATH` 環境變數。
 
 
 ### 1.3：磁碟空間
