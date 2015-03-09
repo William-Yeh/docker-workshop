@@ -1,16 +1,30 @@
 行前準備 Part 2：預載範例程式碼
 ===
 
+[ <-- Prev: [行前準備 Part 1](prepare.md)  ]
+
+
 為了節省課程現場下載程式及相關資源的時間及頻寬，請學員先在**網路暢通的地方**，根據指示備妥必要的軟體及設定。
 
-如果網路順暢，整個過程可能會花上數十分鐘，請耐心等候。
+整個過程可能會花上數十分鐘，請耐心等候。
+整個過程可能會花上數十分鐘，請耐心等候。
+整個過程可能會花上數十分鐘，請耐心等候。
+（因為很重要，所以要說三次。）
 
 &nbsp;
 
-☛ 程式範例會在每一梯次開課前一週才定案，因此，建議**等開課前一週再進行下列步驟**。
+☛ 注意事項：
 
-☛ 進行以下步驟之前，請先確定 VirtualBox 之【預設機器資料夾】所在的磁碟上，仍有足夠空間，以容納各虛擬機內容及預載之 Docker 映像檔。建議至少要預留 15 GB：
-![預留 VirtualBox 虛擬機所需空間](img/vbox-diskspace.png)
+- 程式範例會在每一梯次開課前一週才定案，因此，建議**等開課前一週再進行下列步驟**。
+
+- 進行以下步驟之前，請先確定 VirtualBox 之【預設機器資料夾】所在的磁碟上，仍有足夠空間，以容納各虛擬機內容及預載之 Docker 映像檔。建議至少要預留 15 GB：
+  ![預留 VirtualBox 虛擬機所需空間](img/vbox-diskspace.png)
+
+- 進行以下步驟之前，建議您先關閉（甚至解除安裝）可能與 VirtualBox 相衝的其他虛擬機軟體。譬如說，以下命令可暫時關閉 Hyper-V（還需要你手動重新開機，才會生效）：
+
+  ```
+  bcdedit /set hypervisorlaunchtype off
+  ```
 
 
 &nbsp;
@@ -29,9 +43,7 @@
 
 ### 步驟二：開啟終端機，以進行後續步驟
 
-Linux 使用者：請使用 xterm 或任何你慣用的終端機軟體。
-
-Mac 使用者：請使用終端機 (Terminal)、iTerm 或任何你慣用的終端機軟體。
+Linux 及 Mac 使用者：請使用 xterm、終端機 (Terminal)、iTerm 或任何你慣用的終端機軟體。
 
 Windows 使用者：
 
@@ -43,7 +55,7 @@ Windows 使用者：
 
 ### 步驟三：下載 workshop 範例程式
 
-請先切換到你選定的工作目錄，譬如：
+請先切換到你選定的工作目錄（Windows 用戶，請避免選用「含中文字」），譬如：
 
    ```shell
    cd YOUR_OWN_WORKING_DIRECTORY
@@ -63,34 +75,17 @@ Windows 使用者：
 cd docker-workshop
 ```
 
+這個目錄，課堂上會反覆用到。建議你設桌面捷徑，以節省切換目錄的時間。
+
+
 #### ⇡ 以上所列的幾個步驟，如有不清楚的，請見示範錄影：
 
 [![Docker Workshop - How to Fork Project](http://img.youtube.com/vi/n2ogtWHZRzo/0.jpg)](http://youtu.be/n2ogtWHZRzo)
 
----
-<br/>
 
-#### ⇣ 以下所列的幾個步驟，如有不清楚的，請見示範錄影：
-
-[![Docker Workshop - How to Setup Lab Environment](http://img.youtube.com/vi/0aaMQ8u9Dvg/0.jpg)](http://youtu.be/0aaMQ8u9Dvg)
-
-
-
-### 步驟五：安裝必要的 Vagrant 擴充套件
-
-➤ 錄影 0:00～01:16 片段。
-
-```shell
-vagrant plugin install vagrant-hosts
-vagrant plugin install vagrant-vbox-snapshot
-```
-
-
-### 步驟六：初始化 Vagrant 虛擬機
+### 步驟五：初始化 Vagrant 虛擬機
 
 耗時最久的，就是這個步驟，請耐心等候。
-
-➤ 錄影 01:23～57:25 片段。
 
 - 如果你的電腦是 Mac 或 Linux，請輸入：
 
@@ -105,31 +100,26 @@ vagrant plugin install vagrant-vbox-snapshot
   ```
 
 
-### 步驟七：快照 (snapshot)
+### 步驟六：確認已設定完畢
 
-➤ 錄影 57:38～58:42 片段。
-
-先替這一批 snapshot 取個易於辨識追溯的名稱，建議以現在時間 *mm/dd-HH:MM* 為名。
-
-假設現在時間是 `02/19-08:00` (Feb 19, 08:00)，請輸入以下指令：
+輸入以下指令，查看各虛擬機的狀態：
 
 ```shell
-vagrant snapshot take main      02/19-08:00
-vagrant snapshot take alice     02/19-08:00
-vagrant snapshot take bob       02/19-08:00
-vagrant snapshot take centos    02/19-08:00
-vagrant snapshot take registry  02/19-08:00
+vagrant status
 ```
 
+如果看到以下畫面，五台虛擬機都呈現 "poweroff" 狀態，就表示已經順利設定完畢：
 
-### 步驟八：確認 snapshot 已完成
+```
+Current machine states:
 
-➤ 錄影 59:08～片尾。
+main                      poweroff (virtualbox)
+alice                     poweroff (virtualbox)
+bob                       poweroff (virtualbox)
+centos                    poweroff (virtualbox)
+registry                  poweroff (virtualbox)
 
-```shell
-vagrant snapshot list main
-vagrant snapshot list alice
-vagrant snapshot list bob
-vagrant snapshot list centos
-vagrant snapshot list registry
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
 ```

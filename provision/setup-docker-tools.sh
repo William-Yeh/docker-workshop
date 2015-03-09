@@ -4,7 +4,7 @@
 #
 
 readonly BASE_URL="https://raw.githubusercontent.com/William-Yeh/docker-host-tools/master/"
-readonly APP=( "DOCKER"  "docker-mirror"  "docker-rm-stopped"  "docker-rmi-repo"  "docker-inspect-attr" )
+readonly APP=( "DOCKER"  "docker-rm-stopped"  "docker-rmi-repo"  "docker-inspect-attr" )
 
 
 cd /usr/local/bin
@@ -21,4 +21,3 @@ for i in "${OTHER_TOOLS[@]}"; do
     curl -L -O $i
 done
 chmod a+x *
-
