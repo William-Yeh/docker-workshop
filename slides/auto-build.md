@@ -129,6 +129,37 @@ $ docker build .
 
 ---
 
+class: center, middle
+
+# Authorization - 2 Parts
+
+### 1. GitHub
+### 2. Docker Hub
+
+---
+
+# GitHub／授權
+
+Log in to GitHub: https://github.com/
+
+1. Switch to your project (repository)
+
+--
+2. Settings
+
+--
+3. Webhooks & Services
+
+--
+4. Add service
+   - Docker  ☚ 勾選這個
+
+--
+5. Add service  ☚ 確認
+
+
+---
+
 # Docker Hub／綁定帳號
 
 Log in to Docker Hub: https://registry.hub.docker.com/
@@ -151,7 +182,7 @@ Log in to Docker Hub: https://registry.hub.docker.com/
 --
 2. Add Repository
   - Repository
-  - Automated Build  ☚ 會與 GitHub 連動！
+  - Automated Build  ☚ 勾選這個，與 GitHub 連動！
 
 --
 3. Select

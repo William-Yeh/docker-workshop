@@ -346,7 +346,7 @@ Our private registry...
 Vagrant.configure(2) do |config|
 
   config.vm.define "registry" do |node|
-    node.vm.box = "williamyeh/insecure-registry"
+    node.vm.box = "williamyeh/docker-workshop-registry"
     node.vm.network "private_network", ip: "10.0.0.200"
   end
 
@@ -384,7 +384,7 @@ DOCKER  pull  ACCOUNT/IMAGE
 
 # Pre-loaded images
 
-See `provision/IMAGE-LIST`.
+See `make-registry-box/IMAGE-LIST`.
 
 ---
 

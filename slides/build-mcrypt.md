@@ -594,6 +594,9 @@ $ docker images --tree
   $ ./demo-php  `IMAGE_ID_OR_NAME`
   ```
 
+
+.footnote[.red[*] The `-i` option: "Keep STDIN open (even if not attached)."]
+
 ---
 
 # Check if all dependencies are packaged into the image...

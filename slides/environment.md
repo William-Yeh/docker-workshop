@@ -166,7 +166,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "registry" do |node|
-    node.vm.box = "williamyeh/insecure-registry"
+    node.vm.box = "williamyeh/docker-workshop-registry"
   end
 
 end
@@ -175,7 +175,7 @@ end
 Vagrant boxes used here:
 
   - [`williamyeh/ubuntu-trusty64-docker`](https://vagrantcloud.com/williamyeh/boxes/ubuntu-trusty64-docker)
-  - [`williamyeh/insecure-registry`](https://vagrantcloud.com/williamyeh/boxes/insecure-registry)
+  - [`williamyeh/docker-workshop-registry`](https://vagrantcloud.com/williamyeh/boxes/docker-workshop-registry)
   - [`chef/centos-5.11`](https://vagrantcloud.com/chef/boxes/centos-5.11)
 
 
