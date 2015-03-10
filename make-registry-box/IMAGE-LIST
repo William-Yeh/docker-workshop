@@ -40,6 +40,7 @@ williamyeh/wrk
 #williamyeh/spray-httpserver
 #williamyeh/fluentd
 #digitalwonderland/elasticsearch
+#elasticsearch:1.4.4
 
 #ipython/notebook
-#dockerfile/ghost
+#ghost:0.5.9

@@ -22,6 +22,13 @@ Read the documents:
   - [行前準備 Part 2：預載範例程式碼](config.md) ☚ 建議等開課前一週再進行。
 
 
+## Companion Slides
+
+View slides online: http://bit.ly/docker-slides
+
+FYI, the `gh-pages` branch stores the slide files, mostly in markdown format.
+
+
 ## History
 
 

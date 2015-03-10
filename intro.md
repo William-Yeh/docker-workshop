@@ -20,6 +20,20 @@ Docker 建置實戰講堂
 
 ## 課程簡介
 
+- Docker 技術總覽
+- 實習環境介紹
+- 常用的工具指令：docker cli、docker compose
+- 常用的 Dockerfile 指令
+- 用 Docker 建置典型伺服器軟體：Redis、Nginx
+- 從程式源碼建置 Docker 化軟體：PHP、Node.js
+- GitHub 與 Docker Hub 連動
+- Docker 網路模型
+- Docker 化軟體要素：port、volume、daemon off
+- 綜合運用
+
+
+## 課程特色
+
 1. **Docker 的 Why**：從 DevOps 角度，分析 Docker 的優異特性：dependency、isolation、lightweight、standard。
 
 2. **Docker 的 How**：從雲端時代軟體架構角度（尤其是 [12-factor app](http://12factor.net/)），搭配重點案例，探討 Dockerfile 及「Docker 化軟體」設計要點。
@@ -41,7 +55,7 @@ Docker 建置實戰講堂
 
 ## 報名須知
 
-1. 本課程含大量實機操作內容，請自備筆記型電腦。
+1. 本課程含大量實機操作內容，請自備筆記型電腦（Windows、Mac、Linux 皆可）。
 
 2. 建議上課前學習 Git 版本控制指令：
 
