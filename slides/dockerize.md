@@ -153,17 +153,7 @@ Official document says: .red[*]
 template: inverse
 
 Principle #3
-# stdout/stderr
-
----
-
-class: center, middle
-
-## ☛ XI. Logs
-Treat logs as event streams
-
-.footnote[.red[*] See "[12 Factor App](http://12factor.net/)"
-]
+# daemon off
 
 ---
 
@@ -403,6 +393,15 @@ Possible solutions:
 
 
 
+---
+
+class: center, middle
+
+## ☛ XI. Logs
+Treat logs as event streams
+
+.footnote[.red[*] See "[12 Factor App](http://12factor.net/)"
+]
 
 ---
 
