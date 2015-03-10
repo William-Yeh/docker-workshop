@@ -24,8 +24,8 @@ Docker 建置實戰講堂
 - 實習環境介紹
 - 常用的工具指令：docker cli、docker compose
 - 常用的 Dockerfile 指令
-- 用 Docker 建置典型伺服器軟體：Redis、Nginx
-- 從程式源碼建置 Docker 化軟體：PHP、Node.js
+- 用 Docker 建置典型伺服器軟體（以 Redis、Nginx 為例）
+- 從程式源碼建置 Docker 化軟體（以 PHP、Node.js 為例）
 - GitHub 與 Docker Hub 連動
 - Docker 網路模型
 - Docker 化軟體要素：port、volume、daemon off
