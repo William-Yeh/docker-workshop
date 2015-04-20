@@ -37,37 +37,6 @@ Vagrant.configure(2) do |config|
     end
 
 
-    config.vm.define "alice" do |node|
-
-        node.vm.box = "williamyeh/ubuntu-trusty64-docker"
-        node.vm.box_version = ">= 1.5.0"
-
-        node.vm.network "private_network", ip: "10.0.0.11"
-
-        node.vm.synced_folder ".", SYNCED_FOLDER
-
-        for f in PROVISION_SCRIPTS
-            node.vm.provision "shell", path: f
-        end
-
-    end
-
-
-    config.vm.define "bob" do |node|
-
-        node.vm.box = "williamyeh/ubuntu-trusty64-docker"
-        node.vm.box_version = ">= 1.5.0"
-
-        node.vm.network "private_network", ip: "10.0.0.12"
-
-        node.vm.synced_folder ".", SYNCED_FOLDER
-
-        for f in PROVISION_SCRIPTS
-            node.vm.provision "shell", path: f
-        end
-
-    end
-
 
     config.vm.define "centos" do |node|
         node.vm.box = "chef/centos-5.11"
