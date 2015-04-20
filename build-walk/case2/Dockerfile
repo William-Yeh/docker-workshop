@@ -5,4 +5,4 @@
 
 FROM scratch
 
-COPY  walk-tree-c  /bin/walk-tree-c
+COPY  walk-tree-c  /bin/

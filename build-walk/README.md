@@ -5,6 +5,8 @@ This directory demostrates several Docker topics:
 
 - Minimal Docker images (all less than 3 MB).
 
+- Rootfs concept inside the Docker images/containers.
+
 - Dependencies on runtime components (e.g., .so files).
 
 - Isolation of resources.
@@ -57,7 +59,7 @@ The program `walk-tree-c` is a dynamically-linked ELF executable with runtime de
 ★★ To build it into a minimal Docker image with `Dockerfile`:
 
 ```
-$ docker build  -f Dockerfile.c  .
+$ docker build .
 ```
 
 To see what's inside this image, starting from its root directory `/` (**will fail!**):
@@ -79,10 +81,10 @@ Extract required .so files from CentOS 5.11:
 Then, pack them, together with `walk-tree-c`, into the tarball `rootfs-from-centos511.tar.gz`.
 
 
-★★ To build it into a minimal Docker image with `Dockerfile.c.centos511`:
+★★ To build it into a minimal Docker image with `Dockerfile`:
 
 ```
-$ docker build  -f Dockerfile.c.centos511  .
+$ docker build .
 ```
 
 To see what's inside this image, starting from its root directory `/`:
@@ -104,10 +106,10 @@ Extract required .so files from Ubuntu 14.04:
 Then, pack them, together with `walk-tree-c`, into the tarball `rootfs-from-ubuntu1404.tar.gz`.
 
 
-★★ To build it into a minimal Docker image with `Dockerfile.c.ubuntu1404`:
+★★ To build it into a minimal Docker image with `Dockerfile`:
 
 ```
-$ docker build  -f Dockerfile.c.ubuntu1404  .
+$ docker build .
 ```
 
 To see what's inside this image, starting from its root directory `/`:
@@ -134,5 +136,3 @@ System-wise .so files from Ubuntu 14.04:
    ```
 
 Can these two suites co-exist at the same time?  Dependency hell?
-
-

@@ -3,4 +3,3 @@
 FROM scratch
 
 COPY  walk-tree-go  /bin/
-
