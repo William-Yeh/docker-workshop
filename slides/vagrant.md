@@ -61,9 +61,9 @@ Show current status of all VMs:
 
 ---
 
-# Login
+# Power on
 
-Power on the default VM:
+Power on all VMs:
 
 ```bash
 % vagrant up
@@ -71,15 +71,19 @@ Power on the default VM:
 
 --
 
+<br/>
+
 Show current status of all VMs, again:
 
 ```bash
 % vagrant status
 ```
 
---
+---
 
-SSH into the VM:
+# Login
+
+SSH into the *default* VM:
 
 ```bash
 % vagrant ssh
@@ -94,20 +98,27 @@ SSH into the VM:
 ## Host machine
 
 ```bash
+% pwd
+
 % ls -al
 ```
 ]
 
+--
 
 .pull-right[
 ## Guest machine
 
 ```bash
+$ pwd
+
 $ ls -al  /vagrant
 ```
 ]
 
 --
+
+<br/>
 
 Default mapping rule .red[*]:
 
@@ -160,7 +171,7 @@ Can login again:
 
 # Shutdown
 
-Shutdown the VM:
+Shutdown all VM instances:
 
 ```bash
 % vagrant halt
@@ -170,8 +181,9 @@ Shutdown the VM:
 ```
 
 --
+<br/>
 
-We can power on the default VM, later:
+We can power on all VM instances, later:
 
 ```bash
 % vagrant up
@@ -185,7 +197,9 @@ We can power on the default VM, later:
 
 # Destroy
 
-Destroy the VM instance:
+.red[**DANGEROUS!!!**]
+
+Destroy all VM instances:
 
 ```bash
 % vagrant destroy
@@ -196,7 +210,9 @@ Destroy the VM instance:
 
 --
 
-Since the VM instance has been destroyed altogether, the following power on procedure will take times, as if it has never been `vagrant up` before...
+<br/>
+
+Since all VM instances have been destroyed altogether, the following power on procedure will take times, as if it has never been `vagrant up` before...
 
 ```bash
 % vagrant up

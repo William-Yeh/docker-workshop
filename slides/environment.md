@@ -21,42 +21,6 @@ class: center, middle
 
 ---
 
-# Directory mapping
-
-
-.pull-left[
-## Host machine
-
-```bash
-% ls -al
-```
-]
-
-
-.pull-right[
-## Guest machine
-
-```bash
-$ ls -al $HOME/docker-workshop
-```
-]
-
---
-
-<br/><br/>
-Mapping rule:
-
-```yaml
-Vagrant.configure(2) do |config|
-
-  #                         host  guest
-  config.vm.synced_folder   "." , "/home/vagrant/docker-workshop"
-
-end
-```
-
----
-
 template: inverse
 
 # Topology
@@ -66,7 +30,7 @@ template: inverse
 layout: false
 class: center, middle
 
-An almost isolated environment inside the Host Machine
+VM - An almost isolated environment inside the Host Machine
 
 .percent90[![topology](img/lab-topology-1.svg)
 ]
@@ -75,7 +39,7 @@ An almost isolated environment inside the Host Machine
 
 class: center, middle
 
-A Plain VM (without any Docker)
+A Plain VM (without any Docker stuff) for comparison
 
 .percent90[![topology](img/lab-topology-2.svg)
 ]
@@ -126,6 +90,8 @@ template: inverse
 
 # Vagrantfile
 
+### VM definition file for Vagrant
+
 ---
 
 # IP addresses
@@ -152,7 +118,7 @@ end
 
 ---
 
-# Operating systems
+# OS to be emulated
 
 ```yaml
 Vagrant.configure(2) do |config|
@@ -185,9 +151,10 @@ class: center, middle
 
 # Open **VirtualBox** side by side<br/>to see effect...
 
+
 ---
 
-# Which VM to work with?
+# VM status
 
 Show current status of all VMs:
 
@@ -195,24 +162,48 @@ Show current status of all VMs:
 % vagrant status
 ```
 
---
+---
 
-Power on the `main` VM:
+# Power on
+
+Power on all VMs:
 
 ```bash
-% vagrant up  main
+% vagrant up
 ```
 
 --
 
-SSH into the `main` VM:
+<br/>
+
+Show current status of all VMs, again:
 
 ```bash
-% vagrant ssh  main
+% vagrant status
 ```
 
-.footnote[Ditto for built-in (`halt`, `destroy`, `provision`, etc) and plugin (e.g., `snapshot`) commands.
-]
+---
+
+# Login
+
+SSH into the *default* VM:
+
+```bash
+% vagrant ssh
+```
+
+--
+<br/>
+
+SSH into the specific VM:
+
+&nbsp;&nbsp;&nbsp;&nbsp;  `% vagrant ssh  `  &nbsp;&nbsp;  main
+
+&nbsp;&nbsp;&nbsp;&nbsp;  `% vagrant ssh  `  &nbsp;&nbsp;  centos
+
+&nbsp;&nbsp;&nbsp;&nbsp;  `% vagrant ssh  `  &nbsp;&nbsp;  registry
+
+&nbsp;&nbsp;&nbsp;&nbsp;  `% vagrant ssh  `  &nbsp;&nbsp;  _name_of_VM_
 
 ---
 
@@ -238,11 +229,179 @@ SSH into the `main` VM:
 
 ---
 
-# Quiz
+# Directory mapping
 
-Ditto for other VM:
 
-  - `centos`
+.pull-left[
+## Host machine
+
+```bash
+# Mac or Linux
+% pwd
+# Windows
+% cd
+
+
+% ls -al
+```
+]
+
+--
+
+.pull-right[
+## Guest machine
+
+```bash
+$ pwd
+
+$ ls -al $HOME/docker-workshop
+```
+]
+
+--
+
+<br/><br/>
+Mapping rule:
+
+```yaml
+Vagrant.configure(2) do |config|
+
+  #                         host  guest
+  config.vm.synced_folder   "." , "/home/vagrant/docker-workshop"
+
+end
+```
+
+---
+
+# Logout
+
+.pull-right[
+## Guest machine
+
+```bash
+$ exit
+```
+]
+
+--
+<br clear="all">
+
+.pull-left[
+
+
+## Host machine
+Current status of all VMs:
+
+```bash
+% vagrant status
+```
+
+Can login again:
+
+```bash
+% vagrant ssh
+```
+]
+
+---
+
+# Shutdown
+
+Shutdown all VM instances:
+
+```bash
+% vagrant halt
+
+% # current VM status?
+% vagrant status
+```
+
+--
+<br/>
+
+We can power on all VM instances, later:
+
+```bash
+% vagrant up
+
+% # current VM status?
+% vagrant status
+```
+
+---
+
+# Destroy
+
+.red[**DANGEROUS!!!**]
+
+Destroy all VM instances:
+
+```bash
+% vagrant destroy
+
+% # current VM status?
+% vagrant status
+```
+
+--
+
+<br/>
+
+Since all VM instances have been destroyed altogether, the following power on procedure will take times, as if it has never been `vagrant up` before...
+
+```bash
+% vagrant up
+
+% # current VM status?
+% vagrant status
+```
+
+---
+
+class: center, middle
+
+# One more thing about <br/> multi-VM environment...
+
+---
+
+# Which VM to work with?
+
+Show current status of all VMs:
+
+```bash
+% vagrant status
+```
+
+--
+
+<br/>
+
+Power on the `main` VM:
+
+```bash
+% vagrant up  main
+```
+
+--
+
+SSH into the `main` VM:
+
+```bash
+% vagrant ssh  main
+```
+
+.footnote[Ditto for built-in (`halt`, `destroy`, `provision`, etc) and plugin (e.g., `snapshot`) commands.
+]
+
+---
+
+# Want to learn more?
+
+Read my [Vagrant Tutorial series](http://www.codedata.com.tw/social-coding/vagrant-tutorial-1-developer-and-vm) at CodeData.
+
+.center[.percent90[![Vagrant article logo](http://www.codedata.com.tw/wp-content/uploads/2014/08/VagrantTutorial.jpg)
+]]
 
 ---
 
