@@ -37,6 +37,8 @@ layout: false
 
 ---
 
+class: code120
+
 # 這次沒有 DEB 或 RPM 了...
 
 
@@ -58,6 +60,8 @@ $ tree
 ### ... 還有 dependency 設定...
 
 ---
+
+class: code120
 
 # Dependencies
 
@@ -97,6 +101,8 @@ Explicitly declare and isolate dependencies
 .percent50[.right[![bg](img/app-building-dockerway.svg)]]
 
 ---
+
+class: code120
 
 # Dockerfile for this chat server
 
@@ -783,20 +789,24 @@ RUN composer install
 
 ---
 
+class: code120
+
 # 其他語言？
 
 ## Python: pip
 
-例子：官方版 [`registry`](https://registry.hub.docker.com/_/registry/) 的 [Dockerfile](https://github.com/docker/docker-registry/blob/master/Dockerfile)：
+例子：官方版 [`registry`](https://registry.hub.docker.com/_/registry/) 0.9 系列 的 [Dockerfile](https://github.com/docker/docker-registry/blob/master/Dockerfile)：
 
 ```dockerfile
 ...
 
 # Install core
-RUN pip install /docker-registry/depends/docker-registry-core
+RUN pip install \
+    /docker-registry/depends/docker-registry-core
 
 # Install registry
-RUN pip install file:///docker-registry#egg=docker-registry[bugsnag,newrelic,cors]
+RUN pip install \
+    file:///docker-registry#egg=docker-registry[bugsnag,newrelic,cors]
 
 ...
 ```

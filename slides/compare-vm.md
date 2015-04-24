@@ -39,7 +39,7 @@ layout: false
 
 .pull-right[
 ## Lab directory
-- workshop root
+- `build-walk/case1`
 ]
 
 ---
@@ -110,18 +110,201 @@ template: inverse
 
 ## In Practice
 
-- Startup time
-
 - Kernel
 
+- Startup time
+
 - Runtime performance
+
 
 
 ---
 
 template: inverse
 
-# Task #1: Startup time
+# Task #1: Kernel
+
+---
+
+class: center, middle
+
+# Remember our first Docker image?
+
+
+`$ cd ~/docker-workshop/build-walk/case1`
+
+
+---
+
+# A minimal image
+
+.pull-right[
+
+<br/>
+
+```bash
+$ docker run  `IMAGE_ID`  \
+    /bin/walk-tree-go  /
+```
+
+☛ **Isolation**: Only sees the file system **within** the target image
+
+```
+
+2015-04-25     4096  /
+2015-04-25        0  /.dockerenv
+2015-04-25        0  /.dockerinit
+2015-04-25     4096  /bin
+2015-04-25  2667144  /bin/walk-tree-go
+2015-04-25     4096  /etc
+2015-04-25       13  /etc/hostname
+2015-04-25      174  /etc/hosts
+2015-04-25       12  /etc/mtab
+2015-04-25      171  /etc/resolv.conf
+```
+]
+
+--
+
+.pull-left[
+
+## Q: which kernel will it see?
+]
+
+--
+
+.pull-left[
+## A: same as host OS!
+]
+
+---
+
+class: code115
+
+# Image that contains a barebone Linux distribution
+
+.pull-right[
+
+<br/>
+
+```bash
+$ docker run centos:5.11 \
+    ls -al
+```
+
+☛ **Isolation**: Only sees the file system **within** the target image
+
+```
+```
+]
+
+--
+
+.pull-left[
+
+## Q: which kernel will it see?
+]
+
+
+---
+
+.pull-left[
+## Virtual machine
+]
+
+.pull-right[
+## Docker
+]
+<br clear="all">
+
+```
+ `+------------------------+`         |  `+------------------------+`
+ `|  App                   |`         |  `|  App                   |`
+ `+------------------------+`         |  `+------------------------+`
+
+     `+----------------------+`       |      `+----------------------+`
+     `|  PL library/package/ |`       |      `|  PL library/package/ |`
+     `|  module/extension    |`       |      `|  module/extension    |`
+     `+----------------------+`       |      `+----------------------+`
+
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+ `| PL      |`   `| special-purpose |`  |  `| PL      |`   `| special-purpose |`
+ `| runtime |`   `| runtime lib     |`  |  `| runtime |`   `| runtime lib     |`
+ `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  libc & generic runtime lib   |`  |  `|  libc & generic runtime lib   |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  `+-------------------------------+`
+ `|  root file system             |`  |  `|  root file system             |`
+ `+-------------------------------+`  |  `+-------------------------------+`
+
+ `+-------------------------------+`  |  +-------------------------------+
+ `|  Linux kernel                 |`  |  |  Linux kernel ≥ 3.10          |
+ `+-------------------------------+`  |  +-------------------------------+
+```
+
+---
+
+# Task 1A: VM kernel
+
+.pull-left[
+## CentOS 5.11
+
+```bash
+% vagrant ssh  centos
+
+$ uname -a
+```
+]
+
+--
+
+.pull-right[
+## Ubuntu 14.04
+
+```bash
+% vagrant ssh  main
+
+$ uname -a
+```
+]
+
+---
+
+# Task 1B: Container's view of kernel
+
+.center[ `% vagrant ssh  main` ]
+
+
+--
+
+.pull-left[
+## CentOS 5.11 image
+
+```bash
+$ docker run  centos:5.11  \
+      uname -a
+```
+]
+
+--
+
+.pull-right[
+## Ubuntu 14.04 image
+
+```bash
+$ docker run   ubuntu:14.04  \
+      uname -a
+```
+]
+
+---
+
+template: inverse
+
+# Task #2: Startup time
 
 ---
 
@@ -196,7 +379,7 @@ template: inverse
 
 ---
 
-# Task 1A: VM startup time
+# Task 2A: VM startup time
 
 測量以下時間：
 
@@ -206,7 +389,7 @@ template: inverse
 
 ---
 
-# Task 1B: Container startup time
+# Task 2B: Container startup time
 
 先備妥環境：
 
@@ -227,109 +410,6 @@ $ docker images
 ```bash
 $ docker run centos:5.11   echo "Hello!"
 ```
-
-
----
-
-template: inverse
-
-# Task #2: Kernel
-
----
-
-.pull-left[
-## Virtual machine
-]
-
-.pull-right[
-## Docker
-]
-<br clear="all">
-
-```
- `+------------------------+`         |  `+------------------------+`
- `|  App                   |`         |  `|  App                   |`
- `+------------------------+`         |  `+------------------------+`
-
-     `+----------------------+`       |      `+----------------------+`
-     `|  PL library/package/ |`       |      `|  PL library/package/ |`
-     `|  module/extension    |`       |      `|  module/extension    |`
-     `+----------------------+`       |      `+----------------------+`
-
- `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
- `| PL      |`   `| special-purpose |`  |  `| PL      |`   `| special-purpose |`
- `| runtime |`   `| runtime lib     |`  |  `| runtime |`   `| runtime lib     |`
- `+---------+`   `+-----------------+`  |  `+---------+`   `+-----------------+`
-
- `+-------------------------------+`  |  `+-------------------------------+`
- `|  libc & generic runtime lib   |`  |  `|  libc & generic runtime lib   |`
- `+-------------------------------+`  |  `+-------------------------------+`
-
- `+-------------------------------+`  |  `+-------------------------------+`
- `|  root file system             |`  |  `|  root file system             |`
- `+-------------------------------+`  |  `+-------------------------------+`
-
- `+-------------------------------+`  |  +-------------------------------+
- `|  Linux kernel                 |`  |  |  Linux kernel ≥ 3.10          |
- `+-------------------------------+`  |  +-------------------------------+
-```
-
----
-
-# Task 2A: VM kernel
-
-.pull-left[
-## CentOS 5.11
-
-```bash
-% vagrant ssh  centos
-
-$ uname -a
-```
-]
-
---
-
-.pull-right[
-## Ubuntu 14.04
-
-```bash
-% vagrant ssh  main
-
-$ uname -a
-```
-]
-
----
-
-# Task 2B: Container's view of kernel
-
-.center[ `% vagrant ssh  main` ]
-
-
---
-
-.pull-left[
-## CentOS 5.11 image
-
-```bash
-$ docker run  centos:5.11  \
-      uname -a
-```
-]
-
---
-
-.pull-right[
-## Ubuntu 14.04 image
-
-```bash
-$ DOCKER pull  ubuntu:14.04
-
-$ docker run   ubuntu:14.04  \
-      uname -a
-```
-]
 
 ---
 

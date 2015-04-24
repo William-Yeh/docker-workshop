@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 .percent90[.center[![bg](img/cook-vector.jpg)]]
 
-# 牛刀小試／第一個 Docker Image
+# 借力使力／善用 OS 資源
 
 ???
 
@@ -48,33 +48,14 @@ template: inverse
 
 ---
 
-# Analogy: base class (super class)
-
-.percent50[.center[![bg](img/java-io-hierarchy.gif)]]
-
-???
-
-Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
-
----
-
-# Docker base image
-
---
+# Docker base images (revisited)
 
 - Minimalism: based on `scratch` or `busybox`
 
-  - [Create the smallest possible Docker container](http://blog.xebia.com/2014/07/04/create-the-smallest-possible-docker-container/)
-  - [Squashing Docker Images](http://jasonwilder.com/blog/2014/08/19/squashing-docker-images/)
-  - [Creating minimal Docker images from dynamically linked ELF binaries](http://blog.oddbit.com/2015/02/05/creating-minimal-docker-images/)
-  - [Creating super small docker images](http://yasermartinez.com/blog/posts/creating-super-small-docker-images.html)
-
---
+  - See: [Quest for minimal Docker images 【追求極簡化 Docker image 之路】](http://bit.ly/docker-mini)
 
 - Modest: barebone Linux distributions
   - Reuse your existing experiences: make, ant, apt-get, yum...
-
---
 
 - Convenience: programming languages installed
   - Reuse your existing experiences: gem, maven, npm, pip...
@@ -83,10 +64,11 @@ Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
 
 class: middle
 
-# .center[Let's start by this approach...]
+# .center[This time, let's try this approach...]
 
 <br/>
 - Modest: barebone Linux distributions
+
   - Reuse your existing experiences: make, ant, apt-get, yum...
 
 ---
@@ -102,7 +84,7 @@ class: center, middle
 --
 
 ### ☛ 先在 Vagrant 實驗
-(`ubuntu/trusty64`, `chef/debian-7.6`, ...)
+(`ubuntu/trusty64`, `debian/jessie64`, ...)
 
 --
 
@@ -120,27 +102,7 @@ class: center, middle
 
 ---
 
-# Add something to root file system (rootfs)
-
-<br/>
-
-.pull-left[
-  .percent90[.center[![bg](img/app-building-oldway.svg)]]
-]
-
-.pull-right[
-  .percent90[.center[![bg](img/cook-vector.jpg)]]
-]
-
-
-???
-
-Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
-
-
----
-
-# DEB file for Redis server
+# 原料：DEB file for Redis server
 
 What's inside?
 
@@ -177,18 +139,6 @@ $ sudo dpkg -i redis-server_2.8.19.deb
 class: center, middle
 
 # 那麼，Docker 是怎麼 build 的？
-
---
-
-.percent90[.center[![bg](img/cook-vector.jpg)]]
-
-Add something to ...?
-
----
-
-# Add something to ~~rootfs~~ <br/> base image!
-
-.percent110[.center[![bg](img/app-building-compare.svg)]]
 
 ---
 
@@ -240,6 +190,7 @@ FROM  ubuntu:14.04
 
 --
 
+<br/><br/>
 Remember image hierarchy?
 
 ```bash
@@ -250,7 +201,7 @@ $ docker images --tree
 
 # 逐行拆解 Dockerfile 指令
 
-## #2: Add something to ~~rootfs~~ target image
+## #2: Add something to target image
 
 ```dockerfile
 COPY  redis-server_2.8.19.deb  redis-server.deb
@@ -267,7 +218,7 @@ Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 
 # 逐行拆解 Dockerfile 指令
 
-## #3: Run commands within ~~rootfs~~ target image
+## #3: Run commands within target image
 
 ```dockerfile
 # install from deb
@@ -336,6 +287,7 @@ $ docker run  `THE_UGLY_IMAGE_ID`
 
 --
 
+<br/><br/>
 Container status:
 
 ```bash
@@ -361,6 +313,7 @@ $ docker run -d  `THE_UGLY_IMAGE_ID`
 
 --
 
+<br/><br/>
 Container status:
 
 ```bash
@@ -513,7 +466,7 @@ template: inverse
 
 ---
 
-# "SSH into" containers without SSH
+# Process injection
 
 Inject a new process into the "running container".
 
@@ -529,20 +482,27 @@ For examples,
   ```
 
 --
-- `bash` with an **<u>i</u>**nteractive **<u>t</u>**ty:
+- `bash` with an **<u>i</u>**nteractive **<u>t</u>**ty: .red[*]
 
   ```bash
   $ docker exec -it  `CONTAINER_NAME`  \
         bash
   ```
 
+.footnote[.red[*] Effect: "SSH into" containers without SSH.]
+
 ---
 
 # Quiz
 
-Dig into a running Redis container.
+1. Dig into a running Redis container.<br/><br/>
+   See if DEB files are installed into the container successfully.
 
-See if DEB files are installed into the container successfully.
+--
+
+2. Rewrite `Dockerfile`:<br/><br/>
+   Use `apt-get update` and `apt-get install -y redis-server` to install Redis.
+
 
 ---
 

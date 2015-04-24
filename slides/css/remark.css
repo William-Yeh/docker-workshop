@@ -27,23 +27,34 @@ h1, h2, h3 {
     font-weight: 400;
 }
 
-.remark-slide-content    { font-size: 24px;  }
-.remark-slide-content h1 { font-size: 2em;   }
+.remark-slide-content    { font-size: 24px;    }
+.remark-slide-content h1 { font-size: 2em;     }
 .remark-slide-content h2 { font-size: 1.5em;   }
-.remark-slide-content h3 { font-size: 1.2em; }
+.remark-slide-content h3 { font-size: 1.2em;   }
 .footnote {
     position: absolute;
     bottom: 3em;
 }
 
-li p   { line-height: 1.25em; }
-.red   { color: #fa0000; }
-.large { font-size: 2em; }
+li p     { line-height: 1.25em; }
+
+table {
+    margin-top: 1em;
+}
+
 
 a, a > code {
-    color: rgb(249, 38, 114);
+    color: #0000EE;
     text-decoration: none;
 }
+.inverse a, .inverse a > code {
+    color: lime;
+}
+a:hover, a:hover > code {
+    color: rgb(249, 38, 114);
+    font-weight: bold;
+}
+
 
 code {
     -moz-border-radius: 5px;
@@ -62,20 +73,39 @@ code {
     /*background-color: #373832; */
 
 
+.code140  .remark-code-line      { font-size: 1.40em ! important;  }
+.code135  .remark-code-line      { font-size: 1.35em ! important;  }
+.code130  .remark-code-line      { font-size: 1.30em ! important;  }
+.code125  .remark-code-line      { font-size: 1.25em ! important;  }
+.code120  .remark-code-line      { font-size: 1.20em ! important;  }
+.code115  .remark-code-line      { font-size: 1.15em ! important;  }
+.code110  .remark-code-line      { font-size: 1.10em ! important;  }
+.code105  .remark-code-line      { font-size: 1.05em ! important;  }
+
+
 .percent150 img { max-width: 150%; }
 .percent140 img { max-width: 140%; }
 .percent130 img { max-width: 130%; }
 .percent120 img { max-width: 120%; }
 .percent110 img { max-width: 110%; }
+.percent105 img { max-width: 105%; }
 .percent100 img { max-width: 100%; }
 .percent95  img { max-width:  95%; }
 .percent90  img { max-width:  90%; }
+.percent85  img { max-width:  85%; }
 .percent80  img { max-width:  80%; }
 .percent70  img { max-width:  70%; }
 .percent60  img { max-width:  60%; }
 .percent50  img { max-width:  50%; }
 .percent40  img { max-width:  40%; }
 .percent30  img { max-width:  30%; }
+.percent20  img { max-width:  20%; }
+
+
+.red     { color: #fa0000;  }
+.green   { color: #00fa00;  }
+.blue    { color: #0000fa;  }
+.large   { font-size: 2em;  }
 
 
 .pull-left {

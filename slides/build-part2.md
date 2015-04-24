@@ -5,7 +5,7 @@ class: center, middle, inverse
 ---
 .percent90[.center[![bg](img/cook-vector.jpg)]]
 
-# 舉一反三／第二個 Docker Image
+# 舉一反三／善用另一家 OS 資源
 
 ???
 
@@ -54,7 +54,7 @@ class: center, middle
 --
 
 ### ☛ 先在 Vagrant 實驗
-(`chef/centos-5.11`, `chef/centos-6.5`, ...)
+(`chef/centos-5.11`, `chef/centos-6.6`, `chef/centos-7.0`...)
 
 --
 
@@ -73,7 +73,7 @@ class: center, middle
 
 ---
 
-# RPM file for Redis server
+# 原料：RPM file for Redis server
 
 What's inside?
 
@@ -258,7 +258,7 @@ $ docker images --tree
 
 ---
 
-# "SSH into" containers without SSH
+# Process injection
 
 Inject a new process into the "running container".
 
@@ -270,16 +270,18 @@ For examples,
 
   ```bash
   $ docker exec  `CONTAINER_NAME`  \
-        cat /etc/redhat-release
+        cat /etc/os-release
   ```
 
 --
-- `bash` with an **<u>i</u>**nteractive **<u>t</u>**ty:
+- `bash` with an **<u>i</u>**nteractive **<u>t</u>**ty: .red[*]
 
   ```bash
   $ docker exec -it  `CONTAINER_NAME`  \
         bash
   ```
+
+.footnote[.red[*] Effect: "SSH into" containers without SSH.]
 
 ---
 

@@ -30,9 +30,9 @@ template: inverse
 
 layout: false
 
-# Analogy
+# Learning by analogy
 
-☛ Object-Oriented Programming
+☛ Object-oriented programming
 
 >| Static Structure | ↔ | Dynamic Behavior |
 |:----------------:|---|:----------------:|
@@ -40,7 +40,7 @@ layout: false
 
 --
 
-☛ Operating Systems
+☛ Operating systems
 
 >| Static Structure | ↔ | Dynamic Behavior |
 |:----------------:|---|:----------------:|
@@ -188,9 +188,8 @@ $ docker images --no-trunc=true
 
 ---
 
-# Layers
+# Layers: Forest of base images
 
-## Tree of base images
 Analogy - single inheritance
 
 ```bash
@@ -200,6 +199,7 @@ $ docker images --tree
 .footnote[.red[*] See official doc about [Layers](https://docs.docker.com/terms/layer/). ]
 
 --
+<br/>
 
 - ### Q: What is the `511136ea3c5a` image?
 
@@ -208,7 +208,7 @@ $ docker images --tree
   ```
 --
 
-- ### A: [`scratch`](https://registry.hub.docker.com/_/scratch/) image; see official document "[Create a Base Image](https://docs.docker.com/articles/baseimages/)" for more info.
+- ### A: `scratch` image; see [official document](https://registry.hub.docker.com/_/scratch/) for more info.
 
 
 ---

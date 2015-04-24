@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 .percent80[.center[![bg](img/CodeMonkey-3.jpg)]]
 
-# Docker 想解決什麼問題？
+# 進階示範／<br/>加解密程式 in PHP &amp; Node.js
 
 ???
 
@@ -15,21 +15,9 @@ Img src: http://zikayn.com/blog/wp-content/uploads/2011/12/monkey-5.jpg
 
 ---
 
-class: center, middle
-
-TL;DR
-
-## Dependency
-## Isolation
-## Composibility
-
----
-
 layout: false
 
 # Lab setup
-
---
 
 .pull-left[
 ## VMs
@@ -42,7 +30,6 @@ layout: false
    - `up`
 ]
 
---
 
 .pull-right[
 ## Lab directory
@@ -895,25 +882,12 @@ Given a `Dockerfile.nodejs`, do the following on your own:
 
 template: inverse
 
-# Dependency Hell
+## Recap:
+# Dependency Hell?
 
 ---
 
-class: center, middle
-
-.percent60[.center[![bg](img/slamdunk-ball.jpg)]]
-
-
----
-
-class: center, middle
-
-.percent90[.center[![bg](img/dependency-hell.svg)]]
-
-
----
-
-# Dependency hell... Where?
+# Dependency hell... in Docker?
 
 - 2.5.8-3.1 (in PHP example)
 
@@ -940,115 +914,6 @@ class: center, middle
 class: center, middle
 
 .percent90[.center[![bg](img/slamdunk-battlefield.jpg)]]
-
----
-
-template: inverse
-
-# The Docker Way
-
-### 『籃板之下就是戰場！』
-### 『無論如何都一定要死守自己的陣地！』
-
-
----
-
-class: center, middle
-
-
-.percent120[.center[![bg](img/docker-isolation.svg)]]
-
-
----
-
-# Isolation
-
-
-## ☛ at *image* level
-
-```bash
-$ ls -al /var/lib/docker/graph
-```
-
---
-
-## ☛ at *container* level
-
-```bash
-# on-disk structure
-$ ls -al /var/lib/docker/containers
-
-# runtime view
-$ docker exec -it  CONTAINER_NAME  bash
-```
-
---
-
-## ☛ at runtime, "**.red[cgroup]**" and "**.red[namespace]**" mechanisms of Linux kernel are also used.
-
----
-
-template: inverse
-
-# Recap: Docker 兩項特點
-
-## Dependency
-## Isolation
-
----
-
-class: middle
-
-```
-        +--------------+
-        |              |           +-------------------+
-        |  dependency  +---------> |                   |
-        |              |           |                   |
-        +--------------+           |                   |
-                                   |   composibility   |
-        +--------------+           |                   |
-        |              |           |                   |
-        |  isolation   +---------> |                   |
-        |              |           +-------------------+
-        +--------------+
-```
----
-
-# Composibility - example #1
-
-```yaml
-benchmark1:
-  build: .
-  command: benchmark
-  links:
-    - redis1:redis
-
-benchmark2:
-  build: .
-  command: benchmark
-  links:
-    - redis2:redis
-
-redis1:
-  image: redis:2.8.19
-
-redis2:
-  build: .
-```
-
-
-.footnote[ See Lab 9: [從 API 角度思考／Container Linking](api-thinking.html)
-]
-
----
-
-# Composibility - example #2
-
-.percent150[![bg](img/flows.png)]
-
-
-.footnote[ See Lab 11: [大雜燴](synegy.html)
-]
 
 ---
 

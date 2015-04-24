@@ -57,15 +57,7 @@ class: center, middle
 
 Some TCP ports are exposed for host machine to access...
 
-.percent90[![topology](img/lab-topology-4.svg)
-]
----
-
-class: center, middle
-
-More Docker hosts to use, if necessary...
-
-.percent90[![topology](img/lab-topology-5.svg)
+.percent90[![topology](img/lab-topology-4.png)
 ]
 ---
 
@@ -81,7 +73,7 @@ class: center, middle
 
 That's all!
 
-.percent90[![topology](img/lab-topology.svg)
+.percent90[![topology](img/lab-topology.png)
 ]
 
 ---

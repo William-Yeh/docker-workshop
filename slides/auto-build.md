@@ -103,6 +103,8 @@ $ docker build .
 
 ---
 
+class: code120
+
 # 提交至 Git
 
 ## 在你的 Host machine 上：
@@ -192,6 +194,8 @@ Log in to Docker Hub: https://registry.hub.docker.com/
 Live demo!
 
 ---
+
+class: code120
 
 # Pull it from Docker Hub!
 
