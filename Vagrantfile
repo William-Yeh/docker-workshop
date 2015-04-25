@@ -28,6 +28,9 @@ Vagrant.configure(2) do |config|
         for f in PROVISION_SCRIPTS
             node.vm.provision "shell", path: f
         end
+        node.vm.provision "shell", inline: <<-SHELL
+            sudo apt-get install -y tree
+        SHELL
 
         node.vm.provider "virtualbox" do |vb|
             vb.customize ["modifyvm", :id, "--memory", "1024"]
@@ -46,6 +49,10 @@ Vagrant.configure(2) do |config|
 
         # [NOTE] unmark this while benchmarking VM startup time
         #node.vm.box_check_update = false
+
+        node.vm.provision "shell", inline: <<-SHELL
+            sudo yum -y install tree
+        SHELL
 
         node.vm.provider "virtualbox" do |vb|
             vb.customize ["modifyvm", :id, "--memory", "256"]
