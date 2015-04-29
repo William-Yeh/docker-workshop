@@ -114,8 +114,6 @@ vagrant status
 Current machine states:
 
 main                      poweroff (virtualbox)
-alice                     poweroff (virtualbox)
-bob                       poweroff (virtualbox)
 centos                    poweroff (virtualbox)
 registry                  poweroff (virtualbox)
 

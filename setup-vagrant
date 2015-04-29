@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly HOSTS=( "main"  "alice"  "bob"  "centos"  "registry" )
+readonly HOSTS=( "main"  "centos"  "registry" )
 
 for i in "${HOSTS[@]}"; do
     NAME=$i
