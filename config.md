@@ -108,7 +108,7 @@ cd docker-workshop
 vagrant status
 ```
 
-如果看到以下畫面，五台虛擬機都呈現 "poweroff" 狀態，就表示已經順利設定完畢：
+如果看到以下畫面，三台虛擬機都呈現 "poweroff" 狀態，就表示已經順利設定完畢：
 
 ```
 Current machine states:
