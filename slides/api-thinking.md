@@ -37,14 +37,50 @@ layout: false
 
 ---
 
-## Traditional scenario
+class: center, middle
+
+# Client software
+## vs.
+# Server software
+
+---
+
+class: center, middle
+
+# Traditional software
+## vs.
+# Dockerized software
+
+
+---
+
+class: center, middle
+
+.pull-left[
+# Client
+### - Traditional software
+### - Dockerized software
+]
+
+
+.pull-right[
+# Server
+### - Traditional software
+### - Dockerized software
+]
+
+---
+
+class: code105
+
+# Traditional scenario
 
 .pull-right[
 Native redis-server
 
 ```bash
 $ sudo \
-    service redis-server start
+  service redis-server start
 ```
 ]
 
@@ -69,16 +105,29 @@ $ redis-cli
 
 ---
 
-## What if... in the Docker world?
+# What if... in the Docker world?
+
+<br/>
 
 .percent100[.center[![bg](img/redis-combinations.svg)]]
 
 ---
 
-## Scenario #1: without port mapping
+class: center, middle
+
+.percent110[![bg](img/redis-scenario-all.png)]
+
+
+---
+
+
+class: code110
+
+
+# Scenario #1: without port mapping
 
 .pull-right[
-Dockerized redis-server
+.red[Dockerized redis-server]
 
 ```bash
 $ docker run -d    \
@@ -117,7 +166,7 @@ how?
 
 ---
 
-# Two approaches
+## ... Two approaches
 
 1. `.NetworkSettings.IPAddress`
 
@@ -131,10 +180,12 @@ how?
 
 ---
 
-## Scenario #2: with port mapping
+class: code110
+
+# Scenario #2: .red[with] port mapping
 
 .pull-right[
-Dockerized redis-server
+.red[Dockerized redis-server]
 
 ```bash
 $ docker run -d    \
@@ -180,7 +231,9 @@ How?
 
 ---
 
-## Scenario #3: with port mapping
+class: code110
+
+# Scenario #3: .red[with] port mapping
 
 .pull-right[
 Dockerized redis-server
@@ -196,7 +249,7 @@ $ docker run -d    \
 --
 
 .pull-left[
-Dockerized redis-cli
+.red[Dockerized redis-cli]
 
 ```bash
 How?
@@ -261,6 +314,17 @@ $ docker run -it redis:2.8.19  \
 Could not connect to Redis at 127.0.0.1:26379: Connection refused
 ```
 
+---
+
+Remember?
+Docker's virtual Ethernet bridge
+
+.percent100[.center[![bg](img/docker-bridge.jpg)]]
+
+
+.footnote[.red[*] Source: [Docker 源码分析（七）：Docker Container 网络（上）](http://blog.daocloud.io/docker-source-code-analysis-part7-first/)
+]
+
 
 ---
 
@@ -295,15 +359,18 @@ $ docker run -it redis:2.8.19  \
 --
 
 <br/>
-... manually lookup; not perfect yet...
+... manually lookup IP address; not perfect yet...
 
 
 ---
 
-## Scenario #4: without port mapping
+class: code110
+
+
+# Scenario #4: .red[without] port mapping
 
 .pull-right[
-Dockerized redis-server
+.red[Dockerized redis-server]
 
 ```bash
 $ docker run -d    \
@@ -315,7 +382,7 @@ $ docker run -d    \
 --
 
 .pull-left[
-Dockerized redis-cli
+.red[Dockerized redis-cli]
 
 ```bash
 how?
@@ -343,6 +410,14 @@ how?
 
 ---
 
+class: center, middle
+
+.percent110[![bg](img/redis-scenario-all.png)]
+
+
+---
+
+class: code115
 
 # 先從簡單的 busybox 下手...
 
@@ -361,7 +436,7 @@ $ docker run -d    \
 --
 
 .pull-left[
-Dockerized *busybox*
+.red[Dockerized *busybox*]
 
 ```bash
 $ docker run -it         \
@@ -384,6 +459,8 @@ template: inverse
 
 
 ---
+
+class: code120
 
 ## Use link to access it...
 
@@ -571,6 +648,7 @@ Let's filter "`REDIS`" (in uppercase) patterns:
 
   ```bash
   $ docker run -d --name redis2 redis:2.8.19
+
   $ docker run -it  \
   *     --link redis2:redis \
         busybox
@@ -617,12 +695,18 @@ class: center, middle
 
 # OK, how can we connect to it?
 
+--
+
+.percent90[![bg](img/redis-scenario-all.png)]
+
 ---
 
-# Scenario #4: linking, without port mapping
+class: code115
+
+# Scenario #4: .red[linking], without port mapping
 
 .pull-right[
-Dockerized redis-server
+.red[Dockerized redis-server]
 
 ```bash
 $ docker run -d    \
@@ -634,7 +718,7 @@ $ docker run -d    \
 --
 
 .pull-left[
-Dockerized redis-cli
+.red[Dockerized redis-cli]
 
 ```bash
 $ docker run -it        \
@@ -650,7 +734,7 @@ $ docker run -it        \
 <br clear="all">
 
 .pull-right[
-Dockerized redis-server #2
+.red[Dockerized redis-server #2]
 
 ```bash
 $ docker run -d    \
@@ -662,7 +746,7 @@ $ docker run -d    \
 --
 
 .pull-left[
-Dockerized redis-cli
+.red[Dockerized redis-cli]
 
 ```bash
 $ docker run -it        \
@@ -675,6 +759,9 @@ $ docker run -it        \
 ]
 
 ---
+
+class: code110
+
 
 # 變與不變之間...
 
@@ -728,9 +815,12 @@ $ docker run -it          \
 
 class: center, middle
 
-## 只要 link 的 alias 部分維持不變，<br/>`redis-cli` 的參數就可以維持不變。
+### 不管 *target-name* 如何變動，
+## 只要 link 的 .red[**alias**] 部分維持不變，<br/>`redis-cli` 的連線變數名稱就可維持不變。
 
-.percent100[.center[![bg](img/redis-linking.svg)]]
+<br/>
+
+.percent100[![bg](img/redis-linking.svg)]
 
 
 ---
@@ -742,6 +832,8 @@ template: inverse
 ## 如果某件事常常做，<br/>就值得單獨抽離出來。
 
 ---
+
+class: code110
 
 # Wrapper script for redis-cli
 
@@ -784,6 +876,8 @@ exec redis-cli  \
 
 
 ---
+
+class: code110
 
 # Wrapper script for redis-benchmark
 
@@ -878,7 +972,16 @@ template: inverse
 
 ## Various clients in the Docker world...
 
+<br/>
+
 .percent100[.center[![bg](img/redis-combinations.svg)]]
+
+---
+
+class: center, middle
+
+.percent110[![bg](img/redis-scenario-all.png)]
+
 
 ---
 

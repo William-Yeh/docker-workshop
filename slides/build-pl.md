@@ -8,6 +8,8 @@ class: center, middle, inverse
 
 # 編譯示範／從源碼建 image
 
+### (兼談 Compose)
+
 ???
 
 Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
@@ -84,16 +86,6 @@ class: code120
 
 ---
 
-template: inverse
-
-## ☛ II. Dependencies
-Explicitly declare and isolate dependencies
-
-.footnote[.red[*] See "[12 Factor App](http://12factor.net/)"
-]
-
----
-
 # Dockerfile
 
 ## "Makefile" for Docker images
@@ -158,6 +150,7 @@ WORKDIR  /app
 
 --
 
+<br/>
 也可依循傳統 Linux 慣例，把軟體安裝在 image 裡面的 `/usr/local` 或 `/opt` 等處。
 
 ---
@@ -207,7 +200,7 @@ Img src: http://www.vectorstock.com/royalty-free-vector/cook-vector-684665
 EXPOSE  3000
 ```
 
-.footnote[.red[*] Good practice: Treat Dockerfile as a spec.]
+.footnote[.red[*] Good practice: .red[Treat Dockerfile as a *spec*.]]
 
 --
 
@@ -317,6 +310,12 @@ Img src: http://i1.w.hjfile.cn/doc/201011/orz42797.jpg
 
 ---
 
+class: center, middle
+
+# Why?
+
+---
+
 template: inverse
 
 # Docker networking models
@@ -328,6 +327,8 @@ template: inverse
 # Devils in the Detail...
 
 Low-level information on a container or image
+
+**`docker inspect`**
 
 ```bash
 Usage: docker inspect [OPTIONS] CONTAINER|IMAGE [CONTAINER|IMAGE...]
@@ -455,6 +456,8 @@ class: center, middle
 
 ---
 
+class: code120
+
 # Can we try to connect to it, now?
 
 --
@@ -479,9 +482,9 @@ class: center, middle
 ... manually lookup; not perfect yet...
 
 
-
-
 ---
+
+class: code120
 
 # Can we skip this bridge stuff?
 
@@ -579,6 +582,8 @@ template: inverse
 
 
 ---
+
+class: code105
 
 # Re-run with port mapping...
 
@@ -680,17 +685,61 @@ EXPOSE   3000
 CMD      [ "npm", "start" ]
 ```
 
+
 ---
 
 template: inverse
 
-# Appendix A: Docker Compose
+# Appendix A: Dockerfile's roles
+
+---
+
+# Two roles of Dockerfile
+
+.footnote[.red[☛] Open 〈[Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)〉 and "[Dockerfile Reference](https://docs.docker.com/reference/builder/)" side by side for your easy reference.]
+
+--
+
+.pull-left[
+### "Makefile" for Docker images
+
+- `FROM`
+- `COPY`
+- `ADD`
+- `RUN`
+- `ONBUILD`
+- ...
+]
+
+--
+
+.pull-right[
+### As a service spec for Docker images
+
+- `EXPOSE`
+- `VOLUME`
+- `ENV`
+- `LABEL` (since Docker 1.6)
+- `CMD`
+- `ENTRYPOINT`
+- ...
+]
+
+
+---
+
+template: inverse
+
+# Appendix B: Docker Compose
 
 ### was: Fig
 
 .footnote[.red[*] https://github.com/docker/compose ]
 
 ---
+
+class: code120
+
 
 # Service definition file
 
@@ -705,7 +754,21 @@ app:
 ```
 
 
+--
+<br/>
+
+c.f. Docker CLI
+
+```bash
+$ docker build .
+
+$ docker run  [-d]  -p 10080:3000   IMAGE_ID_OR_NAME
+```
+
 ---
+
+class: code120
+
 
 # Run it!
 
@@ -726,7 +789,7 @@ $ docker-compose  up  -d
 
 template: inverse
 
-# Appendix B: 其他語言？
+# Appendix C: 其他語言？
 
 ### Java
 ### PHP
