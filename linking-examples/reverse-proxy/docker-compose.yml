@@ -1,0 +1,36 @@
+nginx:
+  image: nginx:1.7.9
+  restart: always
+  volumes:
+    - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  ports:
+    - "8000:80"
+  links:
+    - app1:node1
+    - app2:node2
+
+
+app1:
+  build: app
+  links:
+    - redisserver
+  environment:
+    - REDIS_HOST=redisserver
+
+
+app2:
+  build: app
+  links:
+    - redisserver
+  environment:
+    - REDIS_HOST=redisserver
+
+
+redisserver:
+  image: williamyeh/redis:2.8.19
+  restart: always
+  volumes:
+    - .:/data
+    - ./redis.conf:/etc/redis/redis.conf:ro
+  command:
+    - start
