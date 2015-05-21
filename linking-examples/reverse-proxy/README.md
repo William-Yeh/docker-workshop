@@ -3,12 +3,12 @@ Reverse proxy example
 
 ## Purpose
 
-Demonstrate how to use reverse proxy for backend application servers.
+Demonstrate how to use reverse proxy for backend application servers, all in the Docker's world.
 
 
 ## Software stack
 
-**Nginx**:
+#### Nginx
 
  - [Reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
 
@@ -17,16 +17,16 @@ Demonstrate how to use reverse proxy for backend application servers.
  - [SSL termination](http://nginx.com/resources/admin-guide/nginx-ssl-termination/): use `make-cert.sh` to generate self-signed certificate.
 
 
-**Node.js application server instances**:
+#### Node.js application server instances
 
  - Source code in `app` directory.
  - *N* instances.
- - Zero-downtime deployments.
+ - Zero-downtime deployments via Nginx.
 
-**Redis server**:
+#### Redis server
 
- - Shared across Node.js application instances.
- - Persistence RDB and AOF modes.
+ - Shared datastore across Node.js application instances.
+ - [Persistence](http://redis.io/topics/persistence): RDB and AOF modes.
 
 
 ## Usage
