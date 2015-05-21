@@ -1,10 +1,11 @@
 nginx:
-  image: nginx:1.7.9
+  image: nginx:1.9.0
   restart: always
   volumes:
-    - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    - .:/etc/nginx:ro
   ports:
-    - "8000:80"
+    - "10080:80"
+    - "10443:443"
   links:
     - app1:node1
     - app2:node2
