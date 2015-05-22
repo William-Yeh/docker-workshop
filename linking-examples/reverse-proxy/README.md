@@ -8,6 +8,9 @@ Demonstrate how to use reverse proxy for backend application servers, all in the
 
 ## Software stack
 
+![bg](reverse-proxy.png)
+
+
 #### Nginx
 
  - [Reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
