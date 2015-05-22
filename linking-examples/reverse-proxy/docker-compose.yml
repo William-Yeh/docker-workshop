@@ -11,6 +11,34 @@ nginx:
     - app2:node2
 
 
+haproxy:
+  image: haproxy:1.5.12
+  restart: always
+  volumes:
+    - .:/usr/local/etc/haproxy:ro
+  ports:
+    - "10090:80"
+    - "10091:443"
+    - "10092:1936"
+  links:
+    - app1:node1
+    - app2:node2
+
+
+#openresty:
+#  image: ficusio/openresty:1.7.10.1
+#  restart: always
+#  volumes:
+#    - ./nginx.openresty.conf:/opt/openresty/nginx/conf/nginx.conf:ro
+#    - .:/etc/nginx:ro
+#  ports:
+#    - "10081:80"
+#    - "10444:443"
+#  links:
+#    - app1:node1
+#    - app2:node2
+
+
 app1:
   build: app
   links:

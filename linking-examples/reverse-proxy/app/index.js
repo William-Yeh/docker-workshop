@@ -11,7 +11,7 @@ var REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1' ;
 var REDIS_PORT = process.env.REDIS_PORT || 6379        ;
 
 
-var get_remote_ip = function(req) {
+function get_remote_ip(req) {
     var ip_address = null;
     try {
         ip_address = req.headers['x-forwarded-for'];
@@ -23,6 +23,14 @@ var get_remote_ip = function(req) {
 }
 
 
+function report_health(resp) {
+    resp.writeHead(200, {
+        "Content-Type": "text/plain"
+    });
+    resp.write("OK");
+    resp.end();
+}
+
 
 var redis_client = require('redis').createClient(REDIS_PORT, REDIS_HOST);
 var server = http.createServer(function(request, response) {
@@ -31,6 +39,10 @@ var server = http.createServer(function(request, response) {
 
     // skip uninteresting URL requests
     if (request.url === '/favicon.ico') {
+        return;
+    }
+    else if (request.url === '/health') {
+        report_health(response);
         return;
     }
 
