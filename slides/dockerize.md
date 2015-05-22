@@ -119,7 +119,7 @@ Official document says: .red[*]
    $ docker run -d --name nginx   \
         -p 10081:80               \
         -v $(pwd):/usr/share/nginx/html:ro  \
-        nginx:1.7.9
+        nginx:1.9.0
    ```
 
 --
@@ -141,7 +141,7 @@ Official document says: .red[*]
 
    ```yaml
    nginx:
-       image: nginx:1.7.9
+       image: nginx:1.9.0
        ports:
            - 10081:80
        volumes:
@@ -359,7 +359,7 @@ class: center, middle
 - "Daemon off" mode (correct!)
 
   ```yaml
-  FROM  nginx:1.7.9
+  FROM  nginx:1.9.0
   CMD [ "nginx", "-g", "daemon off;" ]
   ```
 
@@ -367,7 +367,7 @@ class: center, middle
 - "Daemonize" mode (wrong!)
 
   ```yaml
-  FROM  nginx:1.7.9
+  FROM  nginx:1.9.0
   CMD [ "nginx" ]
   ```
 
