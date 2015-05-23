@@ -1,5 +1,5 @@
-# dockerize `walk-tree-c`, with .so files extracted from Ubuntu 14.04
+# dockerize `walk-c`, with .so files extracted from CentOS 5.11
 
 FROM scratch
 
-Add  rootfs-from-ubuntu1404.tar.gz  .
+Add  rootfs-from-centos511.tar.gz  .

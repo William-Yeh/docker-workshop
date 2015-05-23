@@ -1,7 +1,7 @@
 # Container Linking
 
 
-This directory is to demostrate the "[container linking](https://docs.docker.com/userguide/dockerlinks/)" feature of Docker, using [wrk](https://github.com/William-Yeh/docker-wrk) (written in C and Lua), [Spray](https://github.com/William-Yeh/Docker-Spray-HttpServer) (written in Scala), [Fluentd](https://github.com/William-Yeh/docker-fluentd) (written in Ruby), and [Elasticsearch + Kibana](http://www.elasticsearch.org/overview/kibana/) (written in Java) as example.
+This directory is to demonstrate the "[container linking](https://docs.docker.com/userguide/dockerlinks/)" feature of Docker, using [wrk](https://github.com/William-Yeh/docker-wrk) (written in C and Lua), [Spray](https://github.com/William-Yeh/Docker-Spray-HttpServer) (written in Scala), [Fluentd](https://github.com/William-Yeh/docker-fluentd) (written in Ruby), and [Elasticsearch + Kibana](http://www.elasticsearch.org/overview/kibana/) (written in Java) as example.
 
 ![Overview of the demo](./flows.png "Overview of the demo")
 

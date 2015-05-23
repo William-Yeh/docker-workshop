@@ -1,5 +1,5 @@
-# dockerize `walk-tree-go`
+# dockerize `walk-go`
 
 FROM scratch
 
-COPY  walk-tree-go  /bin/
+COPY  walk-go  /bin/walk

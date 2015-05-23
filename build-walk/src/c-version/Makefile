@@ -1,5 +1,5 @@
-all: walk-tree.c
-	gcc  -std=c99  -o walk-tree  walk-tree.c
+all: walk.c
+	gcc  -std=c99  -o walk  walk.c
 
 clean:
-	rm -f walk-tree
+	rm -f walk

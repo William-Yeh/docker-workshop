@@ -7,14 +7,14 @@
 FROM golang:1.4.2
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
-ENV EXE_NAME  walk-tree_linux-amd64
+ENV EXE_NAME  walk_linux-amd64
 ENV GOPATH    /opt
 WORKDIR       /opt
 
 
 # fetch imported Go lib...
 RUN  go get  github.com/kr/fs  text/tabwriter
-COPY walk-tree.go  /opt/
+COPY walk.go  /opt/
 
 # compile...
 RUN  go build -o $EXE_NAME

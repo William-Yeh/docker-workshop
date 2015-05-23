@@ -1,6 +1,6 @@
 // Directory walker, excluding /dev /proc /sys.
 //
-// Usage: walk-tree  [starting path]
+// Usage: walk  [starting path]
 //
 // @adapted from: http://linux.die.net/man/3/ftw
 //

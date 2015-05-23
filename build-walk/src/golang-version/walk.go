@@ -1,6 +1,6 @@
 // Directory walker, excluding /dev /proc /sys.
 //
-// Usage: walk-tree  [starting path]
+// Usage: walk  [starting path]
 //
 // adapted from: https://raw.githubusercontent.com/kr/fs/master/example_test.go
 //
