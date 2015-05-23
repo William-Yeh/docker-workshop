@@ -24,7 +24,8 @@ node:0.10.36-onbuild
 #
 
 redis:2.8.19
-nginx:1.7.9
+nginx:1.9.0
+haproxy:1.5.12
 mysql:5.6.22
 wordpress:4.1.0
 

@@ -1,5 +1,5 @@
 nginx:
-  image: nginx:1.7.9
+  image: nginx:1.9.0
   ports:
     - "10081:80"
   volumes:

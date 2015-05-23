@@ -1,0 +1,51 @@
+nginx:
+  image: nginx:1.9.0
+  restart: always
+  volumes:
+    - .:/etc/nginx:ro
+  ports:
+    - "10080:80"
+    - "10443:443"
+  links:
+    - app1:node1
+    - app2:node2
+
+
+haproxy:
+  image: haproxy:1.5.12
+  restart: always
+  volumes:
+    - .:/usr/local/etc/haproxy:ro
+  ports:
+    - "10090:80"
+    - "10091:443"
+    - "10100:1936"
+  links:
+    - app1:node1
+    - app2:node2
+
+
+app1:
+  build: app
+  links:
+    - redisserver
+  environment:
+    - REDIS_HOST=redisserver
+
+
+app2:
+  build: app
+  links:
+    - redisserver
+  environment:
+    - REDIS_HOST=redisserver
+
+
+redisserver:
+  image: williamyeh/redis:2.8.19
+  restart: always
+  volumes:
+    - .:/data
+    - ./redis.conf:/etc/redis/redis.conf:ro
+  command:
+    - start

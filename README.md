@@ -32,6 +32,11 @@ FYI, the `gh-pages` branch stores the slide files, mostly in markdown format.
 ## History
 
 
+**v5.0** / 第五梯次 (2015-06-27)
+
+  - 增加更多實例，示範 container linking 的實務手法。
+
+
 **v4.0** / 第四梯次 (2015-05-09)
 
   - 簡化 Vagrant 虛擬機數量。
