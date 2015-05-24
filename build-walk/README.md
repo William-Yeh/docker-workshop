@@ -34,6 +34,9 @@ Two versions of the same functionality are provided:
 Refer to the `src` directory if you're courious about their source code.
 
 
+![bg](walk-cases.png)
+
+
 ## Case 1: Fully statically-linked ELF file
 
 The program `walk-go` is a fully statically-linked ELF executable.
