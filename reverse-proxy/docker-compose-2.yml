@@ -10,6 +10,7 @@ haproxy:
   restart: always
   volumes:
     - ./haproxy-2.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    - ./certificate.pem:/usr/local/etc/haproxy/certificate.pem:ro
   net: "host"
 
 

@@ -4,7 +4,7 @@ Vagrant.require_version ">= 1.7.2"
 SYNCED_FOLDER = "/home/vagrant/docker-workshop"
 
 # expose ports from guest to host for convenience
-FORWARDED_PORT_RANGE = (10080..10100).to_a.push(10443)
+FORWARDED_PORT_RANGE = (10080..10100).to_a.push(10443).to_a.push(8080)
 
 # external provision script files
 PROVISION_SCRIPTS = [ "provision/setup-docker-tools.sh", "provision/setup-env.sh", "provision/setup-hosts.sh" ]
