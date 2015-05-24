@@ -1176,7 +1176,7 @@ class: middle
         |  dependency  +---------> |                   |
         |              |           |                   |
         +--------------+           |                   |
-                                   |   composibility   |
+                                   |   composability   |
         +--------------+           |                   |
         |              |           |                   |
         |  isolation   +---------> |                   |
