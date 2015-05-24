@@ -114,7 +114,7 @@ $ tree  /
 
 # Try again: rootfs in Ubuntu 14.04
 
-This time, use `walk-tree-go` program instead:
+This time, use `walk-go` program instead:
 
   - similar to previous `tree` command
 
@@ -123,17 +123,17 @@ This time, use `walk-tree-go` program instead:
 --
 
 ```bash
-$ cd ~/docker-workshop/build-walk/case1
+$ cd ~/docker-workshop/build-walk
 
 $ ls -al
 
-$ file  walk-tree-go
-walk-tree-go: ELF 64-bit LSB  executable, x86-64,
+$ file  walk-go
+walk-go: ELF 64-bit LSB  executable, x86-64,
 version 1 (SYSV), statically linked, not stripped
 
 
 
-$ sudo  ./walk-tree-go  /
+$ sudo  ./walk-go  /
 ```
 
 
@@ -291,7 +291,7 @@ Add something to the `scratch` **base image**:
 
 ### - Base: `scratch` (空, 無)
 
-### - Add: `walk-tree-go`
+### - Add: `walk-go`
 
 .percent40[.right[![bg](img/cook-vector.jpg)]]
 
@@ -306,14 +306,14 @@ class: center, middle
 
 ---
 
-# Dockerfile for "walk-tree-go"
+# Dockerfile for "walk-go"
 
 ```dockerfile
-# dockerize "walk-tree-go"
+# dockerize "walk-go"
 
 FROM  scratch
 
-COPY  walk-tree-go  /bin/
+COPY  walk-go  /bin/walk
 ```
 
 .footnote[.red[☛] Open 〈[Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)〉 and "[Dockerfile Reference](https://docs.docker.com/reference/builder/)" side by side for your easy reference.]
@@ -346,12 +346,12 @@ $ docker images --tree
 ## #2: Add something new to the base image
 
 ```dockerfile
-COPY  walk-tree-go  /bin/
+COPY  walk-go  /bin/walk
 ```
 
 .percent40[.right[![bg](img/cook-vector.jpg)]]
 
-.footnote[.red[*] Effect: `/bin/walk-tree-go` in the target image.]
+.footnote[.red[*] Effect: copy to `/bin/walk` in the target image.]
 
 ---
 
@@ -394,7 +394,7 @@ Foreground mode:
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk-tree-go  /
+    /bin/walk  /
 ```
 
 --
@@ -402,7 +402,7 @@ $ docker run  `THE_UGLY_IMAGE_ID`  \
 ☛ [Compare] without Docker, it is used in this way:
 
 ```bash
-$ sudo  ./walk-tree-go  /
+$ sudo  ./walk-go  /
 ```
 
 
@@ -457,7 +457,7 @@ $ docker ps -a
 - Without Docker
 
 ```bash
-$ sudo  ./walk-tree-go  /
+$ sudo  ./walk-go  /
 ```
 ```
 
@@ -488,14 +488,14 @@ $ sudo  ./walk-tree-go  /
 
 ```bash
 $ docker run  `IMAGE_ID`  \
-    /bin/walk-tree-go  /
+    /bin/walk  /
 ```
 ```
 2015-04-25     4096  /
 2015-04-25        0  /.dockerenv
 2015-04-25        0  /.dockerinit
 2015-04-25     4096  /bin
-2015-04-25  2667144  /bin/walk-tree-go
+2015-04-25  2667144  /bin/walk
 2015-04-25     4096  /etc
 2015-04-25       13  /etc/hostname
 2015-04-25      174  /etc/hosts
@@ -512,7 +512,7 @@ $ docker run  `IMAGE_ID`  \
 - Without Docker
 
 ```bash
-$ sudo  ./walk-tree-go  /
+$ sudo  ./walk-go  /
 ```
 
 ☛ Sees the whole file system of the enclosing OS
@@ -544,7 +544,7 @@ $ sudo  ./walk-tree-go  /
 
 ```bash
 $ docker run  `IMAGE_ID`  \
-    /bin/walk-tree-go  /
+    /bin/walk  /
 ```
 
 ☛ Only sees the file system **within** the target image
@@ -555,7 +555,7 @@ $ docker run  `IMAGE_ID`  \
 2015-04-25        0  /.dockerenv
 2015-04-25        0  /.dockerinit
 2015-04-25     4096  /bin
-2015-04-25  2667144  /bin/walk-tree-go
+2015-04-25  2667144  /bin/walk
 2015-04-25     4096  /etc
 2015-04-25       13  /etc/hostname
 2015-04-25      174  /etc/hosts
@@ -614,9 +614,9 @@ class: center, middle
 
 # Try again: rootfs in Ubuntu 14.04
 
-This time, use `walk-tree-c` program instead:
+This time, use `walk-c` program instead:
 
-  - similar to previous `tree` and `walk-tree-go` commands
+  - similar to previous `tree` and `walk-go` commands
 
   - written in C
 
@@ -627,15 +627,15 @@ $ cd ~/docker-workshop/build-walk/case2
 
 $ ls -al
 
-$ file  walk-tree-c
-walk-tree-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
+$ file  walk-c
+walk-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
 *dynamically linked (uses shared libs), for GNU/Linux 2.6.24,
 BuildID[sha1]=bba8e784a630f4260a31a39fa0826b4a00147fea,
 not stripped
 
 
 
-$ ./walk-tree-c  /
+$ ./walk-c  /
 ```
 
 ---
@@ -646,7 +646,7 @@ Add something to the `scratch` **base image**:
 
 ### - Base: `scratch` (空, 無)
 
-### - Add: `walk-tree-c`
+### - Add: `walk-c`
 
 .percent40[.right[![bg](img/cook-vector.jpg)]]
 
@@ -661,14 +661,14 @@ class: center, middle
 
 ---
 
-# Dockerfile for "walk-tree-c"
+# Dockerfile for "walk-c"
 
 ```dockerfile
-# dockerize "walk-tree-c"
+# dockerize "walk-c"
 
 FROM  scratch
 
-COPY  walk-tree-c  /bin/
+COPY  walk-c  /bin/walk
 ```
 
 ---
@@ -690,12 +690,12 @@ FROM  scratch
 ## #2: Add something new to the base image
 
 ```dockerfile
-COPY  walk-tree-c  /bin/
+COPY  walk-c  /bin/walk
 ```
 
 .percent40[.right[![bg](img/cook-vector.jpg)]]
 
-.footnote[.red[*] Effect: `/bin/walk-tree-c` in the target image.]
+.footnote[.red[*] Effect: copy to `/bin/walk` in the target image.]
 
 ---
 
@@ -736,7 +736,7 @@ $ docker images --tree
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk-tree-c  /
+    /bin/walk  /
 ```
 
 --
@@ -755,22 +755,22 @@ msg="Error response from daemon:
 ☛ [Compare] without Docker, it is used in this way:
 
 ```bash
-$ ./walk-tree-c  /
+$ ./walk-c  /
 ```
 
 <br/>
 
-.center[What's wrong?]
+.center[.red[What's wrong?]]
 
 ---
 
 # Dynamically linked ELF file
 
 ```bash
-$ file  walk-tree-c
+$ file  walk-c
 ```
 ```
-walk-tree-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
+walk-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
 *dynamically linked (uses shared libs), for GNU/Linux 2.6.24,
 BuildID[sha1]=bba8e784a630f4260a31a39fa0826b4a00147fea,
 not stripped
@@ -780,7 +780,7 @@ not stripped
 <br/>
 
 ```bash
-$ ldd  walk-tree-c
+$ ldd  walk-c
 ```
 ```
     linux-vdso.so.1 =>  (0x00007fff7a7fc000)
@@ -806,17 +806,19 @@ Quote : a Q&A in Ask Ubuntu - http://askubuntu.com/a/40425
 
 ---
 
+
+
 template: inverse
 
 # Case 3
-## "scratch" + Link with dependent .so files extracted from CentOS 5.11
+## "scratch" + Link with dependent .so files extracted from Ubuntu 14.04
 
 ---
 
 class: center, middle
 
 # Case 3
-## `scratch` + Link with dependent .so files extracted from CentOS 5.11
+## `scratch` + Link with dependent .so files extracted from Ubuntu 14.04
 
 <br/>
 
@@ -826,168 +828,13 @@ class: center, middle
 
 # Collect all dependent .so files
 
-- The tarball `rootfs-from-centos511.tar.gz` contains `walk-tree-c`, together with required .so files from CentOS 5.11:
-
-    ```bash
-    $ tar ztvf rootfs-from-centos511.tar.gz
-    ```
-    ```
-    -rwxr-xr-x     9086  2015-04-13  bin/walk-tree-c
-    -rwxr-xr-x  1720712  2014-09-16  lib64/libc.so.6
-    -rwxr-xr-x   142488  2014-09-16  lib64/ld-linux-x86-64.so.2
-    ```
-
---
-
-<br/>
-- Let's add them to the target image!
-
-.percent30[.right[![bg](img/cook-vector.jpg)]]
-
----
-
-# Dockerfile for "walk-tree-c"
-
-```dockerfile
-# dockerize "walk-tree-c", with .so files extracted from CentOS 5.11
-
-FROM  scratch
-
-ADD  rootfs-from-centos511.tar.gz  .
-```
-
----
-
-# 逐行拆解 Dockerfile 指令
-
-## #1: Base image
-
-```dockerfile
-FROM  scratch
-```
-
-.footnote[.red[*] This line can be omitted since Docker 1.5.0; see [official document](https://registry.hub.docker.com/_/scratch/) for more info.]
-
----
-
-# 逐行拆解 Dockerfile 指令
-
-## #2: Add something new to the base image
-
-```dockerfile
-ADD  rootfs-from-centos511.tar.gz  .
-```
-
-.percent30[.right[![bg](img/cook-vector.jpg)]]
-
-
-.footnote[.red[*] Effect: unpack to the specified directory in the target image. See [official document](https://docs.docker.com/reference/builder/#add) for more info.]
-
----
-
-# Build it!
-
-```bash
-$ docker build .
-```
-
-.percent50[.right[![bg](img/app-building-dockerway.svg)]]
-
-
-.footnote[.red[*] See the _very very very ugly_ ID?]
-
-
----
-
-# Look at what we've built...
-
-
-```bash
-$ docker images
-```
-
-.footnote[.red[*] See the _very very very ugly_ ID?]
-
---
-
-Or,
-
-```bash
-$ docker images --tree
-```
-
----
-
-# Run it!
-
-```bash
-$ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk-tree-c  /
-```
-
---
-
-```
-d   2015-04-25 17:23     4096  /
-f   2015-04-25 17:23        0  /.dockerinit
-d   2015-04-25 17:22     4096  /lib64
-*f   2014-09-16 06:35  1720712  /lib64/libc.so.6
-*f   2014-09-16 06:35   142488  /lib64/ld-linux-x86-64.so.2
-d   2015-04-25 17:22     4096  /bin
-*f   2015-04-13 04:55     9086  /bin/walk-tree-c
-d   2015-04-25 17:23     4096  /etc
-f   2015-04-25 17:23      171  /etc/resolv.conf
-f   2015-04-25 17:23      174  /etc/hosts
-f   2015-04-25 17:23        0  /etc/mtab
-f   2015-04-25 17:23       13  /etc/hostname
-f   2015-04-25 17:23        0  /.dockerenv
-```
-
---
-
-<br/>
-☛ [Compare] without Docker, it is used in this way:
-
-```bash
-$ ./walk-tree-c  /
-```
-
----
-
-class: center, middle
-
-# Docker Feature #2:
-# .red[Dependency]: all dependencies should be packed into the image.
-
----
-
-template: inverse
-
-# Case 4
-## "scratch" + Link with dependent .so files extracted from Ubuntu 14.04
-
----
-
-class: center, middle
-
-# Case 4
-## `scratch` + Link with dependent .so files extracted from Ubuntu 14.04
-
-<br/>
-
-```$ cd ~/docker-workshop/build-walk/case4```
-
----
-
-# Collect all dependent .so files
-
-- The tarball `rootfs-from-ubuntu1404.tar.gz` contains `walk-tree-c`, together with required .so files from Ubuntu 14.04:
+- The tarball `rootfs-from-ubuntu1404.tar.gz` contains `walk-c`, together with required .so files extracted from Ubuntu 14.04:
 
     ```bash
     $ tar ztvf rootfs-from-ubuntu1404.tar.gz
     ```
     ```
-    -rwxr-xr-x     9086  2015-04-13  bin/walk-tree-c
+    -rwxr-xr-x     9086  2015-04-13  bin/walk
     -rwxr-xr-x  1840928  2015-02-25  lib/x86_64-linux-gnu/libc.so.6
     -rwxr-xr-x   149120  2015-02-25  lib64/ld-linux-x86-64.so.2
     ```
@@ -1001,10 +848,10 @@ class: center, middle
 
 ---
 
-# Dockerfile for "walk-tree-c"
+# Dockerfile for "walk-c"
 
 ```dockerfile
-# dockerize "walk-tree-c", with .so files extracted from Ubuntu 14.04
+# dockerize "walk-c", with .so files extracted from Ubuntu 14.04
 
 FROM  scratch
 
@@ -1077,7 +924,7 @@ $ docker images --tree
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk-tree-c  /
+    /bin/walk  /
 ```
 
 --
@@ -1088,7 +935,7 @@ f   2015-04-25 17:36        0  /.dockerinit
 d   2015-04-25 17:35     4096  /lib64
 *f   2015-02-25 16:56   149120  /lib64/ld-linux-x86-64.so.2
 d   2015-04-25 17:35     4096  /bin
-*f   2015-04-13 04:35     9086  /bin/walk-tree-c
+*f   2015-04-13 04:35     9086  /bin/walk
 d   2015-04-25 17:36     4096  /etc
 f   2015-04-25 17:36      171  /etc/resolv.conf
 f   2015-04-25 17:36      174  /etc/hosts
@@ -1099,6 +946,160 @@ d   2015-04-25 17:35     4096  /lib/x86_64-linux-gnu
 *f   2015-02-25 16:56  1840928  /lib/x86_64-linux-gnu/libc.so.6
 f   2015-04-25 17:36        0  /.dockerenv
 ```
+
+---
+
+
+class: center, middle
+
+# Docker Feature #2:
+# .red[Dependency]: all dependencies should be packed into the image.
+
+
+---
+
+template: inverse
+
+# Case 4
+## "scratch" + Link with dependent .so files extracted from CentOS 5.11
+
+---
+
+class: center, middle
+
+# Case 4
+## `scratch` + Link with dependent .so files extracted from CentOS 5.11
+
+<br/>
+
+```$ cd ~/docker-workshop/build-walk/case4```
+
+---
+
+# Collect all dependent .so files
+
+- The tarball `rootfs-from-centos511.tar.gz` contains `walk-c`, together with required .so files extracted from CentOS 5.11:
+
+    ```bash
+    $ tar ztvf rootfs-from-centos511.tar.gz
+    ```
+    ```
+    -rwxr-xr-x     9086  2015-04-13  bin/walk
+    -rwxr-xr-x  1720712  2014-09-16  lib64/libc.so.6
+    -rwxr-xr-x   142488  2014-09-16  lib64/ld-linux-x86-64.so.2
+    ```
+
+--
+
+<br/>
+- Let's add them to the target image!
+
+.percent30[.right[![bg](img/cook-vector.jpg)]]
+
+---
+
+# Dockerfile for "walk-c"
+
+```dockerfile
+# dockerize "walk-c", with .so files extracted from CentOS 5.11
+
+FROM  scratch
+
+ADD  rootfs-from-centos511.tar.gz  .
+```
+
+---
+
+# 逐行拆解 Dockerfile 指令
+
+## #1: Base image
+
+```dockerfile
+FROM  scratch
+```
+
+.footnote[.red[*] This line can be omitted since Docker 1.5.0; see [official document](https://registry.hub.docker.com/_/scratch/) for more info.]
+
+---
+
+# 逐行拆解 Dockerfile 指令
+
+## #2: Add something new to the base image
+
+```dockerfile
+ADD  rootfs-from-centos511.tar.gz  .
+```
+
+.percent30[.right[![bg](img/cook-vector.jpg)]]
+
+
+.footnote[.red[*] Effect: unpack to the specified directory in the target image. See [official document](https://docs.docker.com/reference/builder/#add) for more info.]
+
+---
+
+# Build it!
+
+```bash
+$ docker build .
+```
+
+.percent50[.right[![bg](img/app-building-dockerway.svg)]]
+
+
+.footnote[.red[*] See the _very very very ugly_ ID?]
+
+
+---
+
+# Look at what we've built...
+
+
+```bash
+$ docker images
+```
+
+.footnote[.red[*] See the _very very very ugly_ ID?]
+
+--
+
+Or,
+
+```bash
+$ docker images --tree
+```
+
+---
+
+# Run it!
+
+```bash
+$ docker run  `THE_UGLY_IMAGE_ID`  \
+    /bin/walk  /
+```
+
+--
+
+```
+d   2015-04-25 17:23     4096  /
+f   2015-04-25 17:23        0  /.dockerinit
+d   2015-04-25 17:22     4096  /lib64
+*f   2014-09-16 06:35  1720712  /lib64/libc.so.6
+*f   2014-09-16 06:35   142488  /lib64/ld-linux-x86-64.so.2
+d   2015-04-25 17:22     4096  /bin
+*f   2015-04-13 04:55     9086  /bin/walk
+d   2015-04-25 17:23     4096  /etc
+f   2015-04-25 17:23      171  /etc/resolv.conf
+f   2015-04-25 17:23      174  /etc/hosts
+f   2015-04-25 17:23        0  /etc/mtab
+f   2015-04-25 17:23       13  /etc/hostname
+f   2015-04-25 17:23        0  /.dockerenv
+```
+
+---
+
+template: inverse
+
+# Dependency hell?
 
 ---
 
