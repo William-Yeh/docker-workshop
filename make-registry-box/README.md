@@ -12,7 +12,7 @@ Official box name in Atlas (was: Vagrant Cloud): [`williamyeh/docker-workshop-re
 
 To build a Vagrant box, which:
 
-  - derives from [`williamyeh/insecure-registry`](https://vagrantcloud.com/williamyeh/insecure-registry) box.
+  - derives from [`williamyeh/insecure-registry`](https://vagrantcloud.com/williamyeh/insecure-registry) box (refer to [this](https://github.com/William-Yeh/docker-enabled-vagrant/tree/master/insecure-registry) for implementation details).
   - pre-loads Docker images listed in the `IMAGE-LIST` file from Docker Hub.
 
 

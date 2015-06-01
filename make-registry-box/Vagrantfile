@@ -4,11 +4,8 @@ Vagrant.require_version ">= 1.7.2"
 $script = <<PULL_SCRIPT
 
 # download "docker-mirror" tool
-curl     -o /usr/local/bin/docker-mirror  https://raw.githubusercontent.com/William-Yeh/docker-host-tools/master/docker-mirror
+curl   -o   /usr/local/bin/docker-mirror  https://raw.githubusercontent.com/William-Yeh/docker-host-tools/master/docker-mirror
 chmod  a+x  /usr/local/bin/*
-
-# start the "docker-registry" app
-service docker-registry start
 
 # pull images from Docker Hub
 PRIVATE_DOCKER_REGISTRY=registry.com  docker-mirror  /vagrant/IMAGE-LIST
@@ -20,8 +17,8 @@ PULL_SCRIPT
 
 Vagrant.configure(2) do |config|
 
-    config.vm.box = "williamyeh/ubuntu-trusty64-docker"
-    config.vm.box_version = ">= 1.5.0"
+    config.vm.box = "williamyeh/insecure-registry"
+    config.vm.box_version = ">= 1.6.2"
 
     # avoid possible request "vagrant@127.0.0.1's password:" when "up" and "ssh"
     config.ssh.password = "vagrant"
@@ -31,10 +28,7 @@ Vagrant.configure(2) do |config|
         hosts.add_host '127.0.0.1', ['registry.com']
     end
 
-    config.vm.provision "shell", path: "install-registry-app.sh"
-
     config.vm.provision "shell", inline: $script
-
     config.vm.provision "shell", path: "cleanup.sh"
 
 end
