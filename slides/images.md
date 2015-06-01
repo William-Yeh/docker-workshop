@@ -257,6 +257,7 @@ class: center, middle
 -
 .percent100[![Docker registry](img/lab-topology-other-registry.svg)
 ]
+
 ---
 
 # Pull images from *another* registry
@@ -309,15 +310,20 @@ Which case?
 
 --
 
-- `dockerfile/ghost`
+- `google/cadvisor`
+
 
 --
 
-- `registry.com/dockerfile/ghost`
+- `jfrog-docker-registry.bintray.io/artifactory/artifactory-oss`
 
 --
 
-- `10.0.0.200/dockerfile/ghost`
+- `registry.com/jwilder/nginx-proxy`
+
+--
+
+- `10.0.0.200/jwilder/nginx-proxy`
 
 ---
 
