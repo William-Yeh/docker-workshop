@@ -50,9 +50,9 @@ template: inverse
 
 # Docker base images (revisited)
 
-- Minimalism: based on `scratch` or `busybox`
+<br/>
 
-  - See: [Quest for minimal Docker images 【追求極簡化 Docker image 之路】](http://bit.ly/docker-mini)
+- Minimalism: based on `scratch` or `busybox` <br/><br/>
 
 - Modest: barebone Linux distributions
   - Reuse your existing experiences: make, ant, apt-get, yum...
@@ -62,14 +62,18 @@ template: inverse
 
 ---
 
-class: middle
 
-# .center[This time, let's try this approach...]
+# This time, let's try this approach...
 
 <br/>
-- Modest: barebone Linux distributions
 
+- Minimalism: based on `scratch` or `busybox` <br/><br/>
+
+- .red[☛ ☛ ☛ **Modest: barebone Linux distributions** ☚ ☚ ☚]
   - Reuse your existing experiences: make, ant, apt-get, yum...
+
+- Convenience: programming languages installed
+  - Reuse your existing experiences: gem, maven, npm, pip...
 
 ---
 

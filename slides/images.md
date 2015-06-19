@@ -222,7 +222,7 @@ Registered users can create their own repos hosted on Docker Hub!
 .pull-left[
 
 ```bash
-docker pull dockerfile/ghost
+docker pull google/cadvisor
 ```
 
 ```bash

@@ -27,8 +27,6 @@ layout: false
    - `up`
    - `ssh`
 
-2. `registry`:
-   - `up`
 ]
 
 --
@@ -109,6 +107,7 @@ Use [`tree`](http://en.wikipedia.org/wiki/Tree_%28Unix%29) command:
 $ tree  /
 ```
 
+.footnote[.red[*] You may need to `apt-get install tree`, if the `tree` command has not been installed yet.]
 
 ---
 
@@ -177,14 +176,17 @@ Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
 
 ---
 
-class: middle
+# Let's start by this approach...
 
-# .center[Let's start by this approach...]
+- .red[☛ ☛ ☛ **Minimalism: based on `scratch` or `busybox`** ☚ ☚ ☚]
 
-<br/>
-- Minimalism: based on `scratch` or `busybox`
+  - See: [Quest for minimal Docker images 【追求極簡化 Docker image 之路】](http://bit.ly/docker-mini)
 
-  - [Quest for minimal Docker images 【追求極簡化 Docker image 之路】](http://bit.ly/docker-mini)
+- Modest: barebone Linux distributions
+  - Reuse your existing experiences: make, ant, apt-get, yum...
+
+- Convenience: programming languages installed
+  - Reuse your existing experiences: gem, maven, npm, pip...
 
 ---
 
@@ -285,16 +287,27 @@ Add something to the `scratch` **base image**.
 
 ---
 
-# Task brief
+# We're going to do...
 
-Add something to the `scratch` **base image**:
+Add the `walk-go` file to the `scratch` (空, 無) base image.
 
-### - Base: `scratch` (空, 無)
+### Target image layout
 
-### - Add: `walk-go`
-
-.percent40[.right[![bg](img/cook-vector.jpg)]]
-
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  executable file: walk-go  (< 3 MB) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image:  scratch      (0 byte) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
 
 ---
 
@@ -349,9 +362,11 @@ $ docker images --tree
 COPY  walk-go  /bin/walk
 ```
 
-.percent40[.right[![bg](img/cook-vector.jpg)]]
+<br/><br/>
 
-.footnote[.red[*] Effect: copy to `/bin/walk` in the target image.]
+### Effect:
+1. copy to `/bin/` directory within the target image,
+2. and rename it to `walk`.
 
 ---
 
@@ -508,6 +523,38 @@ $ docker run  `IMAGE_ID`  \
 
 # Isolation: file system resource
 
+```
+|                                                                       |
+|      +-------------------------------------+                          |
+|      |                                     |                          |
+|      | resources injected by Docker engine |                          |
+|      | (/etc/hosts, /etc/resolv.conf, etc) |                          |
+|      |                                     |                          |
+|      +-------------------------------------+                          |
+|      |                                     |                          |
+|      |                                     |                          |
+|      |  executable file: walk-go ( < 3 MB) |                          |
+|      |                                     |                          |
+|      |                                     |                          |
+|      +-------------------------------------+                          |
+|      |                                     |                          |
+|      |                                     |                          |
+|      |  base image:  scratch      (0 byte) |                          |
+|      |                                     |                          |
+|      |                                     |                          |
+|      +-------------------------------------+                          |
+|                 Docker container                                      |
+|                                                  host machine         |
+|                                                  root file system     |
+|                                                                       |
++-----------------------------------------------------------------------+
+```
+
+
+---
+
+# Isolation: file system resource
+
 .pull-left[
 - Without Docker
 
@@ -640,15 +687,27 @@ $ ./walk-c  /
 
 ---
 
-# Task brief
+# We're going to do...
 
-Add something to the `scratch` **base image**:
+Add the `walk-c` file to the `scratch` (空, 無) base image.
 
-### - Base: `scratch` (空, 無)
+### Target image layout
 
-### - Add: `walk-c`
-
-.percent40[.right[![bg](img/cook-vector.jpg)]]
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  executable file: walk-c   (< 1 MB) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image:  scratch      (0 byte) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
 
 
 ---
@@ -693,7 +752,6 @@ FROM  scratch
 COPY  walk-c  /bin/walk
 ```
 
-.percent40[.right[![bg](img/cook-vector.jpg)]]
 
 .footnote[.red[*] Effect: copy to `/bin/walk` in the target image.]
 
@@ -826,12 +884,40 @@ class: center, middle
 
 ---
 
+# We're going to do...
+
+Add the `walk-c` file, together with dependent .so files, to the `scratch` (空, 無) base image.
+
+### Target image layout
+
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  executable file: walk-c   (< 1 MB) |
+             |                                     |
+             |  dependent .so files from Trusty:   |
+             |      libc.so.6                      |
+             |      ld-linux-x86-64.so.2           |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image:  scratch      (0 byte) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
+
+---
+
 # Collect all dependent .so files
 
 - The tarball `rootfs-from-ubuntu1404.tar.gz` contains `walk-c`, together with required .so files extracted from Ubuntu 14.04:
 
     ```bash
-    $ tar ztvf rootfs-from-ubuntu1404.tar.gz
+    $ tar  ztvf  rootfs-from-ubuntu1404.tar.gz
     ```
     ```
     -rwxr-xr-x     9086  2015-04-13  bin/walk
@@ -880,7 +966,6 @@ FROM  scratch
 ADD  rootfs-from-ubuntu1404.tar.gz  .
 ```
 
-.percent30[.right[![bg](img/cook-vector.jpg)]]
 
 
 .footnote[.red[*] Effect: unpack to the specified directory in the target image. See [official document](https://docs.docker.com/reference/builder/#add) for more info.]
@@ -973,6 +1058,36 @@ class: center, middle
 <br/>
 
 ```$ cd ~/docker-workshop/build-walk/case4```
+
+---
+
+
+# We're going to do...
+
+Add the `walk-c` file, together with dependent .so files, to the `scratch` (空, 無) base image.
+
+### Target image layout
+
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  executable file: walk-c   (< 1 MB) |
+             |                                     |
+             |  dependent .so files from CentOS:   |
+             |      libc.so.6                      |
+             |      ld-linux-x86-64.so.2           |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image:  scratch      (0 byte) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
+
 
 ---
 
@@ -1101,6 +1216,34 @@ template: inverse
 
 # Dependency hell?
 
+
+---
+
+# Containers in Case #3 and #4
+
+Co-exist? Conflict?
+
+```
++------------------------------------+ +------------------------------------+
+|                                    | |                                    |
+|                                    | |                                    |
+| executable file: walk-c   (< 1 MB) | | executable file: walk-c   (< 1 MB) |
+|                                    | |                                    |
+| dependent .so files from Trusty:   | | dependent .so files from CentOS:   |
+|     libc.so.6                      | |     libc.so.6                      |
+|     ld-linux-x86-64.so.2           | |     ld-linux-x86-64.so.2           |
+|                                    | |                                    |
+|                                    | |                                    |
++------------------------------------+ +------------------------------------+
+|                                    | |                                    |
+|                                    | |                                    |
+| base image:  scratch      (0 byte) | | base image:  scratch      (0 byte) |
+|                                    | |                                    |
+|                                    | |                                    |
++------------------------------------+ +------------------------------------+
+```
+
+
 ---
 
 # Question: Dependency hell?
@@ -1109,19 +1252,20 @@ Co-exist? Conflict?
 
 - `libc.so.6`:
 
-  - Case 3 (from CentOS 5.11) <br/>
+  - Case 3 (from Ubuntu 14.04) <br/>
+    `1840928  2015-02-25  lib/x86_64-linux-gnu/libc.so.6`
+
+  - Case 4 (from CentOS 5.11) <br/>
     `1720712  2014-09-16  lib64/libc.so.6`
 
-  - Case 4 (from Ubuntu 14.04) <br/>
-    `1840928  2015-02-25  lib/x86_64-linux-gnu/libc.so.6`
 
 - `ld-linux-x86-64.so.2`:
 
-  - Case 3 (from CentOS 5.11) <br/>
-    ` 142488  2014-09-16  lib64/ld-linux-x86-64.so.2`
-
-  - Case 4 (from Ubuntu 14.04) <br/>
+  - Case 3 (from Ubuntu 14.04) <br/>
     ` 149120  2015-02-25  lib64/ld-linux-x86-64.so.2`
+
+  - Case 4 (from CentOS 5.11) <br/>
+    ` 142488  2014-09-16  lib64/ld-linux-x86-64.so.2`
 
 ---
 
