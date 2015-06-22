@@ -328,37 +328,6 @@ $ docker ps
 
 ---
 
-# Image IDs and Container IDs
-
-
-<br/>
-
->| Static Structure | ↔ | Dynamic Behavior |
-|:----------------:|---|:----------------:|
-|  image 映像檔     | ↔ |  container 容器   |
-
-
---
-
-.pull-left[
-- images:
-
-   ```bash
-   $ docker images
-   ```
-]
-
-.pull-right[
-- containers:
-
-   ```bash
-   $ docker ps
-   ```
-]
-
-
----
-
 # Stop & Remove
 
 >| Static Structure | ↔ | Dynamic Behavior |
@@ -393,72 +362,6 @@ $ docker ps
    ```
 ]
 
----
-
-template: inverse
-
-#Naming
-
-.center[![bg](img/TwoHardThings.png)]
-
-.right[Source: http://martinfowler.com/bliki/TwoHardThings.html]
-
----
-
-# Image naming
-
-- Method 1: name it *after* building:
-
-  ```bash
-  $ docker tag  `THE_UGLY_IMAGE_ID`  `IMAGE_NAME`
-  ```
-
---
-  ... also tag it:
-
-  ```bash
-  $ docker tag  `THE_UGLY_IMAGE_ID`  `IMAGE_NAME`:`TAG`
-  ```
-
-
---
-
-- Method 2: name it *while* building:
-
-  ```bash
-  $ docker build  -t `IMAGE_NAME`  .
-  ```
-
---
-  ... also tag it:
-
-  ```bash
-  $ docker build  -t `IMAGE_NAME`:`TAG`  .
-  ```
-
----
-
-# Container naming
-
-The only method: name it *while* invoking:
-
-- Foreground mode:
-
-  ```bash
-  $ docker run  \
-        --name `CONTAINER_NAME` \
-        `IMAGE_ID_or_NAME`
-  ```
-
---
-
-- Daemon mode:
-
-  ```bash
-  $ docker run -d  \
-        --name `CONTAINER_NAME` \
-        `IMAGE_ID_or_NAME`
-  ```
 
 ---
 

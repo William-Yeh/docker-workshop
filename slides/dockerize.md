@@ -52,16 +52,6 @@ Principle #1
 ### port mapping
 ### container linking
 
----
-
-class: center, middle
-
-## ☛ VII. Port binding :
-Export services via port binding
-
-
-.footnote[.red[*] See "[12 Factor App](http://12factor.net/)"
-]
 
 ---
 
@@ -81,17 +71,6 @@ Principle #2
 
 ---
 
-class: center, middle
-
-## ☛ IV. Backing Services:
-Treat backing services as attached resources
-
-.footnote[.red[*] See "[12 Factor App](http://12factor.net/)"
-]
-
-
----
-
 # Example: Nginx
 
 Official document says: .red[*]
@@ -102,7 +81,7 @@ Official document says: .red[*]
 > `docker run --name some-nginx  \` <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`   -v /some/content:/usr/share/nginx/html:ro  \` <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`   -d nginx`
-> ## ☚
+
 
 .footnote[.red[*] Official [`nginx`](https://registry.hub.docker.com/_/nginx/) at Docker Hub.]
 

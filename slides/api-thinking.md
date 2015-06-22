@@ -35,6 +35,13 @@ layout: false
 - `build-redis-linking`
 ]
 
+
+---
+
+template: inverse
+
+# Two dimensions of thinking...
+
 ---
 
 class: center, middle

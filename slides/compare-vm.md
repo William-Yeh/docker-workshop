@@ -144,7 +144,7 @@ class: center, middle
 
 ```bash
 $ docker run  `IMAGE_ID`  \
-    /bin/walk-tree-go  /
+    /bin/walk  /
 ```
 
 ☛ **Isolation**: Only sees the file system **within** the target image
@@ -155,7 +155,7 @@ $ docker run  `IMAGE_ID`  \
 2015-04-25        0  /.dockerenv
 2015-04-25        0  /.dockerinit
 2015-04-25     4096  /bin
-2015-04-25  2667144  /bin/walk-tree-go
+2015-04-25  2667144  /bin/walk
 2015-04-25     4096  /etc
 2015-04-25       13  /etc/hostname
 2015-04-25      174  /etc/hosts
