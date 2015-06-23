@@ -25,11 +25,12 @@ Docker 建置實戰講堂
 - 實習環境介紹
 - 常用的工具指令：docker cli、docker compose
 - 常用的 Dockerfile 指令
-- 用 Docker 建置典型伺服器軟體（以 Redis、Nginx 為例）
+- 從極簡化 Docker image 領會 Docker 三大特色
+- Docker 化典型伺服器軟體（以 Redis、Nginx 為例）
 - 從程式源碼建置 Docker 化軟體（以 PHP、Node.js 為例）
 - GitHub 與 Docker Hub 連動
 - Docker 網路模型
-- Docker 化軟體要素：port、volume、daemon off
+- Docker 化軟體要素（暨常見地雷）：port、volume、daemon off
 - 綜合運用
 
 
@@ -46,7 +47,7 @@ Docker 建置實戰講堂
 
 ## 課程時數
 
-6 小時。
+6 小時，涵蓋 90% 教材內容。
 
 
 ## 適合對象
@@ -70,5 +71,3 @@ Docker 建置實戰講堂
    - 曾在 Linux 上安裝過任何一種開放源碼伺服器軟體（譬如：Apache HTTP Server、MongoDB、MySQL、Nginx、WordPress...）。
 
    - 在任何一種雲端平台（Amazon EC2、DigitalOcean、Google Compute Engine、Linode、Microsoft Azure...），完成上述任務。
-
-

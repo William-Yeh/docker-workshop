@@ -35,6 +35,7 @@ FYI, the `gh-pages` branch stores the slide files, mostly in markdown format.
 **v5.0** / 第五梯次 (2015-06-27)
 
   - 增加更多實例，示範 container linking 的實務手法。
+  - 提前以範例介紹初學者常見的兩大地雷：volume 及 network。
 
 
 **v4.0** / 第四梯次 (2015-05-09)
