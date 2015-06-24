@@ -46,19 +46,6 @@ template: inverse
 
 ## Which base image to build from?
 
----
-
-# Docker base images (revisited)
-
-<br/>
-
-- Minimalism: based on `scratch` or `busybox` <br/><br/>
-
-- Modest: barebone Linux distributions
-  - Reuse your existing experiences: make, ant, apt-get, yum...
-
-- Convenience: programming languages installed
-  - Reuse your existing experiences: gem, maven, npm, pip...
 
 ---
 
@@ -70,10 +57,40 @@ template: inverse
 - Minimalism: based on `scratch` or `busybox` <br/><br/>
 
 - .red[☛ ☛ ☛ **Modest: barebone Linux distributions** ☚ ☚ ☚]
-  - Reuse your existing experiences: make, ant, apt-get, yum...
+  - .red[Reuse your existing Linux experiences: make, ant, apt-get, yum...]
 
 - Convenience: programming languages installed
   - Reuse your existing experiences: gem, maven, npm, pip...
+
+---
+
+# We're going to do...
+
+Add the Redis files to the `ubuntu:14.04` base image.
+
+### Target image layout
+
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  Redis files:              (3.1 MB) |
+             |    redis-server                     |
+             |    redis-cli                        |
+             |    redis-benchmark                  |
+             |    ...                              |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image: ubuntu:14.04  (188 MB) |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
+
+
 
 ---
 

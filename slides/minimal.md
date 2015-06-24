@@ -167,7 +167,7 @@ Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
 --
 
 - Modest: barebone Linux distributions
-  - Reuse your existing experiences: make, ant, apt-get, yum...
+  - Reuse your existing Linux experiences: make, ant, apt-get, yum...
 
 --
 

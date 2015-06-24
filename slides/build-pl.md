@@ -39,6 +39,63 @@ layout: false
 
 ---
 
+template: inverse
+
+# Layers
+
+## Which base image to build from?
+
+
+---
+
+
+# This time, let's try this approach...
+
+<br/>
+
+- Minimalism: based on `scratch` or `busybox` <br/><br/>
+
+- Modest: barebone Linux distributions
+  - Reuse your existing Linux experiences: make, ant, apt-get, yum...
+
+- .red[☛ ☛ **Convenience: programming languages installed** ☚]
+  - .red[Reuse your existing experiences: gem, maven, npm, pip...]
+
+
+---
+
+# We're going to do...
+
+Add the chat server files to the `node:0.10.36-slim` base image.
+
+### Target image layout
+
+```
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  chat server files:                 |
+             |    Node.js source files             |
+             |    package.json                     |
+             |    npm modules (to be downloaded)   |
+             |    asset files                      |
+             |    ...                              |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+             |                                     |
+             |                                     |
+             |  base image: node:0.10.36-slim      |
+             |                                     |
+             |                                     |
+             +-------------------------------------+
+```
+
+
+
+
+---
+
 class: code120
 
 # 這次沒有 DEB 或 RPM 了...
