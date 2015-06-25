@@ -188,10 +188,11 @@ code {
 /* Two-column layout */
 
 .left-column {
-    color: #777;
+    color: #AAA;
     width: 20%;
     height: 92%;
     float: left;
+    font-size: 0.9em;  /* !!! */
 }
 
 .left-column h2:last-of-type, .left-column h3:last-child {
@@ -202,7 +203,6 @@ code {
     width: 75%;
     float: right;
     padding-top: 1em;
-    font-size: 1.5em;  /* !!! */
 }
 
 .remark-slide-number {
