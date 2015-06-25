@@ -36,6 +36,15 @@ layout: false
 - `build-walk`
 ]
 
+
+---
+
+
+class: center, middle
+
+.percent110[.center[![bg](img/docker-features.png)]]
+
+
 ---
 
 template: inverse
@@ -1327,6 +1336,15 @@ class: middle
         |              |           +-------------------+
         +--------------+
 ```
+
+---
+
+
+class: center, middle
+
+.percent110[.center[![bg](img/docker-features.png)]]
+
+
 
 ---
 
