@@ -197,7 +197,7 @@ FROM  busybox
 Remember image hierarchy?
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---
@@ -261,7 +261,7 @@ $ docker images
 Or,
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---

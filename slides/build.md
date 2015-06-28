@@ -215,7 +215,7 @@ FROM  ubuntu:14.04
 Remember image hierarchy?
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---
@@ -289,7 +289,7 @@ $ docker images
 Or,
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---

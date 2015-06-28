@@ -227,11 +227,6 @@ $ docker images
 
 .footnote[.red[*] See the _very very very ugly_ ID?]
 
-Or,
-
-```bash
-$ docker images --tree
-```
 
 ---
 

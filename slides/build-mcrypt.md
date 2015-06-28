@@ -558,14 +558,6 @@ $ docker build  \
 $ docker images
 ```
 
-.footnote[.red[*] See the _very very very ugly_ ID?]
-
-Or,
-
-```bash
-$ docker images --tree
-```
-
 ---
 
 # 收割時刻：Run it!

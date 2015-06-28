@@ -192,23 +192,32 @@ $ docker images --no-trunc=true
 
 Analogy - single inheritance
 
-```bash
-$ docker images --tree
-```
-
 .footnote[.red[*] See official doc about [Layers](https://docs.docker.com/terms/layer/). ]
 
---
-<br/>
 
-- ### Q: What is the `511136ea3c5a` image?
+- Before Docker 1.7.0:
+  ```bash
+  $ docker images --tree
+  ```
+
+--
+- After Docker 1.7.0, use [dockviz](https://github.com/justone/dockviz):
+  ```bash
+  $ dockviz images --tree
+  ```
+
+---
+
+# Layers: Forest of base images
+
+- ## Q: What is the `511136ea3c5a` image?
 
   ```bash
   $ docker images -a
   ```
 --
 
-- ### A: `scratch` image; see [official document](https://registry.hub.docker.com/_/scratch/) for more info.
+- ## A: `scratch` image; see [official document](https://registry.hub.docker.com/_/scratch/) for more info.
 
 
 ---

@@ -188,7 +188,7 @@ FROM  node:0.10.36-slim
 Remember image hierarchy?
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---
@@ -305,7 +305,7 @@ $ docker images
 Or,
 
 ```bash
-$ docker images --tree
+$ dockviz images --tree
 ```
 
 ---
