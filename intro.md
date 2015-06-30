@@ -57,7 +57,7 @@ Docker 建置實戰講堂
 
 ## 報名須知
 
-1. 本課程含大量實機操作內容，請自備筆記型電腦（Windows、Mac、Linux 皆可）。
+1. 本課程含大量實機操作內容，請自備 **64 位元**的筆記型電腦（Windows、Mac、Linux 皆可，但需要是 **64 位元**的版本）。
 
 2. 建議上課前學習 Git 版本控制指令：
 
@@ -66,7 +66,7 @@ Docker 建置實戰講堂
 
 3. 具備以下能力能讓你學得更快：
 
-   - 用過任何一種程式語言或框架（譬如：Bash、C、Java、Node.js、PHP、Python、Ruby...），撰寫可在 Linux 上執行的程式，並部署之。
+   - 用過任何一種程式語言或框架（譬如：Bash、C、Go、Java、Node.js、PHP、Python、Ruby...），撰寫可在 Linux 上執行的程式，並部署之。
 
    - 曾在 Linux 上安裝過任何一種開放源碼伺服器軟體（譬如：Apache HTTP Server、MongoDB、MySQL、Nginx、WordPress...）。
 

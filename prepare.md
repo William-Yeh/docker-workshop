@@ -18,7 +18,7 @@
 
 ## 1. 安裝軟體
 
-本課程的「實機操作」部分，需要學員自備筆記型電腦。而這些筆電的作業系統，可能是 Windows，也可能是 Mac OS X，或各種 Linux distributions。
+本課程的「實機操作」部分，需要學員自備 **64 位元**的筆記型電腦。而這些筆電的作業系統，可能是 Windows，也可能是 Mac OS X，或各種 Linux distributions。
 
 為了讓課程有個一致的實作環境，減少干擾施教者與學習者的環境變因，我們統一使用 [Vagrant](http://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/) 虛擬機器組合，作為課堂實作的統一環境。對這種軟體組合的技術細節感興趣的，請見本文附錄：【關於 Vagrant】。這裡先只講軟體安裝步驟。
 
@@ -111,9 +111,9 @@ B. 按右上角的 ![Watch Button](img/icon-github-watch.png) 按鈕。
 
 有幾份資料，在課堂上會反覆用到。因著作權所限，我們無法主動提供紙本。如果您習慣在紙本上註記，請於參加課程之前自行列印，攜至課堂上。
 
-  - [Docker 命令查詢](http://philipzheng.gitbooks.io/docker_practice/content/appendix_command/README.html)
-
   - [一張圖總結 Docker 的命令](http://philipzheng.gitbooks.io/docker_practice/content/_images/cmd_logic.png) ← 彩色
+
+  - [Docker 命令查詢](http://philipzheng.gitbooks.io/docker_practice/content/appendix_command/README.html)
 
   - [Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)
 
