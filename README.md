@@ -15,6 +15,8 @@ Read the document ☛ [Docker 建置實戰講堂・課程簡介](intro.md).
 
 If your organization needs customized training programs and tailored courses, please contact me at william.pjyeh@gmail.com
 
+
+
 ## Preparation
 
 Read the documents:
@@ -31,8 +33,29 @@ View slides online: http://bit.ly/docker-slides
 FYI, the `gh-pages` branch stores the slide files, mostly in markdown format.
 
 
-## History
 
+## Course Feedback
+
+- 「從無到有，對於 Docker 有了基本的認識，也大概知道學習的方向。」
+
+- 「了解現行 Docker 發展技術及實際操作。」
+
+- 「建立有系統的 Docker 基礎背景。」
+
+- 「對 Docker 架構有更進一步瞭解。」
+
+- 「快速進入 Docker 世界，避免會碰到的地雷。」
+
+- 「學會 GitHub 與 Docker Hub 連動。」
+
+- 「了解 Docker 是否適用於 production server 上。」
+
+- 「希望有進階的實務範例銜接課程。」
+
+- 「快開進階課吧！」
+
+
+## History
 
 **v5.0** / 第五梯次 (2015-06-27)
 
