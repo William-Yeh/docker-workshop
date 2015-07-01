@@ -13,6 +13,8 @@ After given 2 Docker speeches at the end of 2014 (see [A Gentle Introduction to 
 
 Read the document ☛ [Docker 建置實戰講堂・課程簡介](intro.md).
 
+If your organization needs customized training programs and tailored courses, please contact me at william.pjyeh@gmail.com
+
 ## Preparation
 
 Read the documents:
