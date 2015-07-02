@@ -82,13 +82,13 @@ See https://docs.docker.com/
 
 .right-column[
 
-1. Pick any modern Linux distribution, and install Docker in it (see https://docs.docker.com/)
+1. Pick any modern Linux distribution, and install Docker in it (see https://docs.docker.com/ as mentioned before)
 
-2. Pick any pre-installed cloud image
-   - [CoreOS](https://coreos.com/)<br/><br/>
+2. Pick any cloud image with Docker engine pre-installed
    - AWS: [Amazon ECS-Optimized Amazon Linux AMI](https://aws.amazon.com/marketplace/pp/B00U6QTYI2)
    - GCP: [Container-optimized image](https://cloud.google.com/compute/docs/containers/container_vms)
    - Azure: [Docker VM Extension](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-vm-extension/)
+   - [CoreOS](https://coreos.com/)
    - ...
 
 ]
