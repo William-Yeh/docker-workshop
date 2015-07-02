@@ -381,11 +381,14 @@ class: center, middle
 
 Analysis:
 
+  - [Containerizing Opinionated Applications](http://blog.codeship.com/containerizing-opinionated-applications/)
+
   - [Docker and the PID 1 zombie reaping problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
+
 
 Possible solutions:
 
-  - [`ENTRYPOINT`](http://docs.docker.com/reference/builder/#entrypoint)
+  - See [`ENTRYPOINT`](http://docs.docker.com/reference/builder/#entrypoint) documentation
 
   - [How to propagate SIGTERM to a child process in a Bash script](http://veithen.github.io/2014/11/16/sigterm-propagation.html)
 
