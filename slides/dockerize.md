@@ -233,8 +233,9 @@ class: center, middle
 
 ---
 
-- child exit first, parent exit last
+- parent sleeps 5s, child exits first, parent exits last
   ```bash
+  $ #       P  C
   $ ./fork  5  0
   ```
   ```
@@ -248,8 +249,9 @@ class: center, middle
   ```
 
 --
-- parent exit first, child exit last (orphan)
+- parent exits first, child sleeps 5s and exits last (orphan)
   ```bash
+  $ #       P  C
   $ ./fork  0  5
   ```
   ```
@@ -322,8 +324,31 @@ class: center, middle
 
 --
 
-### ☛ built-in optional "daemon off" mode
-### ☛ write additional wrapper, if necessary
+## ☛ Use built-in optional "daemon off" mode
+## ☛ Or, write additional wrapper, if necessary
+
+
+---
+
+# Use built-in "daemon off" mode
+
+- Nginx's [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/master/Dockerfile)
+
+  ```
+  CMD ["nginx", "-g", "daemon off;"]
+  ```
+
+- Apache's [wrapper script](https://github.com/fedora-cloud/Fedora-Dockerfiles/blob/master/apache/run-apache.sh)
+
+  ```
+  exec /usr/sbin/httpd -D FOREGROUND
+  ```
+
+- Ganglia's [configuration file](https://github.com/William-Yeh/Docker-Ganglia-Monitor-Mini/blob/master/gmond.conf)
+
+  ```
+  daemonize = no
+  ```
 
 ---
 
