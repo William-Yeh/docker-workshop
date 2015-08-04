@@ -2,4 +2,4 @@
 
 FROM scratch
 
-COPY  walk-go  /bin/walk
+COPY  walk-static  /bin/walk

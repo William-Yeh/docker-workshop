@@ -16,7 +16,7 @@
 
 #define BUF_SIZE     512
 #define TIME_FORMAT  "%F %R"
-
+#define DEFAULT_DIRECTORY "/"
 
 const char* EXCLUDE_PATH[] = {
     "/dev",
@@ -71,12 +71,12 @@ main(int argc, char* argv[])
 {
     int flags = 0;
 
-   if (argc > 2 && strchr(argv[2], 'd') != NULL)
+    if (argc > 2 && strchr(argv[2], 'd') != NULL)
         flags |= FTW_DEPTH;
     if (argc > 2 && strchr(argv[2], 'p') != NULL)
         flags |= FTW_PHYS;
 
-   if (nftw((argc < 2) ? "." : argv[1], display_info, 20, flags)
+    if (nftw((argc < 2) ? DEFAULT_DIRECTORY : argv[1], display_info, 20, flags)
             == -1) {
         perror("nftw");
         exit(EXIT_FAILURE);

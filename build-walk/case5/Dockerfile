@@ -2,4 +2,4 @@
 
 FROM ubuntu:14.04
 
-COPY  walk-c  /bin/walk
+COPY  walk-dynamic  /bin/walk

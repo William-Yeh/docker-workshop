@@ -5,4 +5,4 @@
 
 FROM scratch
 
-COPY  walk-c  /bin/walk
+COPY  walk-dynamic  /bin/walk

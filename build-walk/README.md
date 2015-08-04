@@ -17,21 +17,21 @@ This directory demonstrates several Docker topics:
 The program “**walk**” tries to traverse directory structures starting from specified path (`.` by default). For brevity, it excludes `/dev`, `/proc`, and `/sys` directories from the output.
 
 
-Two versions of the same functionality are provided:
+Two compiled versions of the same functionality written in C are provided:
 
-1. Go version `walk-go`: a fully statically-linked ELF executable (i.e., without runtime dependencies on any `.so` files).
+1. Static version `walk-static`: a fully statically-linked ELF executable (i.e., without runtime dependencies on any `.so` files).
 
 
-2. C version `walk-c`: an ordinary ELF executabie with runtime dependencies on some system-wide `.so` files:
+2. Dynamic version `walk-dynamic`: an ordinary ELF executabie with runtime dependencies on some system-wide `.so` files:
 
    ```bash
-   $ ldd walk-c
+   $ ldd walk-dynamic
            linux-vdso.so.1 =>  (0x00007fff899f4000)
            libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f0e2a191000)
            /lib64/ld-linux-x86-64.so.2 (0x00007f0e2a55f000)
    ```
 
-Refer to the `src` directory if you're courious about their source code.
+Refer to the `src` directory if you're courious about their C source code.
 
 
 ![bg](walk-cases.png)
@@ -39,7 +39,7 @@ Refer to the `src` directory if you're courious about their source code.
 
 ## Case 1: Fully statically-linked ELF file
 
-The program `walk-go` is a fully statically-linked ELF executable.
+The program `walk-static` is a fully statically-linked ELF executable.
 
 ★★ To build it into a minimal Docker image with `Dockerfile`:
 
@@ -57,7 +57,7 @@ $ docker run  IMAGE-ID  walk  /
 
 ## Case 2: Forget to link an ELF file with its dependent .so files
 
-The program `walk-c` is a dynamically-linked ELF executable with runtime dependencies on some system-wide `.so` files.
+The program `walk-dynamic` is a dynamically-linked ELF executable with runtime dependencies on some system-wide `.so` files.
 
 ★★ To build it into a minimal Docker image with `Dockerfile`:
 
@@ -81,7 +81,7 @@ Extract required `.so` files from Ubuntu 14.04:
    1840928  Feb 25 2015  libc.so.6
    ```
 
-Then, pack them (together with `walk-c`) into the tarball `rootfs-from-ubuntu1404.tar.gz`.
+Then, pack them (together with `walk-dynamic`) into the tarball `rootfs-from-ubuntu1404.tar.gz`.
 
 
 ★★ To build it into a minimal Docker image with `Dockerfile`:
@@ -106,7 +106,7 @@ Extract required `.so` files from CentOS 5.11:
    1720712  Sep 16 2014  libc.so.6
    ```
 
-Then, pack them (together with `walk-c`) into the tarball `rootfs-from-centos511.tar.gz`.
+Then, pack them (together with `walk-dynamic`) into the tarball `rootfs-from-centos511.tar.gz`.
 
 
 ★★ To build it into a minimal Docker image with `Dockerfile`:
