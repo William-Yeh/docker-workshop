@@ -55,17 +55,15 @@ Similar to standard Linux `tree` command
 
 ---
 
-# Two versions
+# Two versions compiled from the same C source
 
 ```bash
 $ cd ~/docker-workshop/build-walk
 ```
 
-.footnote[.red[*] Compiled from the same C source.]
-
 --
 
-1. Static version
+1. Static version (compiled with `gcc --static`)
 
    ```bash
    $ file  walk-static
@@ -76,12 +74,14 @@ $ cd ~/docker-workshop/build-walk
    ```
 
 --
-2. Dynamic version
+2. Dynamic version (compiled with `gcc`)
 
    ```bash
    $ file  walk-dynamic
-   walk-static: ELF 64-bit LSB  executable, x86-64,
-   version 1 (SYSV), statically linked, not stripped
+   walk-dynamic: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
+   dynamically linked (uses shared libs), for GNU/Linux 2.6.24,
+   BuildID[sha1]=bba8e784a630f4260a31a39fa0826b4a00147fea,
+   not stripped
 
    $ ./walk-dynamic
    ```
@@ -133,7 +133,7 @@ Img src: http://doc.sumy.ua/prog/java/exp/ch10_01.htm
   - See: [Quest for minimal Docker images 【追求極簡化 Docker image 之路】](http://bit.ly/docker-mini)
 
 - Modest: barebone Linux distributions
-  - Reuse your existing experiences: make, ant, apt-get, yum...
+  - Reuse your existing Linux experiences: make, ant, apt-get, yum...
 
 - Convenience: programming languages installed
   - Reuse your existing experiences: gem, maven, npm, pip...
@@ -247,7 +247,7 @@ Add the `walk-static` file onto the `scratch` (空, 無) base image.
              +-------------------------------------+
              |                                     |
              |                                     |
-             |  exe file: walk-static     (< 3 MB) |
+             |  exe file:  walk-static    (< 3 MB) |
              |                                     |
              |                                     |
              +-------------------------------------+
@@ -453,14 +453,14 @@ $ ./walk-static
 
 ```bash
 $ docker run  `IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 ```
 2015-04-25     4096  /
 2015-04-25        0  /.dockerenv
 2015-04-25        0  /.dockerinit
 2015-04-25     4096  /bin
-2015-04-25  2667144  /bin/walk
+2015-04-25   895098  /bin/walk
 2015-04-25     4096  /etc
 2015-04-25       13  /etc/hostname
 2015-04-25      174  /etc/hosts
@@ -483,7 +483,7 @@ $ docker run  `IMAGE_ID`  \
 |      +-------------------------------------+                          |
 |      |                                     |                          |
 |      |                                     |                          |
-|      |  executable file: walk-go ( < 3 MB) |                          |
+|      |  exe file:  walk-static   ( < 3 MB) |                          |
 |      |                                     |                          |
 |      |                                     |                          |
 |      +-------------------------------------+                          |
@@ -509,7 +509,7 @@ $ docker run  `IMAGE_ID`  \
 - Without Docker
 
 ```bash
-$ sudo  ./walk-go  /
+$ ./walk-static
 ```
 
 ☛ Sees the whole file system of the enclosing OS
@@ -529,7 +529,7 @@ $ sudo  ./walk-go  /
 2013-10-21        6  /bin/bzfgrep
 2013-10-21     3642  /bin/bzgrep
 2013-10-21    31152  /bin/bzip2
-...
+...[略]
 ```
 ]
 
@@ -541,7 +541,7 @@ $ sudo  ./walk-go  /
 
 ```bash
 $ docker run  `IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 
 ☛ Only sees the file system **within** the target image
@@ -552,7 +552,7 @@ $ docker run  `IMAGE_ID`  \
 2015-04-25        0  /.dockerenv
 2015-04-25        0  /.dockerinit
 2015-04-25     4096  /bin
-2015-04-25  2667144  /bin/walk
+2015-04-25   895098  /bin/walk
 2015-04-25     4096  /etc
 2015-04-25       13  /etc/hostname
 2015-04-25      174  /etc/hosts
@@ -609,13 +609,9 @@ class: center, middle
 
 ---
 
-# Try again: rootfs in Ubuntu 14.04
+# Dynamic ELF
 
-This time, use `walk-c` program instead:
-
-  - similar to previous `tree` and `walk-go` commands
-
-  - written in C
+This time, use dynamic version `walk-dynamic` instead:
 
 --
 
@@ -624,7 +620,7 @@ $ cd ~/docker-workshop/build-walk/case2
 
 $ ls -al
 
-$ file  walk-c
+$ file  walk-dynamic
 walk-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
 *dynamically linked (uses shared libs), for GNU/Linux 2.6.24,
 BuildID[sha1]=bba8e784a630f4260a31a39fa0826b4a00147fea,
@@ -632,14 +628,14 @@ not stripped
 
 
 
-$ ./walk-c  /
+$ ./walk-dynamic
 ```
 
 ---
 
 # We're going to do...
 
-Add the `walk-c` file to the `scratch` (空, 無) base image.
+Add the `walk-dynamic` file to the `scratch` (空, 無) base image.
 
 ### Target image layout
 
@@ -647,7 +643,7 @@ Add the `walk-c` file to the `scratch` (空, 無) base image.
              +-------------------------------------+
              |                                     |
              |                                     |
-             |  executable file: walk-c   (< 1 MB) |
+             |  exe file:  walk-dynamic   (< 1 MB) |
              |                                     |
              |                                     |
              +-------------------------------------+
@@ -670,14 +666,14 @@ class: center, middle
 
 ---
 
-# Dockerfile for "walk-c"
+# Dockerfile for "walk-dynamic"
 
 ```dockerfile
-# dockerize "walk-c"
+# dockerize "walk-dynamic"
 
 FROM  scratch
 
-COPY  walk-c  /bin/walk
+COPY  walk-dynamic  /bin/walk
 ```
 
 ---
@@ -699,7 +695,7 @@ FROM  scratch
 ## #2: Add something new to the base image
 
 ```dockerfile
-COPY  walk-c  /bin/walk
+COPY  walk-dynamic  /bin/walk
 ```
 
 
@@ -744,7 +740,7 @@ $ dockviz images --tree
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 
 --
@@ -763,7 +759,7 @@ msg="Error response from daemon:
 ☛ [Compare] without Docker, it is used in this way:
 
 ```bash
-$ ./walk-c  /
+$ ./walk-dynamic
 ```
 
 <br/>
@@ -772,13 +768,13 @@ $ ./walk-c  /
 
 ---
 
-# Dynamically linked ELF file
+# Reason - Dynamically linked ELF file
 
 ```bash
-$ file  walk-c
+$ file  walk-dynamic
 ```
 ```
-walk-c: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
+walk-dynamic: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV),
 *dynamically linked (uses shared libs), for GNU/Linux 2.6.24,
 BuildID[sha1]=bba8e784a630f4260a31a39fa0826b4a00147fea,
 not stripped
@@ -788,7 +784,7 @@ not stripped
 <br/>
 
 ```bash
-$ ldd  walk-c
+$ ldd  walk-dynamic
 ```
 ```
     linux-vdso.so.1 =>  (0x00007fff7a7fc000)
@@ -836,7 +832,7 @@ class: center, middle
 
 # We're going to do...
 
-Add the `walk-c` file, together with dependent .so files, to the `scratch` (空, 無) base image.
+Add the `walk-dynamic` file, together with dependent .so files, to the `scratch` (空, 無) base image.
 
 ### Target image layout
 
@@ -844,7 +840,7 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
              +-------------------------------------+
              |                                     |
              |                                     |
-             |  executable file: walk-c   (< 1 MB) |
+             |  exe file:  walk-dynamic   (< 1 MB) |
              |                                     |
              |  dependent .so files from Trusty:   |
              |      libc.so.6                      |
@@ -864,7 +860,7 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
 
 # Collect all dependent .so files
 
-- The tarball `rootfs-from-ubuntu1404.tar.gz` contains `walk-c`, together with required .so files extracted from Ubuntu 14.04:
+- The tarball `rootfs-from-ubuntu1404.tar.gz` contains `walk-dynamic`, together with all required .so files extracted from Ubuntu 14.04:
 
     ```bash
     $ tar  ztvf  rootfs-from-ubuntu1404.tar.gz
@@ -884,10 +880,11 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
 
 ---
 
-# Dockerfile for "walk-c"
+# Dockerfile for "walk-dynamic"
 
 ```dockerfile
-# dockerize "walk-c", with .so files extracted from Ubuntu 14.04
+# dockerize "walk-dynamic",
+# with .so files extracted from Ubuntu 14.04
 
 FROM  scratch
 
@@ -919,6 +916,16 @@ ADD  rootfs-from-ubuntu1404.tar.gz  .
 
 
 .footnote[.red[*] Effect: unpack to the specified directory in the target image. See [official document](https://docs.docker.com/reference/builder/#add) for more info.]
+
+--
+<br/><br/>
+Otherwise, use 3 `COPY` steps:
+
+```dockerfile
+COPY  walk-dynamic          /bin/walk
+COPY  libc.so.6             /lib/x86_64-linux-gnu/
+COPY  ld-linux-x86-64.so.2  /lib64/
+```
 
 ---
 
@@ -959,7 +966,7 @@ $ dockviz images --tree
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 
 --
@@ -1014,7 +1021,7 @@ class: center, middle
 
 # We're going to do...
 
-Add the `walk-c` file, together with dependent .so files, to the `scratch` (空, 無) base image.
+Add the `walk-dynamic` file, together with dependent .so files, to the `scratch` (空, 無) base image.
 
 ### Target image layout
 
@@ -1022,7 +1029,7 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
              +-------------------------------------+
              |                                     |
              |                                     |
-             |  executable file: walk-c   (< 1 MB) |
+             |  exe file:  walk-dynamic   (< 1 MB) |
              |                                     |
              |  dependent .so files from CentOS:   |
              |      libc.so.6                      |
@@ -1043,7 +1050,7 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
 
 # Collect all dependent .so files
 
-- The tarball `rootfs-from-centos511.tar.gz` contains `walk-c`, together with required .so files extracted from CentOS 5.11:
+- The tarball `rootfs-from-centos511.tar.gz` contains `walk-dynamic`, together with all required .so files extracted from CentOS 5.11:
 
     ```bash
     $ tar ztvf rootfs-from-centos511.tar.gz
@@ -1066,7 +1073,8 @@ Add the `walk-c` file, together with dependent .so files, to the `scratch` (空,
 # Dockerfile for "walk-c"
 
 ```dockerfile
-# dockerize "walk-c", with .so files extracted from CentOS 5.11
+# dockerize "walk-dynamic",
+# with .so files extracted from CentOS 5.11
 
 FROM  scratch
 
@@ -1095,10 +1103,19 @@ FROM  scratch
 ADD  rootfs-from-centos511.tar.gz  .
 ```
 
-.percent30[.right[![bg](img/cook-vector.jpg)]]
-
 
 .footnote[.red[*] Effect: unpack to the specified directory in the target image. See [official document](https://docs.docker.com/reference/builder/#add) for more info.]
+
+--
+<br/><br/>
+Otherwise, use 3 `COPY` steps:
+
+```dockerfile
+COPY  walk-dynamic          /bin/walk
+COPY  libc.so.6             /lib64/
+COPY  ld-linux-x86-64.so.2  /lib64/
+```
+
 
 ---
 
@@ -1139,7 +1156,7 @@ $ dockviz images --tree
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 
 --
@@ -1174,23 +1191,23 @@ template: inverse
 Co-exist? Conflict?
 
 ```
-+------------------------------------+ +------------------------------------+
-|                                    | |                                    |
-|                                    | |                                    |
-| executable file: walk-c   (< 1 MB) | | executable file: walk-c   (< 1 MB) |
-|                                    | |                                    |
-| dependent .so files from Trusty:   | | dependent .so files from CentOS:   |
-|     libc.so.6                      | |     libc.so.6                      |
-|     ld-linux-x86-64.so.2           | |     ld-linux-x86-64.so.2           |
-|                                    | |                                    |
-|                                    | |                                    |
-+------------------------------------+ +------------------------------------+
-|                                    | |                                    |
-|                                    | |                                    |
-| base image:  scratch      (0 byte) | | base image:  scratch      (0 byte) |
-|                                    | |                                    |
-|                                    | |                                    |
-+------------------------------------+ +------------------------------------+
++-----------------------------------+ +-----------------------------------+
+|                                   | |                                   |
+|                                   | |                                   |
+| exe file:  walk-dynamic  (< 1 MB) | | exe file:  walk-dynamic  (< 1 MB) |
+|                                   | |                                   |
+| dependent .so files from Trusty:  | | dependent .so files from CentOS:  |
+|     libc.so.6                     | |     libc.so.6                     |
+|     ld-linux-x86-64.so.2          | |     ld-linux-x86-64.so.2          |
+|                                   | |                                   |
+|                                   | |                                   |
++-----------------------------------+ +-----------------------------------+
+|                                   | |                                   |
+|                                   | |                                   |
+| base image:  scratch     (0 byte) | | base image:  scratch     (0 byte) |
+|                                   | |                                   |
+|                                   | |                                   |
++-----------------------------------+ +-----------------------------------+
 ```
 
 
