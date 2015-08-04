@@ -49,101 +49,42 @@ class: center, middle
 
 template: inverse
 
-# <u>Root</u> <u>f</u>ile <u>s</u>ystem
+# Tasks - directory traversal
 
-## "Rootfs"
-
----
-
-# Technical speaking...
-
-<br/>
-
-> rootfs is a special tempfs image used in initram...
-
-> Normally, init would overwrite rootfs with the actual mounted / file system...
-
-> see: http://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
-
-> --- Quote: ["What is rootfs?"](http://serverfault.com/questions/275988/what-is-rootfs) from Server Fault.
-
+Similar to standard Linux `tree` command
 
 ---
 
-.percent70[.center[![bg](img/rootfs.png)]]
-
-
-.footnote[.red[*] Credit: [linux 文件系统初始化过程 (5)---加载 initrd (下)](http://blog.csdn.net/luomoweilan/article/details/19011917) ]
-
-
----
-
-# Less technical speaking...
-
-rootfs - <u>root</u> <u>f</u>ile <u>s</u>ystem
-
---
-
-- root: `/`
-
---
-
-- file system:
-
-  ```bash
-  $ df -h
-  ```
-  ```
-  Filesystem      Size  Used Avail Use% Mounted on
-  /dev/sda1        40G  2.8G   35G   8% /
-  none            4.0K     0  4.0K   0% /sys/fs/cgroup
-  udev            241M   12K  241M   1% /dev
-  tmpfs            49M  344K   49M   1% /run
-  none            5.0M     0  5.0M   0% /run/lock
-  none            245M     0  245M   0% /run/shm
-  none            100M     0  100M   0% /run/user
-  vagrant         210G  193G   18G  92% /vagrant
-  ```
-
-
----
-
-# Try: rootfs in Ubuntu 14.04
-
-Use [`tree`](http://en.wikipedia.org/wiki/Tree_%28Unix%29) command:
-
-```bash
-$ tree  /
-```
-
-.footnote[.red[*] You may need to `apt-get install tree`, if the `tree` command has not been installed yet.]
-
----
-
-# Try again: rootfs in Ubuntu 14.04
-
-This time, use `walk-go` program instead:
-
-  - similar to previous `tree` command
-
-  - written in Go
-
---
+# Two versions
 
 ```bash
 $ cd ~/docker-workshop/build-walk
-
-$ ls -al
-
-$ file  walk-go
-walk-go: ELF 64-bit LSB  executable, x86-64,
-version 1 (SYSV), statically linked, not stripped
-
-
-
-$ sudo  ./walk-go  /
 ```
 
+.footnote[.red[*] Compiled from the same C source.]
+
+--
+
+1. Static version
+
+   ```bash
+   $ file  walk-static
+   walk-static: ELF 64-bit LSB  executable, x86-64,
+   version 1 (SYSV), statically linked, not stripped
+
+   $ ./walk-static
+   ```
+
+--
+2. Dynamic version
+
+   ```bash
+   $ file  walk-dynamic
+   walk-static: ELF 64-bit LSB  executable, x86-64,
+   version 1 (SYSV), statically linked, not stripped
+
+   $ ./walk-dynamic
+   ```
 
 ---
 
@@ -298,7 +239,7 @@ Add something to the `scratch` **base image**.
 
 # We're going to do...
 
-Add the `walk-go` file to the `scratch` (空, 無) base image.
+Add the `walk-static` file onto the `scratch` (空, 無) base image.
 
 ### Target image layout
 
@@ -306,7 +247,7 @@ Add the `walk-go` file to the `scratch` (空, 無) base image.
              +-------------------------------------+
              |                                     |
              |                                     |
-             |  executable file: walk-go  (< 3 MB) |
+             |  exe file: walk-static     (< 3 MB) |
              |                                     |
              |                                     |
              +-------------------------------------+
@@ -328,14 +269,14 @@ class: center, middle
 
 ---
 
-# Dockerfile for "walk-go"
+# Dockerfile for "walk-static"
 
 ```dockerfile
-# dockerize "walk-go"
+# dockerize "walk-static"
 
 FROM  scratch
 
-COPY  walk-go  /bin/walk
+COPY  walk-static  /bin/walk
 ```
 
 .footnote[.red[☛] Open 〈[Dockerfile 指令](http://philipzheng.gitbooks.io/docker_practice/content/dockerfile/instructions.html)〉 and "[Dockerfile Reference](https://docs.docker.com/reference/builder/)" side by side for your easy reference.]
@@ -368,7 +309,7 @@ $ dockviz images --tree
 ## #2: Add something new to the base image
 
 ```dockerfile
-COPY  walk-go  /bin/walk
+COPY  walk-static  /bin/walk
 ```
 
 <br/><br/>
@@ -418,7 +359,7 @@ Foreground mode:
 
 ```bash
 $ docker run  `THE_UGLY_IMAGE_ID`  \
-    /bin/walk  /
+    /bin/walk
 ```
 
 --
@@ -426,7 +367,7 @@ $ docker run  `THE_UGLY_IMAGE_ID`  \
 ☛ [Compare] without Docker, it is used in this way:
 
 ```bash
-$ sudo  ./walk-go  /
+$ ./walk-static
 ```
 
 
@@ -481,7 +422,7 @@ $ docker ps -a
 - Without Docker
 
 ```bash
-$ sudo  ./walk-go  /
+$ ./walk-static
 ```
 ```
 
@@ -500,7 +441,7 @@ $ sudo  ./walk-go  /
 2013-10-21    31152  /bin/bzip2
 2013-10-21    14480  /bin/bzip2recover
 2013-10-21        6  /bin/bzless
-...
+...[略]
 ```
 ]
 
