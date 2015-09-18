@@ -120,7 +120,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "centos" do |node|
-    node.vm.box = "chef/centos-5.11"
+    node.vm.box = "bento/centos-5.11"
   end
 
   config.vm.define "registry" do |node|
@@ -134,7 +134,7 @@ Vagrant boxes used here:
 
   - [`williamyeh/ubuntu-trusty64-docker`](https://vagrantcloud.com/williamyeh/boxes/ubuntu-trusty64-docker)
   - [`williamyeh/docker-workshop-registry`](https://vagrantcloud.com/williamyeh/boxes/docker-workshop-registry)
-  - [`chef/centos-5.11`](https://vagrantcloud.com/chef/boxes/centos-5.11)
+  - [`bento/centos-5.11`](https://vagrantcloud.com/bento/boxes/centos-5.11)
 
 
 ---

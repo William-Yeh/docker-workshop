@@ -54,7 +54,7 @@ class: center, middle
 --
 
 ### ☛ 先在 Vagrant 實驗
-(`chef/centos-5.11`, `chef/centos-6.6`, `chef/centos-7.0`...)
+(`bento/centos-5.11`, `bento/centos-6.7`, `bento/centos-7.1`...)
 
 --
 
