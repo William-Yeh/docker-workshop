@@ -1,6 +1,10 @@
 Docker Workshop - Slides for Labs
 ===
 
+**UNDER REVISION; YOUR COMMENTS ARE APPRECIATED:**
+**▷**  http://get.soft-arch.net/docker2016-survey/
+
+
 These slides are provided to facilitate your typing while running labs.  It is highly advised, however, that you type these commands on your own instead of simply copying/pasting.  Let's learn by doing!
 
 
